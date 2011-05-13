@@ -3,3 +3,6 @@
 Gemfile.lock
 ./test_run
 dist/*
+.idea
+.rvmrc
+
