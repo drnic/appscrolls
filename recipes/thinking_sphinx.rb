@@ -8,6 +8,6 @@ description: "Include thinking sphinx to enable search"
 author: porta
 
 category: search
-tags: [thinkinx_sphinx, search]
+tags: [thinking_sphinx, search]
 
-requires: thinking_sphinx
+requires: [thinking_sphinx]
