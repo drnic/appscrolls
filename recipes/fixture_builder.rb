@@ -1,6 +1,6 @@
 gem 'fixture_builder', :group => [:test]
 
-after_bundler do
+after_everything do
 
   create_file "spec/support/fixture_builder.rb", <<-RUBY
 FixtureBuilder.configure do |fbuilder|
