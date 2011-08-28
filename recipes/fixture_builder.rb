@@ -1,4 +1,5 @@
 gem 'fixture_builder', :group => [:test]
+gem 'mocha', :group => [:test]
 
 after_everything do
 
@@ -17,6 +18,10 @@ RUBY
 inject_into_file "spec/spec_helper.rb", :after => "require 'rspec/rails'\n" do
   "require 'spec/support/fixture_builder.rb'\n"
 end
+
+gsub_file "spec/spec_helper.rb", "# config.mock_with :mocha", "config.mock_with :mocha"
+gsub_file "spec/spec_helper.rb", "config.mock_with :rspec", "# config.mock_with :rspec"
+
 
 end
 
