@@ -16,7 +16,7 @@ if config['database']
 end
 
 after_bundler do
-  rake "db:create:all" if config['auto_create']
+  bundle exec rake "db:create:all" if config['auto_create']
 end
 
 __END__

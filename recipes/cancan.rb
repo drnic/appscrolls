@@ -1,7 +1,7 @@
 gem 'cancan'
 
 after_bundler do
-  rake "db:migrate"
+  bundle exec rake "db:migrate"
   generate "cancan:ability"
 end
 
