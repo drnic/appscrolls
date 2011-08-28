@@ -1,4 +1,4 @@
-gem 'active_admin', :git => 'git://github.com/gregbell/active_admin.git'
+gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git'
 
 after_bundler do
   generate 'active_admin:install'
