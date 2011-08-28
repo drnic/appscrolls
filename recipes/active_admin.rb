@@ -1,7 +1,7 @@
 gem 'activeadmin'
 
 if Rails::VERSION::STRING.to_f >= 3.1
-  gem 'sass-rails'
+  gem 'sass-rails',     '~> 3.1.0.rc'
   gem "meta_search",    '>= 1.1.0.pre'
 end
 
