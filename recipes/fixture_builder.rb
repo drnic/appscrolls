@@ -15,7 +15,7 @@ end
 RUBY
 
 inject_into_file "spec/spec_helper.rb", :after => "require 'rspec/rails'\n" do
-  "require '#{Rails.root}/spec/support/fixture_builder.rb'\n"
+  "require 'spec/support/fixture_builder.rb'\n"
 end
 
 end
