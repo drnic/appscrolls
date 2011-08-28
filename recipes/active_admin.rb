@@ -1,4 +1,9 @@
-gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git'
+gem 'activeadmin'
+
+if Rails::VERSION::STRING.to_f >= 3.1
+  gem 'sass-rails'
+  gem "meta_search",    '>= 1.1.0.pre'
+end
 
 after_bundler do
   generate 'active_admin:install'
