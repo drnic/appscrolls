@@ -1,6 +1,8 @@
 # create rvmrc file
 create_file ".rvmrc", "rvm gemset create '#{app_name}' \nrvm gemset use '#{app_name}'"
 
+gem 'rake', '~> 0.8.7'  #http://stackoverflow.com/questions/5287121/undefined-method-task-using-rake-0-9-0-beta-4
+
 after_everything do
   # clean up rails defaults
   remove_file "public/index.html"
@@ -11,7 +13,7 @@ after_everything do
     append_file ".gitignore", "\public/system"
   end
   
-  bundle exec rake "db:migrate"
+  rake "db:migrate"
 end
 
 __END__
