@@ -17,7 +17,7 @@ if config['database']
   puts "postgres_role: #{config['postgres_role']}"
   if @options[:database] == 'postgresql'
     role = ask_wizard("Please enter role:")
-    run "createuser -U postgres #{role}" unless role.blank?
+    run "createuser -U postgres -d #{role}" unless role.blank?
   end
 end
 
