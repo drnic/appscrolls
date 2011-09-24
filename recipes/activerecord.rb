@@ -13,6 +13,12 @@ if config['database']
 
   template "config/databases/#{@options[:database]}.yml", "config/database.yml.new"
   run 'mv config/database.yml.new config/database.yml'
+  puts "db: #{@options[:database]}"
+  puts "postgres_role: #{config['postgres_role']}"
+  if @options[:database] == 'postgresql'
+    role = ask_wizard("Please enter role:")
+    run "createuser -U postgres #{role}" unless role.blank?
+  end
 end
 
 after_bundler do
@@ -40,6 +46,8 @@ config:
         - ["SQLite", sqlite3]
         - ["Frontbase", frontbase]
         - ["IBM DB", ibm_db]
+
   - auto_create:
       type: boolean
       prompt: "Automatically create database with default configuration?"
+
