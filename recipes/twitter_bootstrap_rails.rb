@@ -2,10 +2,39 @@ gem 'twitter-bootstrap-rails', :git => 'https://github.com/jonochang/twitter-boo
 
 if config['use_simple_form']
   after_everything do
-    gsub_file "config/initializers/simple_form.rb", "# config.form_class = :simple_form", "# config.form_class = nil"
-    gsub_file "config/initializers/simple_form.rb", "# config.wrapper_class = :input", "# config.wrapper_class = 'clearfix'"
-    gsub_file "config/initializers/simple_form.rb", "# config.wrapper_error_class = :field_with_errors", "# config.wrapper_error_class = 'clearfix'"
-    gsub_file "config/initializers/simple_form.rb", "# config.error_class = :error", "# config.error_class = 'help-inline'"
+    gsub_file "config/initializers/simple_form.rb", '# config.label_text = lambda { |label, required| "#{required} #{label}" }', 'config.label_text = lambda { |label, required| "#{label} #{required}" }'
+    
+    original_wrapper = <<-RB
+  config.wrappers :class => :input, :error_class => :field_with_errors do |b|
+    b.use :placeholder
+    b.use :label_input
+    b.use :hint,  :tag => :span, :class => :hint
+    b.use :error, :tag => :span, :class => :error
+  end
+RB
+    new_wrapper = <<-RB
+
+  config.wrappers :inline, :class => 'clearfix', :error_class => :error do |b|
+    b.use :placeholder
+    b.use :label
+    b.use :tag => 'div', :class => 'input' do |ba|
+      ba.use :input
+      ba.use :error, :tag => :span, :class => :'help-inline'
+      ba.use :hint,  :tag => :span, :class => :'help-block'
+    end
+  end
+
+  config.wrappers :stacked, :class => "clearfix", :error_class => :error do |b|
+    b.use :placeholder
+    b.use :label
+    b.use :hint,  :tag => :span, :class => :'help-block'
+    b.use :tag => 'div', :class => 'input' do |input|
+      input.use :input
+      input.use :error, :tag => :span, :class => :'help-inline'
+    end
+  end
+RB
+    gsub_file "config/initializers/simple_form.rb", original_wrapper, new_wrapper
 
     application_layout_body = <<-ERB
 <body>
@@ -21,10 +50,10 @@ ERB
     <div class="fill">
       <div class="container">
 
-        <h3><%= link_to "TODO Logo", root_path %></h3>
+        <h3><%= link_to "TODO Logo", '/' %></h3>
 
         <ul class="nav">
-          <li><%= link_to "Users", users_path %></li>
+          <li><%= link_to "Users", '/users' %></li>
         </ul>
 
         <% if not logged_in? %>
