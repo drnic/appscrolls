@@ -2,11 +2,11 @@ gem 'rmagick', :require => "RMagick"
 
 __END__
 
-name: Delayed Job
-description: "Use Delayed Job to handle background jobs"
+name: RMagick 
+description: "Use RMagick to manipulate images via ImageMagick"
 author: jonochang
 
-exclusive: background-tasks 
-category: background-tasks
-tags: [background-tasks]
+exclusive: image-manipulation 
+category: image-manipulation
+tags: [image-manipulation]
 
