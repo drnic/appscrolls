@@ -1,5 +1,19 @@
 
 after_bundler do
+  
+  if File.open('script/rails').grep(/module Commands; end/) == []
+    source_rails = <<-RB
+APP_PATH = File.expand_path('../../config/application',  __FILE__)
+RB
+
+    add_commands = <<-RB
+module Commands; end
+APP_PATH = File.expand_path('../../config/application',  __FILE__)
+RB
+  
+    gsub_file 'script/rails', source_rails, add_commands
+  end
+
   run 'rails plugin install git://github.com/parolkar/pfeed.git'
 
   run 'rake pfeed:setup'
