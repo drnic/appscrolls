@@ -41,7 +41,7 @@ config:
       type: multiple_choice
       prompt: "Which region are you using?"
       choices:
-        - ["US Standard". us-east-1]
+        - ["US Standard", us-east-1]
         - ["Northern California", us-west-1]
         - ["Ireland", eu-west-1]
         - ["Singapore", ap-southeast-1]
