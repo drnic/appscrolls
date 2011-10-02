@@ -1,4 +1,4 @@
-gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter-bootstrap-rails', :git => 'https://jonochang@github.com/jonochang/twitter-bootstrap-rails.git'
 
 if config['use_simple_form']
   after_everything do
