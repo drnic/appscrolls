@@ -1,4 +1,4 @@
-gem 'tobi-delayed_job'
+gem 'delayed_job'
 
 after_everything do
   generate 'delayed_job'
