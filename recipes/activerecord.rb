@@ -23,6 +23,18 @@ end
 
 after_bundler do
   rake "db:create:all" if config['auto_create']
+  
+  if config['populate_rake_task']
+    populate_rake = <<-RB
+require './config/environment'
+namespace :db do
+  desc "Populate the database with sample data"
+  task :populate do
+  end
+end
+RB
+    File.open("lib/tasks/populate.rake", 'w') {|f| f.write(populate_rake)}
+  end
 end
 
 __END__
@@ -50,4 +62,8 @@ config:
   - auto_create:
       type: boolean
       prompt: "Automatically create database with default configuration?"
+  
+  - populate_rake_task:
+      type: boolean
+      prompt: "Add db:populate rake task?"
 
