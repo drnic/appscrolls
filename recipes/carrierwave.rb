@@ -40,10 +40,10 @@ config:
   - region:
       type: multiple_choice
       prompt: "Which region are you using?"
+      if_recipe: fog
       choices:
         - ["US Standard", us-east-1]
         - ["Northern California", us-west-1]
         - ["Ireland", eu-west-1]
         - ["Singapore", ap-southeast-1]
         - ["Tokyo", ap-northeast-1]
-
