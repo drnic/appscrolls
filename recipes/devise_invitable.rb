@@ -2,7 +2,7 @@ gem 'devise_invitable'
 
 after_bundler do
   generate 'devise_invitable:install'
-  generate 'devise_invitable'
+  generate 'devise_invitable user'
 end
 
 after_everything do
