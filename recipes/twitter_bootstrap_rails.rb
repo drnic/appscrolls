@@ -35,6 +35,7 @@ RB
   end
 RB
     gsub_file "config/initializers/simple_form.rb", original_wrapper, new_wrapper
+    gsub_file "config/initializers/simple_form.rb", "# config.button_class = 'button'", "config.button_class = 'btn'"
 
     application_layout_body = <<-ERB
 <body>
