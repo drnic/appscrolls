@@ -1,6 +1,7 @@
 
 after_bundler do
   
+  #fixes missing Command error when running rails plugin
   if File.open('script/rails').grep(/module Commands; end/) == []
     source_rails = <<-RB
 APP_PATH = File.expand_path('../../config/application',  __FILE__)
