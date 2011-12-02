@@ -1,8 +1,10 @@
 gem 'resque'
 
 after_bundler do
-  say_wizard 'Adding resque.rake task to lib/tasks'
-  file 'lib/tasks/resque.rake', "require 'resque/tasks'\n"
+  say_ 'Adding resque.rake task to lib/tasks'
+  create_file "lib/tasks/resque.rake", <<-RAKE
+require 'resque/tasks'
+RAKE
 end
 
 __END__
