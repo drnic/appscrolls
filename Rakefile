@@ -1,8 +1,4 @@
-require 'bundler'
-Bundler.setup :development
-
-require 'mg'
-MG.new "ey_rails_wizard.gemspec"
+require "bundler/gem_tasks"
 
 require 'rspec/core/rake_task'
 
