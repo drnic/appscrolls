@@ -1,7 +1,7 @@
 gem 'resque'
 
 after_bundler do
-  say_ 'Adding resque.rake task to lib/tasks'
+  say_wizard 'Adding resque.rake task to lib/tasks'
   create_file "lib/tasks/resque.rake", <<-RAKE
 require 'resque/tasks'
 RAKE
@@ -16,5 +16,5 @@ author: porta
 category: worker
 tags: [background, worker]
 
-requires: redis
+requires: [redis]
 run_after: redis
