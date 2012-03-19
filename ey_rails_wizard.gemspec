@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
 
   s.files         = Dir["lib/**/*.rb", "recipes/*.rb", "README.markdown", "version.rb", "templates/*"] 
   s.test_files    = Dir["spec/**/*"] 
-  s.executables   = ["eywizard"]
+  s.executables   = ["ey_rails_wizard"]
   s.require_paths = ["lib"]
 end
 
