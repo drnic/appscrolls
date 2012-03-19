@@ -12,6 +12,21 @@ after_bundler do
   end      
 
   generate 'devise user'
+
+  if config['add_app_helpers']
+    new_helpers = <<-RB
+module ApplicationHelper
+
+  def current_user
+    @current_user
+  end
+
+  def logged_in?
+    @current_user != nil
+  end
+RB
+    gsub_file 'app/helpers/application_helper.rb', 'module ApplicationHelper', new_helpers
+  end
 end
 
 __END__
@@ -22,3 +37,9 @@ author: mbleigh
 
 category: authentication
 exclusive: authentication
+
+config:
+  - add_app_helpers:
+      type: boolean
+      prompt: "Add logged_in and current_user helpers?"
+
