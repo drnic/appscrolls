@@ -13,3 +13,4 @@ author: amolk
 
 category: authentication
 exclusive: authorization
+tags: [authorization, authentication]

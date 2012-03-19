@@ -22,10 +22,10 @@ end
 
 __END__
 
-name: pFeed
+name: Pfeed
 description: "Plugin to create a user's activity feed"
 author: jonochang
 
-category: social-networking
-exclusive: social-networking
+category: other
 
+# does not support rails 3.1+ https://github.com/parolkar/pfeed/issues/18

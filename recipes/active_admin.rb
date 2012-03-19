@@ -13,6 +13,6 @@ name: Active Admin
 description: "The administration framework for Ruby on Rails applications"
 author: jonochang
 
-exclusive: administration_framework
+exclusive: administration
 category: administration
 tags: [administration]

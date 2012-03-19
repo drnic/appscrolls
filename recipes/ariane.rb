@@ -7,4 +7,4 @@ description: "A flexible breadcrumb system for Rails (Twitter Bootstrap complian
 author: simonc
 
 category: templating
-tags: [breadcrumb]
+tags: [breadcrumb, templating]

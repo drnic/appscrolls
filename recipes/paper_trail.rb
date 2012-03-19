@@ -7,9 +7,9 @@ end
 __END__
 
 name: Paper Trail
-description: Track changes to your models' data. Good for auditing or versioning.
+description: Plugin for tracking changes to your models' data. Good for auditing or versioning.
 
-category: activerecord_versioning
+category: persistence
 exclusive: activerecord_versioning
 tags: [activerecord_versioning]
 
