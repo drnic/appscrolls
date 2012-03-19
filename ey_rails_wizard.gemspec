@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec", "~> 2.5.0"
   s.add_development_dependency "bundler", "~> 1.1.0"
   s.add_development_dependency "rails", ">= 3.0.0"
+  s.add_development_dependency "ZenTest"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
