@@ -1,10 +1,10 @@
-gem 'thin', :group => [:development, :test]
+gem 'thin'
 
 __END__
 
-name: thin
+name: Thin
 description: "A very fast & simple Ruby web server"
 author: lightyrs
 
-category: other
-tags: [dev]
+category: appserver
+exclusive: appserver
