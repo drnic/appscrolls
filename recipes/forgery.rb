@@ -9,7 +9,7 @@ __END__
 name: Forgery
 description: A fake data generator that provides not only a host of basics and a rememberable syntax, but a customizable library to boot.
 
-category: random-data-generation
-exclusive: random-data-generation
-tags: [random-data-generation]
+category: testing
+exclusive: fake-data
+tags: [fake-data]
 
