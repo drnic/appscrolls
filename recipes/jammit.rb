@@ -2,7 +2,7 @@ gem 'jammit'
 
 after_bundler do
   if config['pre_commit']
-    say_wizard "Adding git pre-commit hook..."
+    say_wizard "Adding git pre-commit hook to compile assets..."
     create_file ".git/hooks/pre-commit", <<-BASH
 #!/bin/sh
 
@@ -31,13 +31,13 @@ __END__
 name: Jammit
 description: "Use Jammit to package your application's assets."
 author: mbleigh
+# http://documentcloud.github.com/jammit/
 
 exclusive: asset_packaging
 category: assets
-tags: [packaging]
+tags: [assets, asset_packaging, packaging]
 
 config:
   - pre_commit:
       type: boolean
-      prompt: "Create a git pre-commit hook to generate assets for Heroku?"
-      if_recipe: heroku
+      prompt: "Create a git pre-commit hook to locally generate assets?"
