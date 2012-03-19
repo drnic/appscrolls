@@ -6,6 +6,5 @@ name: Rails Dev Tweaks
 description: "Use Rails Dev Tweaks to speed up asset serving in Rails 3.1 dev environment"
 author: jonochang
 
-exclusive: rails-instrumentation
-category: rails-instrumentation
-tags: [rails-instrumentation]
+category: dev-tools
+tags: [dev-tools]
