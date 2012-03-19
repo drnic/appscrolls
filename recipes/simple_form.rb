@@ -1,4 +1,3 @@
-
 if config['use_edge']
   gem 'simple_form', :git => 'https://github.com/plataformatec/simple_form.git'
 else
@@ -12,7 +11,7 @@ end
 __END__
 
 name: Simple Form
-description: "Use Simple Form as a dsl for creating forms."
+description: Install Simple Form to generate nicely formatted forms.
 author: jonochang
 
 exclusive: forms 
