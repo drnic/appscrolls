@@ -26,9 +26,9 @@ name: Factory Girl
 description: "Use Factory Girl to replace fixtures"
 author: jonochang
 
-exclusive: Factory Girl
-category: Factory Girl
-tags: [Factory Girl]
+exclusive: fixtures
+category: testing
+tags: [fixtures, testing]
 
 config:
   - use_devise:
