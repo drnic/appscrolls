@@ -1,5 +1,11 @@
 gem 'devise'
 
+inject_into_file 'config/environments/development.rb', "\nconfig.action_mailer.default_url_options = { :host => 'localhost:3000' }\n", :after => "Application.configure do"
+inject_into_file 'config/environments/test.rb',        "\nconfig.action_mailer.default_url_options = { :host => 'localhost:7000' }\n", :after => "Application.configure do"
+inject_into_file 'config/environments/production.rb',  "\nconfig.action_mailer.default_url_options = { :host => '#{app_name}.com' }\n", :after => "Application.configure do"
+
+inject_into_file 'config/routes.rb', "\nroot :to => 'home#index'\n", :after => "Testapp::Application.routes.draw do"
+
 after_bundler do
   generate 'devise:install'
 
@@ -12,6 +18,7 @@ after_bundler do
   end      
 
   generate 'devise user'
+  generate "devise:views"
 
   if config['add_app_helpers']
     new_helpers = <<-RB

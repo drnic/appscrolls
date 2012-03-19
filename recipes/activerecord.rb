@@ -6,7 +6,7 @@ if config['database']
   # SQLite3 gem requires special treatment.
   gem_string = case gem_for_database
   when "sqlite3"; "gem 'sqlite3-ruby', :require => 'sqlite3'"
-  when "mysql2"; "gem 'mysql2', '~> 0.2.6'"
+  when "mysql2"; "gem 'mysql2', '>= 0.3.10'"
   else "gem '#{gem_for_database}'"
   end
   gsub_file 'Gemfile', Regexp.new("gem '#{old_gem}'(, '[^']*')?(, :require => '[^']*')?"), gem_string

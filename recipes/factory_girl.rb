@@ -36,4 +36,3 @@ config:
       prompt: "Add factory for devise user?"
       if_recipe: devise
 
-

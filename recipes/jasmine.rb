@@ -1,4 +1,4 @@
-gem 'jasmine'
+gem 'jasmine', :group => [:development, :test]
 
 after_bundler do
   generate "jasmine:install"
