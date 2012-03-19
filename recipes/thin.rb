@@ -6,5 +6,5 @@ name: Thin
 description: "A very fast & simple Ruby web server"
 author: lightyrs
 
-category: appserver
+category: deployment
 exclusive: appserver

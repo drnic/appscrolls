@@ -6,5 +6,5 @@ name: Puma
 description: Ruby web server built for speed & concurrency
 author: drnic
 
-category: appserver
+category: deployment
 exclusive: appserver

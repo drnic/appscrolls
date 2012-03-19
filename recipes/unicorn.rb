@@ -6,5 +6,5 @@ name: Unicorn
 description: Rack HTTP server for fast clients and Unix
 author: drnic
 
-category: appserver
+category: deployment
 exclusive: appserver
