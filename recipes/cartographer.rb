@@ -25,10 +25,9 @@ end
 
 __END__
 
-name: pFeed
-description: "Plugin to create a user's activity feed"
+name: cartographer
+description: "Google Maps on Rails"
 author: jonochang
 
-category: social-networking
-exclusive: social-networking
+category: mapping
 
