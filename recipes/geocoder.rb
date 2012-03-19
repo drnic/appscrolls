@@ -7,6 +7,7 @@ description: "Use Geocoder for geocoding, reverse geocoding and distance queries
 author: jonochang
 
 exclusive: geocoding
-category: geocoding
+category: other
 tags: [geocoding]
 
+# http://www.rubygeocoder.com/
