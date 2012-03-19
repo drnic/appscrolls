@@ -128,9 +128,9 @@ __END__
 name: Twitter Bootstrap Rails
 description: Add Twitter Bootstrap CSS to project
 
-category: CSS
-exclusive: CSS
-tags: [css]
+category: stylesheet
+exclusive: stylesheet
+tags: [css, stylesheet]
 
 run_after: [simple_form]
 config:

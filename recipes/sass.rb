@@ -10,4 +10,4 @@ author: mbleigh
 
 exclusive: css_replacement 
 category: assets
-tags: [css]
+tags: [css, stylesheet]
