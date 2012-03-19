@@ -9,8 +9,8 @@ end
 
 __END__
 
-name: active_admin
-description: "Add Active Admin for administration style interfaces"
+name: Active Admin
+description: "The administration framework for Ruby on Rails applications"
 author: jonochang
 
 exclusive: administration_framework
