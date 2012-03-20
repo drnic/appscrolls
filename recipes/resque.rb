@@ -25,7 +25,7 @@ end
 __END__
 
 name: Resque
-description: Add Resque to your application.
+description: Add Resque to handle background jobs
 author: drnic
 website: https://github.com/defunkt/resque
 

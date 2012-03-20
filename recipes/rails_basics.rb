@@ -35,6 +35,9 @@ README
     append_file ".gitignore", "\public/system"
   end
   
+end
+
+after_everything do
   rake "db:migrate"
 end
 
