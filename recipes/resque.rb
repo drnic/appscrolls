@@ -1,8 +1,5 @@
 gem 'resque'
-
-say_wizard 'Adding EY Cloud Resque recipe...'
 gem 'eycloud-recipe-resque', :group => :eycloud
-append_file "deploy/cookbooks/main/recipes/default.rb", "\nrequire_recipe 'resque'\n"
 
 say_wizard 'Applying fix suggested in https://github.com/defunkt/resque/pull/403...'
 append_file "Rakefile", "\ntask 'resque:setup' => :environment  # for https://github.com/defunkt/resque/pull/403\n"
@@ -22,6 +19,7 @@ on_app_servers_and_utilities do
 end
 RUBY
 
+  append_file "deploy/cookbooks/main/recipes/default.rb", "\nrequire_recipe 'resque'\n"
 end
 
 __END__
