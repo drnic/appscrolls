@@ -2,6 +2,20 @@ gem 'delayed_job_active_record'
 gem 'eycloud-recipe-delayed_job', :group => :eycloud
 gem 'delayed_job_admin'
 
+# app/controllers/application_controller.rb
+# 
+
+inject_into_class "app/controllers/application_controller.rb", "ApplicationController" do
+  <<-RUBY
+  
+  def delayed_job_admin_authentication
+    # authentication_logic_goes_here
+    true
+  end
+
+  RUBY
+end
+
 
 after_bundler do
   generate 'delayed_job'
