@@ -5,10 +5,11 @@ module RailsWizard
   class Command < Thor
     include Thor::Actions
     desc "new APP_NAME", "create a new Rails app"
-    method_option :recipes, :type => :array, :aliases => "-r"
+    method_option :recipes, :type => :array, :aliases => "-r", :desc => "List recipes, e.g. -r resque rails_basics jquery"
+    method_option :template, :type => :boolean, :aliases => "-t", :desc => "Only display template that would be used"
     def new(name)
       if options[:recipes]
-        run_template(name, options[:recipes])
+        run_template(name, options[:recipes], options[:template])
       else
         @recipes = []
 
@@ -61,7 +62,7 @@ module RailsWizard
         puts
       end
 
-      def run_template(name, recipes)
+      def run_template(name, recipes, display_only = false)
         puts
         puts
         puts "#{bold}Generating and Running Template..."
@@ -70,7 +71,12 @@ module RailsWizard
         template = RailsWizard::Template.new(recipes)
         file.write template.compile
         file.close
-        system "rails new #{name} -m #{file.path} #{template.args.join(' ')}"
+        if display_only
+          puts "Template stored to #{file.path}"
+          puts File.read(file.path)
+        else
+          system "rails new #{name} -m #{file.path} #{template.args.join(' ')}"
+        end
       ensure
         file.unlink
       end
