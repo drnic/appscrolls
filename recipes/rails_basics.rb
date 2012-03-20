@@ -5,6 +5,9 @@ after_bundler do
   # clean up rails defaults
   remove_file "public/index.html"
   remove_file "public/images/rails.png"
+  generate "controller home index"
+  route "root :to => 'home#index'"
+  
   run "mv README.rdoc RAILS_README.rdoc"
   remove_file "README.rdoc"
   create_file "README.md", <<-README
@@ -20,6 +23,10 @@ ey deploy
 ## Thanks
 
 The original scaffold for this application was created by [Engine Yard Rails Wizard](http://railswizard.engineyard.com).
+
+The project was created with the following recipes:
+
+#{ recipes.map {|r| "* #{r}"}.join("\n")}
 
 README
 
