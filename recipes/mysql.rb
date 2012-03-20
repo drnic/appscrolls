@@ -1,7 +1,7 @@
 if recipe?("sqlite3")
   gem "mysql2", :group => :production
 else
-  gem "mysql2", :group => :production
+  gem "mysql2"
 end  
 # TODO what about Windows?
 # TODO what if you only want MySQL in production?
