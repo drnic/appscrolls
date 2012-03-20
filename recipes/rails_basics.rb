@@ -1,5 +1,5 @@
 # create rvmrc file
-create_file ".rvmrc", "rvm gemset create '#{app_name}' \nrvm gemset use '#{app_name}'"
+# create_file ".rvmrc", "rvm gemset create '#{app_name}' \nrvm gemset use '#{app_name}'"
 
 after_bundler do
   # clean up rails defaults
@@ -22,21 +22,7 @@ ey deploy
 The original scaffold for this application was created by [Engine Yard Rails Wizard](http://railswizard.engineyard.com).
 
 README
-  create_file "EngineYardCloud.md", <<-README
-# Using Engine Yard Cloud
 
-## Initial Deployment
-
-* Host this git repository (such as on [GitHub](https://github.com))
-* From the [Dashboard](https://cloud.engineyard.com/), click "New an Application"
-* Add the "Git Repository URI"
-* Click "Create Application"
-* Add an Environment Name
-* Click "Create Environment"
-* Click "Boot this Configuration"
-
-README
-  
   if recipes.include? 'git'
     append_file ".gitignore", "\nconfig/database.yml"
     append_file ".gitignore", "\public/system"
