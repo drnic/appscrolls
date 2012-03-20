@@ -55,7 +55,7 @@ exclusive: worker
 config:
   - admin:
       type: boolean
-      prompt: "Install the great admin interface to Delayed Job?"
+      prompt: "Install the great admin interface to Resque?"
 
   - admin_secret:
       type: string
