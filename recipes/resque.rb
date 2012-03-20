@@ -6,6 +6,15 @@ after_bundler do
   create_file "lib/tasks/resque.rake", <<-RAKE
 require 'resque/tasks'
 RAKE
+
+  say_wizard 'Installing deploy hooks to restart resque after deploys'
+  create_file "deploy/before_restart.rb", <<-RUBY
+on_utilities(:resque) do
+  node[:applications].each do |app_name, data|
+    sudo 'echo "sleep 20 && monit -g #{app_name}_resque restart all" | at now'
+  end
+end
+RUBY
 end
 
 __END__
@@ -15,8 +24,8 @@ description: Add Resque to your application.
 author: drnic
 website: https://github.com/defunkt/resque
 
-requires: [redis]
-run_after: redis
+requires: [redis, eycloud_recipes_on_deploy]
+run_after: [redis, eycloud_recipes_on_deploy]
 
 category: worker
 tags: [background, worker]
