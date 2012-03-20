@@ -15,6 +15,6 @@ website: https://github.com/engineyard/engineyard-recipes
 requires: [redis, eycloud_chef_on_deploy]
 run_after: eycloud-recipes
 
-category: worker
+category: deployment
 tags: [background, worker]
-exclusive: worker
+exclusive: eycloud-recipes
