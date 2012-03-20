@@ -1,5 +1,5 @@
 gem 'resque'
-gem 'eycloud-recipe-resque'
+gem 'eycloud-recipe-resque', :group => :eycloud
 
 after_bundler do
   say_wizard 'Adding resque.rake task to lib/tasks'
