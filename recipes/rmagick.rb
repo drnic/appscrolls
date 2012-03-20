@@ -6,8 +6,8 @@ name: RMagick
 description: "Use RMagick to manipulate images via ImageMagick"
 author: jonochang
 
+category: other
 exclusive: image-manipulation 
-category: image-manipulation
 tags: [image-manipulation]
 
 # TODO eycloud
