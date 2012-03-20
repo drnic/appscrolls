@@ -5,7 +5,7 @@ gem 'eycloud-recipe-resque', :group => :eycloud
 append_file "deploy/cookbooks/main/recipes/default.rb", "\nrequire_recipe 'resque'\n"
 
 say_wizard 'Applying fix suggested in https://github.com/defunkt/resque/pull/403...'
-append_file "Rakefile", "\ntask "resque:setup" => :environment  # for https://github.com/defunkt/resque/pull/403\n"
+append_file "Rakefile", "\ntask 'resque:setup' => :environment  # for https://github.com/defunkt/resque/pull/403\n"
 
 after_bundler do
   say_wizard 'Adding resque.rake task to lib/tasks'
