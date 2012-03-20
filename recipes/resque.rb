@@ -25,7 +25,7 @@ RUBY
   unless config['admin_secret'].blank?
     route <<-ROUTE
 require "resque/server"
-mount Resque::Server.new, :at => "/resque/#{config['admin_secret']}"
+  mount Resque::Server.new, :at => "/resque/#{config['admin_secret']}"
 ROUTE
     
   end
