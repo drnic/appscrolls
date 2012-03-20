@@ -1,7 +1,7 @@
-gem "engineyard-recipes", :group => "development"
+gem "engineyard-recipes", :group => [:development]
 
 after_bundler do
-  `bundle exec ey-recipes init --on-deploy`
+  puts `bundle exec ey-recipes init --on-deploy`
 end
 
 
@@ -12,9 +12,7 @@ description: Run Engine Yard Cloud recipes during deployment instead of independ
 author: drnic
 website: https://github.com/engineyard/engineyard-recipes
 
-requires: [redis, eycloud_chef_on_deploy]
-run_after: eycloud-recipes
-
+requires: [eycloud]
+run_after: [eycloud]
 category: deployment
 tags: [background, worker]
-exclusive: eycloud-recipes
