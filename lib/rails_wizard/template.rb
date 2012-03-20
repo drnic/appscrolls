@@ -29,7 +29,9 @@ module RailsWizard
       @recipes_with_dependencies ||= recipe_classes
       
       added_more = false
+      p recipe_classes
       for recipe in recipe_classes
+        p recipe
         recipe.requires.each do |requirement|
           requirement = RailsWizard::Recipe.from_mongo(requirement)
           count = @recipes_with_dependencies.size
