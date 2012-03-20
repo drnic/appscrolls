@@ -15,6 +15,8 @@ on_app_servers_and_utilities do
   end
   
   append_file "deploy/cookbooks/main/recipes/default.rb", "\nrequire_recipe 'resque'\n"
+  
+  append_file "Rakefile", "\ntask "resque:setup" => :environment  # for https://github.com/defunkt/resque/pull/403\n"
 end
 RUBY
 end
