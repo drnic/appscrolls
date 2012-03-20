@@ -8,6 +8,5 @@ description: The Most Powerful Ruby Cloud
 author: drnic
 
 requires: [git]
-run_after: [git]
 category: deployment
 exclusive: deployment

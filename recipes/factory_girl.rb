@@ -1,7 +1,7 @@
 gem 'factory_girl', :group => [:development, :test]
 gem 'factory_girl_rails', :group => [:development, :test]
 
-after_everything do
+after_bundler do
   File.open('spec/factories.rb', 'w') {|f| f.write("FactoryGirl.define do
 end")}
 

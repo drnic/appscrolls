@@ -1,6 +1,6 @@
 gem 'delayed_job'
 
-after_everything do
+after_bundler do
   generate 'delayed_job'
 end
 

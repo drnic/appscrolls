@@ -1,7 +1,8 @@
 gem "engineyard-recipes", :group => [:development]
 
 after_bundler do
-  puts `bundle exec ey-recipes init --on-deploy`
+  say_custom "eycloud", "Setting up deploy hooks..."
+  run "bundle exec ey-recipes init --on-deploy --chef"
 end
 
 

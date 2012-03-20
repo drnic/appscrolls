@@ -1,6 +1,6 @@
 gem 'ffaker'
 
-after_everything do
+after_bundler do
   # TODO - necessary to add this? or will bundler do it?
   inject_into_file "spec/spec_helper.rb", :after => "require 'rspec/rails'\n" do
     "require 'ffaker'\n"
