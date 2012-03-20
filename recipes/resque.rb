@@ -4,6 +4,13 @@ gem 'eycloud-recipe-resque', :group => :eycloud
 say_wizard 'Applying fix suggested in https://github.com/defunkt/resque/pull/403...'
 append_file "Rakefile", "\ntask 'resque:setup' => :environment  # for https://github.com/defunkt/resque/pull/403\n"
 
+create_file "config/initializers/resque.rb", <<-RUBY
+resque_yml = File.expand_path('../../resque.yml', __FILE__)
+if File.exist?(resque_yml)
+  Resque.redis = YAML.load_file(resque_yml)["redis_uri"]
+end
+RUBY
+
 after_bundler do
   say_wizard 'Adding resque.rake task to lib/tasks'
   create_file "lib/tasks/resque.rake", <<-RAKE
