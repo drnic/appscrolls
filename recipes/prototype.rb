@@ -1,4 +1,4 @@
-# No extra code required.
+gem "prototype-rails"
 
 __END__
 
@@ -8,4 +8,4 @@ author: mbleigh
 
 exclusive: javascript_framework
 category: assets
-tags: [javascript, framework, defaults]
+tags: [javascript, framework]

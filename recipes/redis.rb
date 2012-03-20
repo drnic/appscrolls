@@ -1,7 +1,5 @@
 gem 'redis'
 
-say_wizard "Generating Redis initializer..."
-
 initializer "redis.rb", <<-RUBY
 REDIS = Redis.new
 RUBY

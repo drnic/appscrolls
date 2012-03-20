@@ -1,10 +1,10 @@
+gem 'fog'
 gem 'carrierwave'
 
-if config['use_fog']
-  region = config['region']
-  bucket = ask_wizard("Please enter S3 bucket")
+region = config['region']
+bucket = ask_wizard("Please enter S3 bucket")
 
-  carrierwave_initializer = <<-RB
+carrierwave_initializer = <<-RB
 CarrierWave.configure do |config|
   config.fog_credentials = {
     :provider               => 'AWS',
@@ -28,22 +28,15 @@ description: "Use Carrierwave for file uploading"
 author: jonochang
 
 exclusive: file-uploads 
-category: file-uploads
 tags: [file-uploads]
-run_after: [fog]
 
 config:
-  - use_fog:
-      type: boolean
-      prompt: "Use Fog with AWS as the storage provider?"
-      if_recipe: fog
   - region:
       type: multiple_choice
       prompt: "Which region are you using?"
-      if_recipe: fog
       choices:
         - ["US Standard", us-east-1]
-        - ["Northern California", us-west-1]
+        - ["Oregon", us-west-2]
         - ["Ireland", eu-west-1]
         - ["Singapore", ap-southeast-1]
         - ["Tokyo", ap-northeast-1]

@@ -1,4 +1,3 @@
-gem 'jquery-rails'
 
 after_bundler do
   ui = config['ui'] ? ' --ui' : ''
@@ -13,9 +12,7 @@ author: mbleigh
 
 exclusive: javascript_framework
 category: assets
-tags: [javascript, framework]
-
-args: ["-J"]
+tags: [javascript, framework, defaults]
 
 config:
   - ui:

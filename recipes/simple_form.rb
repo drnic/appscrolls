@@ -1,11 +1,11 @@
-if config['use_edge']
-  gem 'simple_form', :git => 'https://github.com/plataformatec/simple_form.git'
-else
-  gem 'simple_form'
-end
+gem 'simple_form'
 
 after_bundler do
-  generate "simple_form:install"
+  if recipe? "twitter_bootstrap_rails"
+    generate "simple_form:install --bootstrap"
+  else
+    generate "simple_form:install"
+  end
 end
 
 __END__
@@ -15,11 +15,5 @@ description: Install Simple Form to generate nicely formatted forms.
 author: jonochang
 
 exclusive: forms 
-category: forms
+category: other
 tags: [forms]
-
-config:
-  - use_edge:
-      type: boolean
-      prompt: "Using Edge version of Simple Form?"
-

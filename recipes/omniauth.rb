@@ -13,3 +13,5 @@ author: mbleigh
 
 exclusive: authentication
 category: authentication
+
+# TODO watch railscasts

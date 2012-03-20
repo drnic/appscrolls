@@ -1,6 +1,4 @@
-if config['use_carrierwave']
-  gem 'carrierwave_direct'
-end
+gem 'carrierwave_direct'
 
 __END__
 
@@ -12,10 +10,4 @@ exclusive: file-uploads
 category: file-uploads
 tags: [file-uploads]
 run_after: [carrierwave]
-
-config:
-  - use_carrierwave:
-      type: boolean
-      prompt: "Use the CarrierWave Direct addon?"
-      if_recipe: carrierwave
-
+requires: [carrierwave]

@@ -57,3 +57,5 @@ config:
       type: string
       prompt: "Enter your MongoHQ URI:"
       unless: use_heroku
+
+# TODO eycloud partners
