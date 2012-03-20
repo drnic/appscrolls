@@ -1,9 +1,19 @@
 module RailsWizard
   class Template
-    attr_reader :recipes
+    attr_reader :recipes, :unknown_recipe_names
 
     def initialize(recipes)
-      @recipes = recipes.map{|r| RailsWizard::Recipe.from_mongo(r)}
+      @unknown_recipe_names = []
+      @recipes = recipes.inject([]) do |list, name|
+        recipe = RailsWizard::Recipe.from_mongo(name)
+        if recipe
+          list << recipe
+        else
+          @unknown_recipe_names << name
+          $stderr.puts "Unknown recipe '#{name}'. Skipping."
+        end
+        list
+      end
     end
 
     def self.template_root
@@ -22,7 +32,7 @@ module RailsWizard
     end
 
     def recipe_classes
-      @recipe_classes ||= recipes.map{|r| RailsWizard::Recipe.from_mongo(r)}
+      @recipe_classes ||= recipes.map { |name| RailsWizard::Recipe.from_mongo(name) }
     end
 
     def recipes_with_dependencies
