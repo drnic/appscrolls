@@ -1,10 +1,10 @@
-gem 'github'
+gem 'github', '>= 0.7.0', :group => [:development]
 
 after_everything do
   if config["private"]
-    run "gh create-from-local --private"
+    run "bundle exec gh create-from-local --private"
   else
-    run "gh create-from-local"
+    run "bundle exec gh create-from-local"
   end
   say_custom "github", "Created repo #{`git config remote.origin.url`}"
 end
@@ -24,4 +24,4 @@ run_after: [git]
 config:
   - private:
       type: boolean
-      prompt: "Create private GitHub repository?"
+      prompt: "Creating GitHub repository; want it to be private?"
