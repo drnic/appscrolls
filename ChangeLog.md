@@ -1,5 +1,10 @@
 # ChangeLog
 
+## v0.4.pre
+
+* 'github' - GitHub repository creation
+* `resque` + `delayed_job` can install their admin consoles
+
 ## v0.3
 
 * Engine Yard support - Resque
@@ -10,10 +15,6 @@
 * Resque recipe works a treat.
 
 Try this on EY Cloud! `ey_rails_wizard new demomysql -r sqlite3 mysql resque rails_basics git`
-
-### v0.3.2.pre
-
-* `resque` + `delayed_job` can install their admin consoles
 
 ## v0.2
 

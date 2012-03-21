@@ -1,22 +1,40 @@
-gem 'engineyard'
+@name = File.basename(File.expand_path("."))
+say_custom "eycloud", "Deploying #{@name} to Engine Yard Cloud..."
+
+gem 'engineyard-v2', :groups => [:development]
 gem 'ey_config'
 
-after_bundler do
-  create_file "EngineYardCloud.md", <<-README
-# Using Engine Yard Cloud
+after_everything do
+  run "ey login"
 
-## Initial Deployment
+  require "yaml"
+  require "engineyard"  # for EY.ui
+  require "engineyard/eyrc" # to load api token
+  require "engineyard-cloud-client"
+  ey_api = EY::CloudClient.new(EY::EYRC.load.api_token)
 
-* Host this git repository (such as on [GitHub](https://github.com))
-* From the [Dashboard](https://cloud.engineyard.com/), click "New an Application"
-* Add the "Git Repository URI"
-* Click "Create Application"
-* Add an Environment Name
-* Click "Create Environment"
-* Click "Boot this Configuration"
+  say_custom "eycloud", "Fetching list of accounts..."
+  current_apps = EY::CloudClient::App.all(ey_api)
+  
+  # TODO check if @git_uri is in current_apps, if not then create app
+  
+  accounts = current_apps.map(&:account).uniq
+  account = multiple_choice("Create app to which Engine Yard Cloud account?", accounts.map {|a| [a.name, a]})
 
-README
-
+  say_custom "eycloud", "Creating application #{@name} on account #{account.name}..."
+  app = EY::CloudClient::App.create(ey_api, {
+    "account"        => account,
+    "name"           => @name,
+    "repository_uri" => @git_uri,
+    "app_type_id"    => "rails3"
+  })
+  
+  # TODO how to get deploy key?
+  # How to upload deploy key to github?
+  
+  multiple_choice("Let's boot some instances!", [
+    [""]
+  ])
 end
 
 __END__
@@ -25,6 +43,7 @@ name: Engine Yard Cloud
 description: The Most Powerful Ruby Cloud
 author: drnic
 
-requires: [git]
+requires: [github]
+run_after: [github]
 category: deployment
 exclusive: deployment

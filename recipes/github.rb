@@ -1,12 +1,16 @@
 gem 'github', '>= 0.7.0', :group => [:development]
 
 after_everything do
-  if config["private"]
+  if config["github_private"]
     run "bundle exec gh create-from-local --private"
   else
     run "bundle exec gh create-from-local"
   end
-  say_custom "github", "Created repo #{`git config remote.origin.url`}"
+
+  # TODO - what to do if repo already exists? prompt to override?
+  
+  @git_uri = `git config remote.origin.url`.strip
+  say_custom "github", "Created repo #{@git_uri}"
 end
 
 __END__
@@ -22,6 +26,6 @@ requires: [git]
 run_after: [git]
 
 config:
-  - private:
+  - github_private:
       type: boolean
       prompt: "Creating GitHub repository; want it to be private?"
