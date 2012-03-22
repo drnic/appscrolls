@@ -46,6 +46,10 @@ If you're looking for the web app source code, it now lives at [ey_rails_wizard.
 
 ## Submitting a Recipe
 
+Create new recipes using:
+
+    rake new NAME=recipe-name
+
 Submitting a recipe is actually a very straightforward process. Recipes are made of up **template code** and **YAML back-matter** stored in a ruby file. The `__END__` parsing convention is used so that each recipe is actually a valid, parseable Ruby file. The structure of a recipe looks something like this:
 
 ```ruby

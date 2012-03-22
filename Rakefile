@@ -43,3 +43,18 @@ task :print do
   recipes = ENV['RECIPES'].split(',')
   puts RailsWizard::Template.new(recipes).compile
 end
+
+desc "Create a new template"
+task :new do
+  unless (name = ENV['NAME']) && name.size > 0
+    $stderr.puts "USAGE: rake new NAME=recipe-name"
+    exit 1
+  end
+  require 'active_support/inflector'
+  require 'erb'
+  require 'rails_wizard/template'
+  recipe = RailsWizard::Template.render("new_recipe", binding)
+  recipe_path = "recipes/#{name}.rb"
+  File.open(recipe_path, "w") { |file| file << recipe }
+  `open #{recipe_path}`
+end
