@@ -32,9 +32,9 @@ after_everything do
   # TODO how to get deploy key?
   # How to upload deploy key to github?
   
-  multiple_choice("Let's boot some instances!", [
-    [""]
-  ])
+  # multiple_choice("Let's boot some instances!", [
+  #   [""]
+  # ])
 end
 
 __END__
