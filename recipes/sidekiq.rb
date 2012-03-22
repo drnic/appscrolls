@@ -1,5 +1,5 @@
 gem "sidekiq"
-gem "eycloud-recipe-sidekiq"
+# gem "eycloud-recipe-sidekiq"
 
 __END__
 
@@ -11,5 +11,5 @@ exclusive: worker
 category: worker
 tags: [worker,background-tasks]
 
-requires: [eycloud_recipes_on_deploy]
-run_after: [eycloud_recipes_on_deploy]
+# requires: [eycloud_recipes_on_deploy]
+# run_after: [eycloud_recipes_on_deploy]
