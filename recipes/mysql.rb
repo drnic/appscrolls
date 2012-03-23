@@ -8,6 +8,14 @@ end
 
 # TODO generate config/database.yml for DBs
 
+if recipe?("eycloud")
+  mysql_versions = [
+    ["MySQL 5.0", "mysql_50"],
+    ["MySQL 5.5 (beta)", "mysql_55"]
+  ]
+  @mysql_stack = multiple_choice("Create app to which Engine Yard Cloud account?", mysql_versions)
+end
+
 __END__
 
 name: MySQL

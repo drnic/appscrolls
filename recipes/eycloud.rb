@@ -4,6 +4,15 @@ say_custom "eycloud", "Deploying #{@name} to Engine Yard Cloud..."
 gem 'engineyard-v2', :groups => [:development]
 gem 'ey_config'
 
+if @mysql_stack
+  say_custom "eycloud", "Using mysql #{@mysql_stack}"
+elsif @postgresql_stack
+  say_custom "eycloud", "Using postgresql #{@postgresql_stack}"
+else
+  say_custom "eycloud", "ERROR: To deploy to Engine Yard Cloud, please choose 'mysql' or 'postgresql' recipe."
+  exit 1
+end
+
 after_everything do
   run "ey login"
 
@@ -12,6 +21,7 @@ after_everything do
   require "engineyard/eyrc" # to load api token
   require "engineyard-cloud-client"
   ey_api = EY::CloudClient.new(EY::EYRC.load.api_token)
+
 
   say_custom "eycloud", "Fetching list of accounts..."
   current_apps = EY::CloudClient::App.all(ey_api)
@@ -29,6 +39,7 @@ after_everything do
     "app_type_id"    => "rails3"
   })
   
+  
   # TODO how to get deploy key?
   # How to upload deploy key to github?
   
@@ -44,6 +55,6 @@ description: The Most Powerful Ruby Cloud
 author: drnic
 
 requires: [github]
-run_after: [github]
+run_after: [github, mysql, postgresql]
 category: deployment
 exclusive: deployment
