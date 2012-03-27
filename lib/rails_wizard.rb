@@ -5,6 +5,6 @@ require 'rails_wizard/template'
 
 Dir[File.dirname(__FILE__) + '/../scrolls/*.rb'].each do |path|
   key = File.basename(path, '.rb')
-  scroll = RailsWizard::Recipe.generate(key, File.open(path))
-  RailsWizard::Recipes.add(scroll)
+  scroll = RailsWizard::Scroll.generate(key, File.open(path))
+  RailsWizard::Scrolls.add(scroll)
 end

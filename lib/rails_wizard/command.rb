@@ -17,7 +17,7 @@ module RailsWizard
           if scroll == ''
             run_template(name, @scrolls)
             break
-          elsif RailsWizard::Recipes.list.include?(scroll)
+          elsif RailsWizard::Scrolls.list.include?(scroll)
             @scrolls << scroll
             puts
             puts "> #{green}Added '#{scroll}' to template.#{clear}"
@@ -32,9 +32,9 @@ module RailsWizard
     desc "list [CATEGORY]", "list available scrolls (optionally by category)"
     def list(category = nil)
       if category
-        scrolls = RailsWizard::Recipes.for(category).map{|r| RailsWizard::Recipe.from_mongo(r) }
+        scrolls = RailsWizard::Scrolls.for(category).map{|r| RailsWizard::Scroll.from_mongo(r) }
       else
-        scrolls = RailsWizard::Recipes.list_classes
+        scrolls = RailsWizard::Scrolls.list_classes
       end
 
       scrolls.each do |scroll|
@@ -55,10 +55,10 @@ module RailsWizard
         puts
         puts
         if @scrolls && @scrolls.any?
-          puts "#{green}#{bold}Your Recipes:#{clear} " + @scrolls.join(", ")
+          puts "#{green}#{bold}Your Scrolls:#{clear} " + @scrolls.join(", ")
           puts
         end
-        puts "#{bold}#{cyan}Available Recipes:#{clear} " + RailsWizard::Recipes.list.join(', ')
+        puts "#{bold}#{cyan}Available Scrolls:#{clear} " + RailsWizard::Scrolls.list.join(', ')
         puts
       end
 

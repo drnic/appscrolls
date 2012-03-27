@@ -3,7 +3,7 @@ require 'spec_helper'
 # This is a simple set of tests to make sure that
 # all of the scrolls conform to the base requirements.
 
-RailsWizard::Recipes.list_classes.each do |scroll|
+RailsWizard::Scrolls.list_classes.each do |scroll|
   describe scroll do
     it("should have a name"){ scroll.name.should be_kind_of(String) }    
     it("should have a description"){ scroll.description.should be_kind_of(String) }
@@ -23,8 +23,8 @@ RailsWizard::Recipes.list_classes.each do |scroll|
     end
 
     it "should be in the list" do
-      RailsWizard::Recipes.list_classes.should be_include(scroll)
-      RailsWizard::Recipes.list.should be_include(scroll.key)
+      RailsWizard::Scrolls.list_classes.should be_include(scroll)
+      RailsWizard::Scrolls.list.should be_include(scroll.key)
     end
   end
 end

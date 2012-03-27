@@ -5,7 +5,7 @@ module RailsWizard
     def initialize(scrolls)
       @unknown_scroll_names = []
       @scrolls = scrolls.inject([]) do |list, name|
-        scroll = RailsWizard::Recipe.from_mongo(name)
+        scroll = RailsWizard::Scroll.from_mongo(name)
         if scroll
           list << scroll
         else
@@ -32,7 +32,7 @@ module RailsWizard
     end
 
     def scroll_classes
-      @scroll_classes ||= scrolls.map { |name| RailsWizard::Recipe.from_mongo(name) }
+      @scroll_classes ||= scrolls.map { |name| RailsWizard::Scroll.from_mongo(name) }
     end
 
     def scrolls_with_dependencies
@@ -41,7 +41,7 @@ module RailsWizard
       added_more = false
       for scroll in scroll_classes
         scroll.requires.each do |requirement|
-          requirement = RailsWizard::Recipe.from_mongo(requirement)
+          requirement = RailsWizard::Scroll.from_mongo(requirement)
           count = @scrolls_with_dependencies.size
           (@scrolls_with_dependencies << requirement).uniq!
           unless @scrolls_with_dependencies.size == count

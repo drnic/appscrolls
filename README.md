@@ -20,7 +20,7 @@ The primary usage of the `ey_rails_wizard` gem is to utilize its interactive ter
 
 Where `APP_NAME` is the directory in which you wish to create the app (it mirrors the Rails creation syntax). You will then be guided through the scroll selection process and subsequently the Rails app generator will automatically run with the template and all appropriate command line options included.
 
-### Specifying Recipes
+### Specifying Scrolls
 
 If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the `-r` option:
 
@@ -28,7 +28,7 @@ If you wish to skip the interactive scroll selector, you may provide instead a l
 
 This will automatically generate a Rails template with the provided scrolls and begin the app generator.
 
-### Listing Recipes
+### Listing Scrolls
 
 You can also print out a simple list of scrolls:
 
@@ -38,19 +38,19 @@ Or print out a list of scrolls for a specific category:
 
     ey_rails_wizard list persistence
 
-# EY Rails Wizard Recipes
+# EY Rails Wizard Scrolls
 
 The Engine Yard Rails Wizard scroll collection now live in this GitHub repository to make them fork-friendly and available for use with the command-line tool. You can see all of the scrolls in the [scrolls directory][2].
 
 If you're looking for the web app source code, it now lives at [ey_rails_wizard.web][3].
 
-## Submitting a Recipe
+## Submitting a Scroll
 
 Create new scrolls using:
 
     rake new NAME=scroll-name
 
-Submitting a scroll is actually a very straightforward process. Recipes are made of up **template code** and **YAML back-matter** stored in a ruby file. The `__END__` parsing convention is used so that each scroll is actually a valid, parseable Ruby file. The structure of a scroll looks something like this:
+Submitting a scroll is actually a very straightforward process. Scrolls are made of up **template code** and **YAML back-matter** stored in a ruby file. The `__END__` parsing convention is used so that each scroll is actually a valid, parseable Ruby file. The structure of a scroll looks something like this:
 
 ```ruby
 gem 'supergem'

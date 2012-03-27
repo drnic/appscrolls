@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe RailsWizard::Template do
   subject{ RailsWizard::Template }
-  let(:scroll){ RailsWizard::Recipe.generate('name','# test') }
+  let(:scroll){ RailsWizard::Scroll.generate('name','# test') }
 
   describe '#initialize' do
     it 'should work with classes' do
@@ -12,7 +12,7 @@ describe RailsWizard::Template do
 
   describe '#scrolls_with_dependencies' do
     def r(*deps)
-      mock(:Class, :requires => deps, :superclass => RailsWizard::Recipe)
+      mock(:Class, :requires => deps, :superclass => RailsWizard::Scroll)
     end
 
     subject do

@@ -5,7 +5,7 @@ require 'yaml'
 require 'erb'
 
 module RailsWizard
-  class Recipe
+  class Scroll
     extend Comparable
     
     def self.<=>(another)
@@ -38,7 +38,7 @@ module RailsWizard
         template = template_or_file
       end
  
-      scroll_class = Class.new(RailsWizard::Recipe) 
+      scroll_class = Class.new(RailsWizard::Scroll) 
       scroll_class.attributes = attributes
       scroll_class.template = template
       scroll_class.key = key
@@ -95,8 +95,8 @@ module RailsWizard
     end
 
     def self.from_mongo(key)
-      return key if key.respond_to?(:superclass) && key.superclass == RailsWizard::Recipe
-      RailsWizard::Recipes[key]
+      return key if key.respond_to?(:superclass) && key.superclass == RailsWizard::Scroll
+      RailsWizard::Scrolls[key]
     end
 
     def self.get_binding

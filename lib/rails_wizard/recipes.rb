@@ -1,10 +1,10 @@
 module RailsWizard
-  module Recipes
+  module Scrolls
     @@categories = {}
     @@list = {}
     
     def self.add(scroll)
-      RailsWizard::Recipes.const_set ActiveSupport::Inflector.camelize(scroll.key), scroll
+      RailsWizard::Scrolls.const_set ActiveSupport::Inflector.camelize(scroll.key), scroll
       @@list[scroll.key] = scroll
       (@@categories[scroll.category.to_s] ||= []) << scroll.key
       @@categories[scroll.category.to_s].uniq!

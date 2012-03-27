@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe RailsWizard::Recipes do
-  subject{ RailsWizard::Recipes }
-  let(:scroll){ RailsWizard::Recipe.generate("scroll_test", "# Testing", :name => "Test Recipe", :category => "test", :description => "Just a test.")}
+describe RailsWizard::Scrolls do
+  subject{ RailsWizard::Scrolls }
+  let(:scroll){ RailsWizard::Scroll.generate("scroll_test", "# Testing", :name => "Test Scroll", :category => "test", :description => "Just a test.")}
 
   before(:all) do
-    RailsWizard::Recipes.add(scroll)
+    RailsWizard::Scrolls.add(scroll)
   end
 
   it '.list_classes should include scroll classes' do
@@ -18,7 +18,7 @@ describe RailsWizard::Recipes do
 
   describe '.for' do
     it 'should find for a given category' do
-      RailsWizard::Recipes.for('test').should be_include('scroll_test')
+      RailsWizard::Scrolls.for('test').should be_include('scroll_test')
     end
   end
 end

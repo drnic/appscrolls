@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe RailsWizard::Recipe do
+describe RailsWizard::Scroll do
   context "with a generated scroll" do
-    subject{ RailsWizard::Recipe.generate('scroll_example', "# this is a test", :category => 'example', :name => "RailsWizard Example") }
+    subject{ RailsWizard::Scroll.generate('scroll_example', "# this is a test", :category => 'example', :name => "RailsWizard Example") }
 
     context 'string setter methods' do
-      (RailsWizard::Recipe::ATTRIBUTES - ['config']).each do |setter|
+      (RailsWizard::Scroll::ATTRIBUTES - ['config']).each do |setter|
         it "should be able to set #{setter} with an argument" do
           subject.send(setter + '=', "test")
           subject.send(setter).should == 'test'
@@ -26,8 +26,8 @@ describe RailsWizard::Recipe do
 
     describe '.generate' do
       it 'should work with a string and hash as arguments' do
-        scroll = RailsWizard::Recipe.generate('some_key', '# some code', :name => "Example")
-        scroll.superclass.should == RailsWizard::Recipe
+        scroll = RailsWizard::Scroll.generate('some_key', '# some code', :name => "Example")
+        scroll.superclass.should == RailsWizard::Scroll
       end
 
       it 'should work with an IO object' do
@@ -40,7 +40,7 @@ category: example
 name: This is an Example
 description: You know it's an exmaple.
 RUBY
-        scroll = RailsWizard::Recipe.generate('just_a_test', file)
+        scroll = RailsWizard::Scroll.generate('just_a_test', file)
         scroll.template.should == '# this is an example'        
         scroll.category.should == 'example'
         scroll.name.should == 'This is an Example'
@@ -50,7 +50,7 @@ RUBY
         file = StringIO.new <<-RUBY
 # just ruby, no YAML
 RUBY
-        lambda{RailsWizard::Recipe.generate('testing',file)}.should raise_error(ArgumentError)
+        lambda{RailsWizard::Scroll.generate('testing',file)}.should raise_error(ArgumentError)
       end
     end
 
@@ -68,15 +68,15 @@ RUBY
   end
 
   it 'should set default attributes' do
-    scroll = RailsWizard::Recipe.generate('abc','# test')
+    scroll = RailsWizard::Scroll.generate('abc','# test')
     
-    RailsWizard::Recipe::DEFAULT_ATTRIBUTES.each_pair do |k,v|
+    RailsWizard::Scroll::DEFAULT_ATTRIBUTES.each_pair do |k,v|
       scroll.send(k).should == v
     end
   end
 
   context 'Comparable' do
-    subject{ RailsWizard::Recipe }
+    subject{ RailsWizard::Scroll }
     it 'a < b.run_after(a)' do
       A = subject.generate('a', '#')
       B = subject.generate('b', '#', :run_after => ['a'])
