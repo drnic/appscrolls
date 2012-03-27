@@ -1,9 +1,5 @@
 gem 'delayed_job_active_record'
-gem 'eycloud-scroll-delayed_job', :group => :eycloud
 gem 'delayed_job_admin'
-
-# app/controllers/application_controller.rb
-# 
 
 if config["admin"]
   inject_into_class "app/controllers/application_controller.rb", "ApplicationController" do
@@ -52,12 +48,18 @@ end
   MD
 end
 
+if scroll? "eycloud_recipes_on_deploy"
+  gem 'eycloud-scroll-delayed_job', :group => :eycloud
+end
+
+
 after_bundler do
   generate 'delayed_job'
 
-  say_wizard 'Installing deploy hooks to restart delayed_job after deploys'
-  run "touch deploy/before_restart.rb"
-  append_file "deploy/before_restart.rb", <<-RUBY
+  if scroll? "eycloud_recipes_on_deploy"
+    say_wizard 'Installing deploy hooks to restart delayed_job after deploys'
+    run "touch deploy/before_restart.rb"
+    append_file "deploy/before_restart.rb", <<-RUBY
 on_app_servers_and_utilities do
   node[:applications].each do |app_name, data|
     sudo 'echo "sleep 20 && monit -g dj_\#{app_name} restart all" | at now'
@@ -65,7 +67,8 @@ on_app_servers_and_utilities do
 end
 RUBY
 
-  append_file "deploy/cookbooks/main/scrolls/default.rb", "\nrequire_scroll 'delayed_job'\n"
+    append_file "deploy/cookbooks/main/scrolls/default.rb", "\nrequire_scroll 'delayed_job'\n"
+  end
 end
 
 after_everything do

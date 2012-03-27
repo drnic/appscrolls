@@ -1,11 +1,13 @@
 gem "sidekiq"
-gem "eycloud-recipe-sidekiq"
 
-append_file "deploy/cookbooks/main/recipes/default.rb", <<-RUBY
+if scroll? "eycloud_recipes_on_deploy"
+  gem "eycloud-recipe-sidekiq", :group => :eycloud
 
-require_recipe "sidekiq"
-RUBY
+  append_file "deploy/cookbooks/main/recipes/default.rb", <<-RUBY
 
+  require_recipe "sidekiq"
+  RUBY
+end
 
 __END__
 
