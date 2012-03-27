@@ -32,7 +32,7 @@ README
 
   if scrolls.include? 'git'
     append_file ".gitignore", "\nconfig/database.yml"
-    append_file ".gitignore", "\public/system"
+    append_file ".gitignore", "\npublic/system"
   end
   
 end
