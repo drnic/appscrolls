@@ -15,6 +15,6 @@ author: drnic
 website: https://github.com/engineyard/engineyard-recipes
 
 requires: [eycloud]
-run_after: [eycloud]
+run_before: [eycloud]
 category: deployment
 tags: [background, worker]

@@ -25,3 +25,5 @@ author: drnic
 exclusive: orm
 category: persistence
 tags: [sql, orm, mysql]
+
+run_before: [eycloud]

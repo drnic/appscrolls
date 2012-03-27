@@ -4,16 +4,18 @@ say_custom "eycloud", "Deploying #{@name} to Engine Yard Cloud..."
 gem 'engineyard-v2', :groups => [:development]
 gem 'ey_config'
 
-if @mysql_stack
-  say_custom "eycloud", "Using mysql #{@mysql_stack}"
-elsif @postgresql_stack
-  say_custom "eycloud", "Using postgresql #{@postgresql_stack}"
-else
-  say_custom "eycloud", "ERROR: To deploy to Engine Yard Cloud, please choose 'mysql' or 'postgresql' scroll."
+unless scroll?("mysql") || scroll?("postgresql")
+  say_custom "eycloud", "ERROR: To deploy to Engine Yard Cloud, please include 'mysql' or 'postgresql' scroll."
   exit 1
 end
 
 after_everything do
+  if @mysql_stack
+    say_custom "eycloud", "Using mysql #{@mysql_stack}"
+  elsif @postgresql_stack
+    say_custom "eycloud", "Using postgresql #{@postgresql_stack}"
+  end
+  
   run "ey login"
 
   require "yaml"
@@ -55,6 +57,6 @@ description: The Most Powerful Ruby Cloud
 author: drnic
 
 requires: [github]
-run_after: [github, mysql, postgresql]
+run_after: [github]
 category: deployment
 exclusive: deployment
