@@ -1,9 +1,11 @@
 # ChangeLog
 
-## v0.4.pre
+## v0.4
 
-* 'github' - GitHub repository creation
+* SCROLLS ARE IN, "recipes" are out. Wizards use scrolls. Alchemists use recipes. 
+* `github` - GitHub repository creation
 * `resque` + `delayed_job` can install their admin consoles
+* `sidekiq` - high performance, low cost alternative to `resque` or `delayed_job`
 
 ## v0.3
 
