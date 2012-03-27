@@ -1,6 +1,6 @@
 gem "sidekiq"
 
-if scroll? "eycloud_scrolls_on_deploy"
+if scroll? "eycloud_recipes_on_deploy"
   gem "eycloud-recipe-sidekiq", :group => :eycloud
 
   append_file "deploy/cookbooks/main/recipes/default.rb", <<-RUBY
@@ -20,4 +20,4 @@ category: worker
 tags: [worker,background-tasks]
 
 requires: [redis]
-run_after: [redis, eycloud_scrolls_on_deploy]
+run_after: [redis, eycloud_recipes_on_deploy]
