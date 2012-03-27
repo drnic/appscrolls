@@ -3,7 +3,7 @@ gem 'resque'
 say_wizard 'Applying fix suggested in https://github.com/defunkt/resque/pull/403...'
 append_file "Rakefile", "\ntask 'resque:setup' => :environment  # for https://github.com/defunkt/resque/pull/403\n"
 
-if scroll? "eycloud_recipes_on_deploy"
+if scroll? "eycloud_scrolls_on_deploy"
   gem 'eycloud-scroll-resque', :group => :eycloud
 
 
@@ -28,7 +28,7 @@ require "resque/server"
 ROUTE
     
   end
-  if scroll? "eycloud_recipes_on_deploy"
+  if scroll? "eycloud_scrolls_on_deploy"
     
     say_wizard 'Installing deploy hooks to restart resque after deploys'
     run "touch deploy/before_restart.rb"

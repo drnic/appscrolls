@@ -4,7 +4,7 @@ initializer "redis.rb", <<-RUBY
 REDIS = Redis.new
 RUBY
 
-if scroll? "eycloud_recipes_on_deploy"
+if scroll? "eycloud_scrolls_on_deploy"
   gem 'eycloud-recipe-redis', :group => :eycloud
 end
 

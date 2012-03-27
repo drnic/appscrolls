@@ -48,7 +48,7 @@ end
   MD
 end
 
-if scroll? "eycloud_recipes_on_deploy"
+if scroll? "eycloud_scrolls_on_deploy"
   gem 'eycloud-scroll-delayed_job', :group => :eycloud
 end
 
@@ -56,7 +56,7 @@ end
 after_bundler do
   generate 'delayed_job'
 
-  if scroll? "eycloud_recipes_on_deploy"
+  if scroll? "eycloud_scrolls_on_deploy"
     say_wizard 'Installing deploy hooks to restart delayed_job after deploys'
     run "touch deploy/before_restart.rb"
     append_file "deploy/before_restart.rb", <<-RUBY
@@ -86,7 +86,6 @@ exclusive: worker
 category: worker
 tags: [worker,background-tasks]
 
-requires: [eycloud_scrolls_on_deploy]
 run_after: [eycloud_scrolls_on_deploy]
 
 config:
