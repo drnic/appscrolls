@@ -1,4 +1,4 @@
-#unless recipes.include? 'sass-rails'
+#unless scrolls.include? 'sass-rails'
 #  gem 'sass-rails'
 #end
 gem 'activeadmin'

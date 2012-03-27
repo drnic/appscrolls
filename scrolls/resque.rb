@@ -1,5 +1,5 @@
 gem 'resque'
-gem 'eycloud-recipe-resque', :group => :eycloud
+gem 'eycloud-scroll-resque', :group => :eycloud
 
 say_wizard 'Applying fix suggested in https://github.com/defunkt/resque/pull/403...'
 append_file "Rakefile", "\ntask 'resque:setup' => :environment  # for https://github.com/defunkt/resque/pull/403\n"
@@ -27,7 +27,7 @@ on_app_servers_and_utilities do
 end
 RUBY
 
-  append_file "deploy/cookbooks/main/recipes/default.rb", "\nrequire_recipe 'resque'\n"
+  append_file "deploy/cookbooks/main/scrolls/default.rb", "\nrequire_scroll 'resque'\n"
   
   unless config['admin_secret'].blank?
     route <<-ROUTE
@@ -45,8 +45,8 @@ description: Add Resque to handle background jobs
 author: drnic
 website: https://github.com/defunkt/resque
 
-requires: [redis, eycloud_recipes_on_deploy]
-run_after: [redis, eycloud_recipes_on_deploy]
+requires: [redis, eycloud_scrolls_on_deploy]
+run_after: [redis, eycloud_scrolls_on_deploy]
 
 category: worker
 tags: [background, worker]

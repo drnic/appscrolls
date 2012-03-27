@@ -5,40 +5,40 @@ module RailsWizard
   class Command < Thor
     include Thor::Actions
     desc "new APP_NAME", "create a new Rails app"
-    method_option :recipes, :type => :array, :aliases => "-r", :desc => "List recipes, e.g. -r resque rails_basics jquery"
+    method_option :scrolls, :type => :array, :aliases => "-s", :desc => "List scrolls, e.g. -s resque rails_basics jquery"
     method_option :template, :type => :boolean, :aliases => "-t", :desc => "Only display template that would be used"
     def new(name)
-      if options[:recipes]
-        run_template(name, options[:recipes], options[:template])
+      if options[:scrolls]
+        run_template(name, options[:scrolls], options[:template])
       else
-        @recipes = []
+        @scrolls = []
 
-        while recipe = ask("#{print_recipes}#{bold}Which recipe would you like to add? #{clear}#{yellow}(blank to finish)#{clear}")
-          if recipe == ''
-            run_template(name, @recipes)
+        while scroll = ask("#{print_scrolls}#{bold}Which scroll would you like to add? #{clear}#{yellow}(blank to finish)#{clear}")
+          if scroll == ''
+            run_template(name, @scrolls)
             break
-          elsif RailsWizard::Recipes.list.include?(recipe)
-            @recipes << recipe
+          elsif RailsWizard::Recipes.list.include?(scroll)
+            @scrolls << scroll
             puts
-            puts "> #{green}Added '#{recipe}' to template.#{clear}"
+            puts "> #{green}Added '#{scroll}' to template.#{clear}"
           else
             puts
-            puts "> #{red}Invalid recipe, please try again.#{clear}"
+            puts "> #{red}Invalid scroll, please try again.#{clear}"
           end
         end
       end
     end
 
-    desc "list [CATEGORY]", "list available recipes (optionally by category)"
+    desc "list [CATEGORY]", "list available scrolls (optionally by category)"
     def list(category = nil)
       if category
-        recipes = RailsWizard::Recipes.for(category).map{|r| RailsWizard::Recipe.from_mongo(r) }
+        scrolls = RailsWizard::Recipes.for(category).map{|r| RailsWizard::Recipe.from_mongo(r) }
       else
-        recipes = RailsWizard::Recipes.list_classes
+        scrolls = RailsWizard::Recipes.list_classes
       end
 
-      recipes.each do |recipe|
-        puts recipe.key.ljust(15) + "# #{recipe.description}"
+      scrolls.each do |scroll|
+        puts scroll.key.ljust(15) + "# #{scroll.description}"
       end
     end
 
@@ -50,25 +50,25 @@ module RailsWizard
       def green; "\033[32m" end
       def yellow; "\033[33m" end
 
-      def print_recipes
+      def print_scrolls
         puts
         puts
         puts
-        if @recipes && @recipes.any?
-          puts "#{green}#{bold}Your Recipes:#{clear} " + @recipes.join(", ")
+        if @scrolls && @scrolls.any?
+          puts "#{green}#{bold}Your Recipes:#{clear} " + @scrolls.join(", ")
           puts
         end
         puts "#{bold}#{cyan}Available Recipes:#{clear} " + RailsWizard::Recipes.list.join(', ')
         puts
       end
 
-      def run_template(name, recipes, display_only = false)
+      def run_template(name, scrolls, display_only = false)
         puts
         puts
         puts "#{bold}Generating and Running Template..."
         puts
         file = Tempfile.new('template')        
-        template = RailsWizard::Template.new(recipes)
+        template = RailsWizard::Template.new(scrolls)
         file.write template.compile
         file.close
         if display_only

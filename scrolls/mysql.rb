@@ -1,4 +1,4 @@
-if recipe?("sqlite3")
+if scroll?("sqlite3")
   gem "mysql2", :group => :production
 else
   gem "mysql2"
@@ -8,7 +8,7 @@ end
 
 # TODO generate config/database.yml for DBs
 
-if recipe?("eycloud")
+if scroll?("eycloud")
   mysql_versions = [
     ["MySQL 5.0", "mysql_50"],
     ["MySQL 5.5 (beta)", "mysql_55"]

@@ -45,11 +45,11 @@ describe RailsWizard::Config do
             type: boolean
             prompt: Yes or no?
             unless: is_false
-            if_recipe: awesome
+            if_scroll: awesome
         - multiple_choice:
             type: multiple_choice
             choices: [[ABC, abc], [DEF, def]]
-            unless_recipe: awesome
+            unless_scroll: awesome
         YAML
       end
 
@@ -65,12 +65,12 @@ describe RailsWizard::Config do
         lines[2].should be_include("!config['is_false']")
       end
 
-      it 'should handle "if_recipe"' do
-        lines[2].should be_include("recipe?('awesome')")
+      it 'should handle "if_scroll"' do
+        lines[2].should be_include("scroll?('awesome')")
       end
 
-      it 'should handle "unelss_recipe"' do
-        lines[3].should be_include("!recipe?('awesome')")
+      it 'should handle "unelss_scroll"' do
+        lines[3].should be_include("!scroll?('awesome')")
       end
     end
 

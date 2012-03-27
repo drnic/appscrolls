@@ -9,7 +9,7 @@ if @mysql_stack
 elsif @postgresql_stack
   say_custom "eycloud", "Using postgresql #{@postgresql_stack}"
 else
-  say_custom "eycloud", "ERROR: To deploy to Engine Yard Cloud, please choose 'mysql' or 'postgresql' recipe."
+  say_custom "eycloud", "ERROR: To deploy to Engine Yard Cloud, please choose 'mysql' or 'postgresql' scroll."
   exit 1
 end
 

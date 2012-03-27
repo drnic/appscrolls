@@ -41,7 +41,7 @@ module RailsWizard
       end
 
       def conditions
-        [config_conditions, recipe_conditions].join(' && ')
+        [config_conditions, scroll_conditions].join(' && ')
       end
 
       def config_conditions
@@ -54,11 +54,11 @@ module RailsWizard
         end
       end
 
-      def recipe_conditions
-        if details['if_recipe']
-          "recipe?('#{details['if_recipe']}')"
-        elsif details['unless_recipe']
-          "!recipe?('#{details['unless_recipe']}')"
+      def scroll_conditions
+        if details['if_scroll']
+          "scroll?('#{details['if_scroll']}')"
+        elsif details['unless_scroll']
+          "!scroll?('#{details['unless_scroll']}')"
         else
           'true'
         end

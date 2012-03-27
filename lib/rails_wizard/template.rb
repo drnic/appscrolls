@@ -1,16 +1,16 @@
 module RailsWizard
   class Template
-    attr_reader :recipes, :unknown_recipe_names
+    attr_reader :scrolls, :unknown_scroll_names
 
-    def initialize(recipes)
-      @unknown_recipe_names = []
-      @recipes = recipes.inject([]) do |list, name|
-        recipe = RailsWizard::Recipe.from_mongo(name)
-        if recipe
-          list << recipe
+    def initialize(scrolls)
+      @unknown_scroll_names = []
+      @scrolls = scrolls.inject([]) do |list, name|
+        scroll = RailsWizard::Recipe.from_mongo(name)
+        if scroll
+          list << scroll
         else
-          @unknown_recipe_names << name
-          $stderr.puts "Unknown recipe '#{name}'. Skipping."
+          @unknown_scroll_names << name
+          $stderr.puts "Unknown scroll '#{name}'. Skipping."
         end
         list
       end
@@ -27,30 +27,30 @@ module RailsWizard
     def render(template_name, binding = nil); self.class.render(template_name, binding) end
 
 
-    def resolve_recipes
-      @resolve_recipes ||= recipes_with_dependencies.sort
+    def resolve_scrolls
+      @resolve_scrolls ||= scrolls_with_dependencies.sort
     end
 
-    def recipe_classes
-      @recipe_classes ||= recipes.map { |name| RailsWizard::Recipe.from_mongo(name) }
+    def scroll_classes
+      @scroll_classes ||= scrolls.map { |name| RailsWizard::Recipe.from_mongo(name) }
     end
 
-    def recipes_with_dependencies
-      @recipes_with_dependencies ||= recipe_classes
+    def scrolls_with_dependencies
+      @scrolls_with_dependencies ||= scroll_classes
       
       added_more = false
-      for recipe in recipe_classes
-        recipe.requires.each do |requirement|
+      for scroll in scroll_classes
+        scroll.requires.each do |requirement|
           requirement = RailsWizard::Recipe.from_mongo(requirement)
-          count = @recipes_with_dependencies.size
-          (@recipes_with_dependencies << requirement).uniq!
-          unless @recipes_with_dependencies.size == count
+          count = @scrolls_with_dependencies.size
+          (@scrolls_with_dependencies << requirement).uniq!
+          unless @scrolls_with_dependencies.size == count
             added_more = true
           end
         end
       end
 
-      added_more ? recipes_with_dependencies : @recipes_with_dependencies
+      added_more ? scrolls_with_dependencies : @scrolls_with_dependencies
     end
 
     def compile
@@ -58,7 +58,7 @@ module RailsWizard
     end
 
     def args
-      recipes.map(&:args).uniq
+      scrolls.map(&:args).uniq
     end
 
     def custom_code?; false end

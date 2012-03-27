@@ -1,7 +1,7 @@
 gem 'simple_form'
 
 after_bundler do
-  if recipe? "twitter_bootstrap_rails"
+  if scroll? "twitter_bootstrap_rails"
     generate "simple_form:install --bootstrap"
   else
     generate "simple_form:install"

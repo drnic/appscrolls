@@ -3,7 +3,7 @@ gem 'capybara', :group => [:development, :test]
 gem 'database_cleaner', :group => [:development, :test]
 
 after_bundler do
-  generate "cucumber:install --capybara#{' --rspec' if recipes.include?('rspec')}#{' -D' unless recipes.include?('activerecord')}"
+  generate "cucumber:install --capybara#{' --rspec' if scrolls.include?('rspec')}#{' -D' unless scrolls.include?('activerecord')}"
 end
 
 __END__

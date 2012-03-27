@@ -24,13 +24,13 @@ ey deploy
 
 The original scaffold for this application was created by [Engine Yard Rails Wizard](http://railswizard.engineyard.com).
 
-The project was created with the following recipes:
+The project was created with the following scrolls:
 
-#{ recipes.map {|r| "* #{r}"}.join("\n")}
+#{ scrolls.map {|r| "* #{r}"}.join("\n")}
 
 README
 
-  if recipes.include? 'git'
+  if scrolls.include? 'git'
     append_file ".gitignore", "\nconfig/database.yml"
     append_file ".gitignore", "\public/system"
   end

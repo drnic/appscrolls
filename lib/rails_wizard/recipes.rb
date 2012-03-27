@@ -3,12 +3,12 @@ module RailsWizard
     @@categories = {}
     @@list = {}
     
-    def self.add(recipe)
-      RailsWizard::Recipes.const_set ActiveSupport::Inflector.camelize(recipe.key), recipe
-      @@list[recipe.key] = recipe
-      (@@categories[recipe.category.to_s] ||= []) << recipe.key
-      @@categories[recipe.category.to_s].uniq!
-      recipe
+    def self.add(scroll)
+      RailsWizard::Recipes.const_set ActiveSupport::Inflector.camelize(scroll.key), scroll
+      @@list[scroll.key] = scroll
+      (@@categories[scroll.category.to_s] ||= []) << scroll.key
+      @@categories[scroll.category.to_s].uniq!
+      scroll
     end
 
     def self.[](key)
@@ -31,8 +31,8 @@ module RailsWizard
       (@@categories[category.to_s] || []).sort
     end
 
-    def self.remove_from_category(category, recipe)
-      (@@categories[category.to_s] ||= []).delete(recipe.key)
+    def self.remove_from_category(category, scroll)
+      (@@categories[category.to_s] ||= []).delete(scroll.key)
     end
   end
 end

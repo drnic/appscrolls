@@ -13,14 +13,14 @@ task :clean do
   system 'rm -rf test_run'
 end
 
-desc "Execute a test run with the specified recipes."
+desc "Execute a test run with the specified scrolls."
 task :run => :clean do
-  recipes = ENV['RECIPES'].split(',')
+  scrolls = ENV['SCROLLS'].split(',')
 
   require 'tempfile'
   require 'rails_wizard'
 
-  template = RailsWizard::Template.new(recipes)
+  template = RailsWizard::Template.new(scrolls)
 
   begin
     dir = Dir.mktmpdir "rails_template"
@@ -36,25 +36,25 @@ task :run => :clean do
   end
 end
 
-desc "Prints out a template from the provided recipes."
+desc "Prints out a template from the provided scrolls."
 task :print do
   require 'rails_wizard'
 
-  recipes = ENV['RECIPES'].split(',')
-  puts RailsWizard::Template.new(recipes).compile
+  scrolls = ENV['SCROLLS'].split(',')
+  puts RailsWizard::Template.new(scrolls).compile
 end
 
 desc "Create a new template"
 task :new do
   unless (name = ENV['NAME']) && name.size > 0
-    $stderr.puts "USAGE: rake new NAME=recipe-name"
+    $stderr.puts "USAGE: rake new NAME=scroll-name"
     exit 1
   end
   require 'active_support/inflector'
   require 'erb'
   require 'rails_wizard/template'
-  recipe = RailsWizard::Template.render("new_recipe", binding)
-  recipe_path = "recipes/#{name}.rb"
-  File.open(recipe_path, "w") { |file| file << recipe }
-  `open #{recipe_path}`
+  scroll = RailsWizard::Template.render("new_scroll", binding)
+  scroll_path = "scrolls/#{name}.rb"
+  File.open(scroll_path, "w") { |file| file << scroll }
+  `open #{scroll_path}`
 end

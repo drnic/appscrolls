@@ -34,5 +34,5 @@ config:
   - use_devise:
       type: boolean
       prompt: "Add factory for devise user?"
-      if_recipe: devise
+      if_scroll: devise
 

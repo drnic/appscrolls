@@ -27,7 +27,7 @@ config:
   - use_heroku:
       type: boolean
       prompt: "Use the Hoptoad Heroku addon?"
-      if_recipe: heroku
+      if_scroll: heroku
   - api_key:
       prompt: "Enter Hoptoad API Key:"
       type: string

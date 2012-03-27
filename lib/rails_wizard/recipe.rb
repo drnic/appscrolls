@@ -28,7 +28,7 @@ module RailsWizard
       if template_or_file.respond_to?(:read)
         file = template_or_file.read
         parts = file.split(/^__END__$/)
-        raise ArgumentError, "The recipe file must have YAML matter after an __END__" unless parts.size == 2
+        raise ArgumentError, "The scroll file must have YAML matter after an __END__" unless parts.size == 2
         template = parts.first.strip
         attributes = YAML.load(parts.last).inject({}) do |h,(k,v)|
           h[k.to_sym] = v
@@ -38,12 +38,12 @@ module RailsWizard
         template = template_or_file
       end
  
-      recipe_class = Class.new(RailsWizard::Recipe) 
-      recipe_class.attributes = attributes
-      recipe_class.template = template
-      recipe_class.key = key
+      scroll_class = Class.new(RailsWizard::Recipe) 
+      scroll_class.attributes = attributes
+      scroll_class.template = template
+      scroll_class.key = key
 
-      recipe_class
+      scroll_class
     end
 
     ATTRIBUTES.each do |setter|
@@ -81,7 +81,7 @@ module RailsWizard
     end
 
     def self.compile
-      "# >#{"[ #{name} ]".center(75,'-')}<\n\n# #{description}\nsay_recipe '#{name}'\n\n#{template}\n"
+      "# >#{"[ #{name} ]".center(75,'-')}<\n\n# #{description}\nsay_scroll '#{name}'\n\n#{template}\n"
     end
     def compile; self.class.compile end
 

@@ -1,5 +1,5 @@
 gem 'delayed_job_active_record'
-gem 'eycloud-recipe-delayed_job', :group => :eycloud
+gem 'eycloud-scroll-delayed_job', :group => :eycloud
 gem 'delayed_job_admin'
 
 # app/controllers/application_controller.rb
@@ -65,7 +65,7 @@ on_app_servers_and_utilities do
 end
 RUBY
 
-  append_file "deploy/cookbooks/main/recipes/default.rb", "\nrequire_recipe 'delayed_job'\n"
+  append_file "deploy/cookbooks/main/scrolls/default.rb", "\nrequire_scroll 'delayed_job'\n"
 end
 
 after_everything do
@@ -83,8 +83,8 @@ exclusive: worker
 category: worker
 tags: [worker,background-tasks]
 
-requires: [eycloud_recipes_on_deploy]
-run_after: [eycloud_recipes_on_deploy]
+requires: [eycloud_scrolls_on_deploy]
+run_after: [eycloud_scrolls_on_deploy]
 
 config:
   - admin:

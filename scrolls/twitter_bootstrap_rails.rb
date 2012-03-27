@@ -137,6 +137,6 @@ config:
   - use_simple_form:
       type: boolean
       prompt: "Using Simple Form?"
-      if_recipe: simple_form
+      if_scroll: simple_form
 
 

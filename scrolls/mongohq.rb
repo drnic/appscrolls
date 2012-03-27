@@ -30,7 +30,7 @@ YAML
 end
 
 after_bundler do
-  mongo_yml = "config/mongo#{'id' if recipe?('mongoid')}.yml"
+  mongo_yml = "config/mongo#{'id' if scroll?('mongoid')}.yml"
 
   prepend_file mongo_yml, header
   inject_into_file mongo_yml, "  <<: *mongohq\n", :after => "production:\n  <<: *defaults\n"
@@ -52,7 +52,7 @@ config:
   - use_heroku:
       type: boolean
       prompt: "Use the MongoHQ Heroku addon?"
-      if_recipe: heroku
+      if_scroll: heroku
   - uri:
       type: string
       prompt: "Enter your MongoHQ URI:"

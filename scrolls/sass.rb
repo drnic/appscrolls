@@ -1,4 +1,4 @@
-unless recipes.include? 'haml'
+unless scrolls.include? 'haml'
   gem 'haml', '>= 3.0.0'
 end
 
