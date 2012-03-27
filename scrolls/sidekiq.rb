@@ -1,6 +1,12 @@
 gem "sidekiq"
 gem "eycloud-recipe-sidekiq"
 
+append_file "deploy/cookbooks/main/recipes/default.rb", <<-RUBY
+
+require_recipe "sidekiq"
+RUBY
+
+
 __END__
 
 name: Sidekiq
