@@ -2,7 +2,8 @@
 
 ## v0.4
 
-* SCROLLS ARE IN, "recipes" are out. Wizards use scrolls. Alchemists use recipes. 
+* SCROLLS ARE IN, "recipes" are out. Wizards use scrolls. Alchemists use recipes.
+* Scrolls have no dependencies on `eycloud` or `eycloud_recipes_on_deploy`; these are optional
 * `github` - GitHub repository creation
 * `resque` + `delayed_job` can install their admin consoles
 * `sidekiq` - high performance, low cost alternative to `resque` or `delayed_job`
