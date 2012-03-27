@@ -3,7 +3,7 @@ gem "engineyard-recipes", :group => [:development]
 after_bundler do
   say_custom "eycloud", "Setting up deploy hooks..."
   run "bundle exec ey-recipes init --on-deploy --chef"
-  run "bundle update --local"
+  run "bundle update"
 end
 
 
