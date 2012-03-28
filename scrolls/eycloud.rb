@@ -39,15 +39,23 @@ after_everything do
   
     framework_env = multiple_choice "Which framework environment?", [%w[Production production], %w[Staging staging]]
 
+    # TODO check for app name first
+    app_name = (@repo_name && @repo_name.size > 0) ? @repo_name : @name
+    say_custom "eycloud", "Checking for availability of #{app_name}"
+    @app_names ||= `ey_cli apps | grep "-" | sed "s/.* //"`.split(/\n/)
+    while @app_names.include?(app_name)
+      app_name = ask_wizard "Application #{app_name} is already taken; what"
+    end
 
     name = File.basename(".")
-    command = "ey_cli create_app --name #{@name} --type rails3 "
+    command = "ey_cli create_app --name #{app_name} --type rails3 "
     command += "--git #{@git_url} "
     command += "--framework_env #{framework_env} "
     command += "--env_name #{@name}_#{framework_env} "
     command += "--stack #{selected_app_server} "
     command += "--solo"
     run command
+
   end
 end
 

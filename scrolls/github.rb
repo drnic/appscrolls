@@ -4,14 +4,14 @@ after_everything do
   tried_create_already = false
   while (@git_uri = `git config remote.origin.url`.strip) && @git_uri.size == 0
     if tried_create_already
-      repo_name = ask_wizard "Repository already exists. What project name?"
+      @repo_name = ask_wizard "Repository already exists. What project name?"
     else
-      repo_name = ""
+      @repo_name = ""
     end
     if config["github_private"]
-      run "bundle exec gh create-from-local #{repo_name} --private"
+      run "bundle exec gh create-from-local #{@repo_name} --private"
     else
-      run "bundle exec gh create-from-local #{repo_name}"
+      run "bundle exec gh create-from-local #{@repo_name}"
     end
     tried_create_already = true
   end
@@ -33,5 +33,6 @@ run_after: [git]
 
 config:
   - github_private:
-      type: boolean
-      prompt: "Creating GitHub repository; want it to be private?"
+      prompt: "Create a GitHub repository?"
+      type: multiple_choice
+      choices: [["Public", false], ["Private", true]]

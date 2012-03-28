@@ -24,8 +24,8 @@ tags: [css, stylesheet]
 
 config:
   - twitter_bootstrap_layout:
-      type: multiple_choice
       prompt: "Which Twitter Bootstrap layout?"
+      type: multiple_choice
       choices: [["Fluid", "fluid"], ["Fixed", "fixed"]]
 
 
