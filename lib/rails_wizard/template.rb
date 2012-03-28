@@ -28,7 +28,7 @@ module RailsWizard
 
 
     def resolve_scrolls
-      @resolve_scrolls ||= scrolls_with_dependencies.sort
+      @resolve_scrolls ||= scrolls_with_dependencies.sort.sort.sort # why do the extra sorts to resolve nesting?!
     end
 
     def scroll_classes
