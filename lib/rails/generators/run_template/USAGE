@@ -1,0 +1,13 @@
+Description:
+    Apply an application template to an existing application
+
+    Application templates are traditionally used for new applications. Such as:
+
+      rails new myapp -m /path/to/template.rb
+
+    This generator allows the templates to be reused/reapplied to this existing application.
+
+Example:
+    rails g run_template /path/to/template.rb
+    rails g run_template https://mycompany.com/template.rb
+
