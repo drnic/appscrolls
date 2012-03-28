@@ -37,14 +37,11 @@ after_everything do
       say_custom "eycloud", "Using postgresql #{@postgresql_stack}"
     end
   
-    accounts = `ey_cli accounts | grep "-" | sed -e "s/.* //"`.split(/\n/).map(&:strip)
-    account = multiple_choice "Create app to which Engine Yard Cloud account?", accounts.map {|a| [a, a]}
-    
     framework_env = multiple_choice "Which framework environment?", [%w[Production production], %w[Staging staging]]
 
 
     name = File.basename(".")
-    command = "ey_cli create_app --account #{account} --name #{@name} --type rails3 "
+    command = "ey_cli create_app --name #{@name} --type rails3 "
     command += "--git #{@git_url} "
     command += "--framework_env #{framework_env} "
     command += "--env_name #{@name}_#{framework_env} "
