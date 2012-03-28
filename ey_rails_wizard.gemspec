@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.description = %q{Quickly and easily create Rails application templates featuring dozens of popular libraries tuned for Engine Yard Cloud}
 
   s.add_dependency "i18n"
+  s.add_dependency "json", "1.6.5"
   s.add_dependency "activesupport", "~> 3.0"
   s.add_dependency "thor"
   s.add_development_dependency "rspec", "~> 2.5.0"
