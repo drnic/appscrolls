@@ -1,15 +1,21 @@
 gem 'github', '>= 0.7.0', :group => [:development]
 
 after_everything do
-  if config["github_private"]
-    run "bundle exec gh create-from-local --private"
-  else
-    run "bundle exec gh create-from-local"
+  tried_create_already = false
+  while (@git_uri = `git config remote.origin.url`.strip) && @git_uri.size == 0
+    if tried_create_already
+      repo_name = ask_wizard "Repository already exists. What project name?"
+    else
+      repo_name = ""
+    end
+    if config["github_private"]
+      run "bundle exec gh create-from-local #{repo_name} --private"
+    else
+      run "bundle exec gh create-from-local #{repo_name}"
+    end
+    tried_create_already = true
   end
-
-  # TODO - what to do if repo already exists? prompt to override?
   
-  @git_uri = `git config remote.origin.url`.strip
   say_custom "github", "Created repo #{@git_uri}"
 end
 
