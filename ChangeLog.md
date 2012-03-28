@@ -3,6 +3,7 @@
 * `eycloud` - now using `ey_cli` to create/boot environments
 * `twitter_bootstrap` - based on latest RailsCast
 * `github` - asks for a new repo name if cannot create a repository
+* Better resolution of ordering of nested dependencies... by doing more .sort.sort.sort.... oh noes.
 
 ## v0.4
 
