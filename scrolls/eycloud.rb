@@ -67,7 +67,7 @@ name: Engine Yard Cloud
 description: The Most Powerful Ruby Cloud
 author: drnic
 
-# requires: [github]
+requires: [github]
 run_after: [github]
 category: deployment
 exclusive: deployment
