@@ -4,7 +4,7 @@ end
 
 after_bundler do
   generate "bootstrap:install"
-  layout = config["twitter_bootstrap_layout_fluid"] ? "fluid" : "fixed"
+  layout = config["twitter_bootstrap_layout"]
   generate "bootstrap:layout #{layout}"
   gsub_file "app/controllers/application_controller.rb", /class ApplicationController < ActionController::Base/, <<-RUBY
 class ApplicationController < ActionController::Base
@@ -23,8 +23,9 @@ exclusive: stylesheet
 tags: [css, stylesheet]
 
 config:
-  - twitter_bootstrap_layout_fluid:
-      type: boolean
-      prompt: "Fluid layout for Twitter Bootstrap?"
+  - twitter_bootstrap_layout:
+      type: multiple_choice
+      prompt: "Which Twitter Bootstrap layout?"
+      choices: [["Fluid", "fluid"], ["Fixed", "fixed"]]
 
 
