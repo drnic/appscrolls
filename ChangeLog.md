@@ -1,5 +1,7 @@
 # ChangeLog
 
+* `twitter_bootstrap` - based on latest RailsCast
+
 ## v0.4
 
 * SCROLLS ARE IN, "recipes" are out. Wizards use scrolls. Alchemists use recipes.
