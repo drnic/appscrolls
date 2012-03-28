@@ -1,4 +1,6 @@
 gem 'twitter-bootstrap-rails', :git => 'https://github.com/jonochang/twitter-bootstrap-rails.git'
+# TODO only in :group => :assets
+# TODO if jruby, then use static assets
 
 if config['use_simple_form']
   after_everything do
