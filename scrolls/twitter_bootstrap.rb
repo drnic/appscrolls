@@ -1,16 +1,12 @@
 gem_group :assets do
+  gem 'therubyracer', '~> 0.9.10' # TODO 0.10.0 breaks twitter-bootstrap-rails https://github.com/cowboyd/therubyracer/issues/150
   gem 'twitter-bootstrap-rails'
 end
 
 after_bundler do
   generate "bootstrap:install"
   layout = config["twitter_bootstrap_layout"]
-  generate "bootstrap:layout #{layout}"
-  gsub_file "app/controllers/application_controller.rb", /class ApplicationController < ActionController::Base/, <<-RUBY
-class ApplicationController < ActionController::Base
-  layout "#{layout}"
-RUBY
-  
+  generate "bootstrap:layout application #{layout} -f"  
 end
 
 __END__
