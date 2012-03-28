@@ -48,13 +48,6 @@ after_everything do
     command += "--stack #{selected_app_server} "
     command += "--solo"
     run command
-  
-    # TODO how to get deploy key?
-    # How to upload deploy key to github?
-  
-    # multiple_choice("Let's boot some instances!", [
-    #   [""]
-    # ])
   end
 end
 
