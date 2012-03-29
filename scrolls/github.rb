@@ -1,4 +1,4 @@
-gem 'github', '>= 0.7.0', :group => [:development]
+gem 'github', '>= 0.7.0', :require => nil, :group => [:development]
 
 after_everything do
   tried_create_already = false

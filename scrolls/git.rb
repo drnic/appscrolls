@@ -11,5 +11,7 @@ description: "Provides basic Git setup for the Rails app and commits the initial
 author: mbleigh
 
 exclusive: scm
-category: other
-tags: [scm]
+category: deployment
+
+run_before: [git, eycloud, heroku]
+
