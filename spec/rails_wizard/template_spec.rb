@@ -15,6 +15,10 @@ describe RailsWizard::Template do
       mock(:Class, :requires => deps, :superclass => RailsWizard::Scroll)
     end
     
+    def scroll(name)
+      RailsWizard::Scrolls[name]
+    end
+    
     subject do
       @template = RailsWizard::Template.new([]) 
       @template.stub!(:scrolls).and_return(@scrolls)
@@ -45,5 +49,9 @@ describe RailsWizard::Template do
       subject.scrolls_with_dependencies.size.should == 4
     end
     
+    it 'should resolve and sort' do
+      template = RailsWizard::Template.new([scroll('eycloud')])
+      template.resolve_scrolls.should == [scroll('git'), scroll('github'), scroll('eycloud')]
+    end
   end
 end
