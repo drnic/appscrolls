@@ -106,6 +106,7 @@ module EldarScrolls
         file.unlink
       end
 
+      # FIXME requires that the application has ey_rails_wizard in gemfile
       def apply_template(scrolls, display_only = false)
         puts
         puts
