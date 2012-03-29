@@ -1,6 +1,9 @@
-gem 'cucumber-rails', :group => [:development, :test]
-gem 'capybara', :group => [:development, :test]
-gem 'database_cleaner', :group => [:development, :test]
+gem_group :test do
+  gem 'cucumber-rails', :required => false # https://github.com/cucumber/cucumber-rails/issues/202
+  gem 'capybara'
+  gem 'database_cleaner'
+end
+
 
 after_bundler do
   generate "cucumber:install --capybara#{' --rspec' if scrolls.include?('rspec')}#{' -D' unless scrolls.include?('activerecord')}"
