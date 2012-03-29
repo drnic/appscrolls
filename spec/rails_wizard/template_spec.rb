@@ -11,10 +11,10 @@ describe RailsWizard::Template do
   end
 
   describe '#scrolls_with_dependencies' do
-    def r(*deps)
+    def s(*deps)
       mock(:Class, :requires => deps, :superclass => RailsWizard::Scroll)
     end
-
+    
     subject do
       @template = RailsWizard::Template.new([]) 
       @template.stub!(:scrolls).and_return(@scrolls)
@@ -23,26 +23,27 @@ describe RailsWizard::Template do
     end
     
     it 'should return the same number scrolls if none have dependencies' do
-      @scrolls = [r, r]
+      @scrolls = [s, s]
       subject.scrolls_with_dependencies.size.should == 2
     end
 
     it 'should handle simple dependencies' do
-      @scrolls = [r(r, r), r(r)]
+      @scrolls = [s(s, s), s(s)]
       subject.scrolls_with_dependencies.size.should == 5
     end
 
     it 'should handle multi-level dependencies' do
-      @scrolls = [r(r(r))]
+      @scrolls = [s(s(s))]
       subject.scrolls_with_dependencies.size.should == 3
     end
 
     it 'should uniqify' do
-      a = r
-      b = r(a)
-      c = r(r, a, b)
+      a = s
+      b = s(a)
+      c = s(s, a, b)
       @scrolls = [a,b,c]
       subject.scrolls_with_dependencies.size.should == 4
     end
+    
   end
 end
