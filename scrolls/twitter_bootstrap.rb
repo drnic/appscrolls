@@ -1,5 +1,4 @@
 gem_group :assets do
-  gem 'therubyracer', '~> 0.9.10' # TODO 0.10.0 breaks twitter-bootstrap-rails https://github.com/cowboyd/therubyracer/issues/150
   gem 'twitter-bootstrap-rails'
 end
 
