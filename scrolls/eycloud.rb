@@ -68,5 +68,5 @@ author: drnic
 category: deployment
 exclusive: deployment
 
-requires: [github]
-run_after: [github]
+requires: [github, eycloud_recipes_on_deploy]
+run_after: [github, eycloud_recipes_on_deploy]
