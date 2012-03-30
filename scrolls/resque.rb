@@ -4,7 +4,7 @@ say_wizard 'Applying fix suggested in https://github.com/defunkt/resque/pull/403
 append_file "Rakefile", "\ntask 'resque:setup' => :environment  # for https://github.com/defunkt/resque/pull/403\n"
 
 if scroll? "eycloud_recipes_on_deploy"
-  gem 'eycloud-scroll-resque', :group => :eycloud
+  gem 'eycloud-recipe-resque', :group => :eycloud
 
 
   create_file "config/initializers/resque.rb", <<-RUBY

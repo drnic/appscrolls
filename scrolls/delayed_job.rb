@@ -49,7 +49,7 @@ end
 end
 
 if scroll? "eycloud_recipes_on_deploy"
-  gem 'eycloud-scroll-delayed_job', :group => :eycloud
+  gem 'eycloud-recipe-delayed_job', :group => :eycloud
 end
 
 
