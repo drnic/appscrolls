@@ -1,5 +1,5 @@
 gem_group :test do
-  gem 'cucumber-rails', :required => false # https://github.com/cucumber/cucumber-rails/issues/202
+  gem 'cucumber-rails', :require => false # https://github.com/cucumber/cucumber-rails/issues/202
   gem 'capybara'
   gem 'database_cleaner'
 end
