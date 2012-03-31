@@ -6,6 +6,10 @@ after_bundler do
   remove_file "public/index.html"
   remove_file "public/images/rails.png"
   generate "controller home index"
+  gsub_file "app/controllers/home_controller.rb", /def index/, <<-RUBY
+def index
+    flash.now[:notice] = "Welcome! - love Engine Yard Rails Wizard"
+RUBY
   route "root :to => 'home#index'"
   
   run "mv README.rdoc RAILS_README.rdoc"
