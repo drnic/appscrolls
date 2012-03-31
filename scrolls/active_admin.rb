@@ -12,6 +12,7 @@ __END__
 name: Active Admin
 description: "The administration framework for Ruby on Rails applications"
 author: jonochang
+website: http://activeadmin.info/
 
 exclusive: administration
 category: administration

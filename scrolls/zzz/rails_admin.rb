@@ -11,6 +11,7 @@ __END__
 name: RailsAdmin
 description: "Install RailsAdmin to manage data in your application"
 author: alno
+website: https://github.com/sferik/rails_admin
 
 category: other
 
