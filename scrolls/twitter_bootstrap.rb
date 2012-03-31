@@ -7,15 +7,17 @@ after_bundler do
   layout = config["twitter_bootstrap_layout"]
   generate "bootstrap:layout application #{layout} -f"
   
-  gsub_file "app/views/layouts/application.html.erb", /<div class="content">/, <<-HTML
+  html_to_find = layout == "fluid" ? '<div class="row-fluid">' : '<div class="content">'
+  gsub_file "app/views/layouts/application.html.erb", /#{html_to_find}/, <<-HTML
 <% flash.each do |name, msg| %>
         <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
           <a class="close" data-dismiss="alert">×</a>
           <%= msg %>
         </div>
       <% end %>
-      <div class="content">
+      #{html_to_find}
 HTML
+
 end
 
 __END__
