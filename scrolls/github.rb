@@ -22,7 +22,7 @@ end
 __END__
 
 name: GitHub
-description: Create/push project to new GitHub repository
+description: Push project to new GitHub repository
 author: drnic
 
 category: deployment
