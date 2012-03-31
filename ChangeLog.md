@@ -4,6 +4,7 @@
 * `twitter_bootstrap` - based on latest RailsCast; automatically includes `simple_form`; includes flash msg
 * `github` - asks for a new repo name if cannot create a repository
 * `rails_basics` - default flash message
+* All untested scrolls moved into scrolls/zzz
 
 ## v0.4
 
