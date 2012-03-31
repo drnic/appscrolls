@@ -1,7 +1,7 @@
 gem 'simple_form'
 
 after_bundler do
-  if scroll? "twitter_bootstrap_rails"
+  if scroll? "twitter_bootstrap"
     generate "simple_form:install --bootstrap"
   else
     generate "simple_form:install"
@@ -13,7 +13,7 @@ __END__
 name: Simple Form
 description: Install Simple Form to generate nicely formatted forms.
 author: jonochang
+website: https://github.com/plataformatec/simple_form
 
 exclusive: forms 
-category: other
-tags: [forms]
+category: templating
