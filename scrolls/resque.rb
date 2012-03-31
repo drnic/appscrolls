@@ -6,7 +6,6 @@ append_file "Rakefile", "\ntask 'resque:setup' => :environment  # for https://gi
 if scroll? "eycloud_recipes_on_deploy"
   gem 'eycloud-recipe-resque', :group => :eycloud
 
-
   create_file "config/initializers/resque.rb", <<-RUBY
   resque_yml = File.expand_path('../../resque.yml', __FILE__)
   if File.exist?(resque_yml)
