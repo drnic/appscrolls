@@ -6,6 +6,9 @@
 * `rails_basics` - default flash message
 * `jquery` & `prototype` - former is already default in Rails 3.1+ now
 * `eycloud` - now using `ey_cli` to create/boot environments
+
+New
+* `postgresql`
 * All untested scrolls moved into scrolls/zzz
 
 ## v0.4
