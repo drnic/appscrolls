@@ -4,6 +4,10 @@ New
 
 * `spork`
 
+Internal
+
+* replace ZenTest with Guard
+
 ## v0.6
 
 * `twitter_bootstrap` - automatically includes `simple_form`; includes flash msg
