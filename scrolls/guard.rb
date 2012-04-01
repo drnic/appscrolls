@@ -42,7 +42,7 @@ gem_group :development do
   gem 'guard-bundler'
   gem 'guard-test' if scrolls.include? 'test_unit'
 
-  KNOWN_GUARD_SCROLLS = %w[cucumber haml less passenger puma redis resque rspec unicorn]
+  KNOWN_GUARD_SCROLLS = %w[cucumber haml less passenger puma redis resque rspec spork unicorn]
   KNOWN_GUARD_SCROLLS.each do |scroll|
     gem "guard-#{scroll}" if scrolls.include? scroll
   end
