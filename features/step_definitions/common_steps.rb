@@ -44,9 +44,9 @@ When /^I run project executable "(.*)" with arguments "(.*)"/ do |executable, ar
 end
 
 When /^I run local executable "(.*)" with arguments "(.*)"/ do |executable, arguments|
-  if executable == "ey-jenkins"
-    require 'engineyard-jenkins'
-    require 'engineyard-jenkins/cli'
+  if executable == "ey_rails_wizard"
+    require 'rails_wizard'
+    require 'rails_wizard/command'
     in_project_folder do
       stdout, stderr = capture_stdios do
         Engineyard::Jenkins::CLI.start(arguments.split(/ /))
