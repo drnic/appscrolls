@@ -1,10 +1,11 @@
 # ChangeLog
 
-* `eycloud` - now using `ey_cli` to create/boot environments
+* `guard` - guard support for all supported scrolls
 * `twitter_bootstrap` - based on latest RailsCast; automatically includes `simple_form`; includes flash msg
 * `github` - asks for a new repo name if cannot create a repository
 * `rails_basics` - default flash message
 * `jquery` & `prototype` - former is already default in Rails 3.1+ now
+* `eycloud` - now using `ey_cli` to create/boot environments
 * All untested scrolls moved into scrolls/zzz
 
 ## v0.4
