@@ -1,4 +1,4 @@
-gem 'spork'
+gem 'spork', '~> 1.0.rc'
 
 after_bundler do
   run "bundle exec spork --bootstrap"
