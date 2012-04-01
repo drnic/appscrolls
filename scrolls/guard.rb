@@ -1,4 +1,4 @@
-gem 'guard', '>= 0.6.2', :group => :development
+gem 'guard', :group => :development
 
 prepend_file 'Gemfile' do <<-RUBY
 require 'rbconfig'
