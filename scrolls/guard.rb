@@ -50,6 +50,8 @@ end
 
 after_bundler do
   run "bundle exec guard init"
+  
+  # TODO move livereload to the top of the Guardfile so it is zippy quick
 end
 
 
