@@ -68,15 +68,15 @@ end
 __END__
 
 name: Guard
-description: 
+description: Command line tool to file system modification events; Powers Up with other scrolls!
 author: drnic
-website:
+website: https://github.com/guard/guard
 
 requires: []
 run_after: []
 run_before: []
 
-category: other # authentication, testing, persistence, javascript, css, services, deployment, and templating
+category: other
 # exclusive: 
 
 # config:
