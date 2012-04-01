@@ -51,7 +51,7 @@ describe RailsWizard::Template do
     
     it 'should resolve and sort' do
       template = RailsWizard::Template.new([scroll('eycloud')])
-      template.resolve_scrolls.should == [scroll('git'), scroll('github'), scroll('eycloud')]
+      template.resolve_scrolls.should == [scroll('eycloud_recipes_on_deploy'), scroll('git'), scroll('github'), scroll('eycloud')]
     end
   end
 end
