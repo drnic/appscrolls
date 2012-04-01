@@ -1,6 +1,5 @@
 # ChangeLog
 
-* `guard` - guard support for all supported scrolls
 * `twitter_bootstrap` - based on latest RailsCast; automatically includes `simple_form`; includes flash msg
 * `github` - asks for a new repo name if cannot create a repository
 * `rails_basics` - default flash message
@@ -8,6 +7,7 @@
 * `eycloud` - now using `ey_cli` to create/boot environments
 
 New
+* `guard` - guard support for all supported scrolls
 * `postgresql`
 * All untested scrolls moved into scrolls/zzz
 
