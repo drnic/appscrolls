@@ -32,6 +32,7 @@ task :run => :clean do
       system "rails new test_run -m template.rb #{template.args.join(' ')}"
 
       puts "\n\n cd #{dir} # look at the app"
+      puts "#{ENV['EDITOR']} #{dir} # edit the app"
     end
   end
 end
