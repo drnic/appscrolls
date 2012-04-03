@@ -2,7 +2,9 @@
 
 New
 
-* `spork`
+* `split` - AB testing promoed in RailsCasts
+* `spork` - clean running of tests
+* `resque` - always includes admin dashboard
 
 Internal
 
