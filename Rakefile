@@ -13,26 +13,52 @@ task :clean do
   system 'rm -rf test_run'
 end
 
-desc "Execute a test run with the specified scrolls."
-task :run => :clean do
-  scrolls = ENV['SCROLLS'].split(',')
+namespace :run do
+  desc "Execute a test run with the specified scrolls on a new Rails app"
+  task :new => :clean do
+    scrolls = ENV['SCROLLS'].split(',')
 
-  require 'tempfile'
-  require 'eldarscrolls'
+    require 'tempfile'
+    require 'rails_wizard'
 
-  template = EldarScrolls::Template.new(scrolls)
+    template = EldarScrolls::Template.new(scrolls)
 
-  begin
-    dir = Dir.mktmpdir "rails_template"
-    Dir.chdir(dir) do
-      file = File.open('template.rb', 'w')
-      file.write template.compile
-      file.close  
+    begin
+      dir = Dir.mktmpdir "rails_template"
+      Dir.chdir(dir) do
+        file = File.open('template.rb', 'w')
+        file.write template.compile
+        file.close
+
+        system "rails new test_run -m template.rb #{template.args.join(' ')}"
+
+        puts "\n\n cd #{dir} # look at the app"
+        puts "#{ENV['EDITOR']} #{dir} # edit the app"
+      end
+    end
+  end
+
+  desc "Execute a test run with the specified scrolls on an existing Rails app"
+  task :apply => :clean do
+    scrolls = ENV['SCROLLS'].split(',')
+
+    require 'tempfile'
+    require 'rails_wizard'
+
+    template = EldarScrolls::Template.new(scrolls)
+
+    begin
+      dir = Dir.mktmpdir "rails_template"
+      Dir.chdir(dir) do
+        file = File.open('template.rb', 'w')
+        file.write template.compile
+        file.close
     
-      system "rails new test_run -m template.rb #{template.args.join(' ')}"
+        system "rails new test_run && cd test_run && FIXME!"
 
-      puts "\n\n cd #{dir} # look at the app"
-      puts "#{ENV['EDITOR']} #{dir} # edit the app"
+        puts "\n\n cd #{dir} # look at the app"
+        puts "#{ENV['EDITOR']} #{dir} # edit the app"
+      end
     end
   end
 end
