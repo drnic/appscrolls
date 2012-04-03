@@ -1,11 +1,19 @@
 gem '<%= name %>'
 
+after_bundler do
+  
+end
+
+after_everything do
+  
+end
+
 __END__
 
 name: <%= name.humanize.capitalize %>
 description: 
-author: <%= `whoami`.strip %>
 website:
+author: <%= `whoami`.strip %>
 
 requires: []
 run_after: []
