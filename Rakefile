@@ -45,7 +45,7 @@ task :print do
   puts RailsWizard::Template.new(scrolls).compile
 end
 
-desc "Create a new template"
+desc "Create a new scroll"
 task :new do
   unless (name = ENV['NAME']) && name.size > 0
     $stderr.puts "USAGE: rake new NAME=scroll-name"
@@ -58,4 +58,21 @@ task :new do
   scroll_path = "scrolls/#{name}.rb"
   File.open(scroll_path, "w") { |file| file << scroll }
   `open #{scroll_path}`
+end
+
+namespace :list do
+  desc "Display scrolls by category"
+  task :categories do
+    require 'rails_wizard'
+    categories = RailsWizard::Scrolls.categories.sort
+    categories = (categories - ["other"]) + ["other"]
+    categories.each do |category|
+      puts "#{category}: #{RailsWizard::Scrolls.for(category).join(", ")}"
+    end
+  end
+
+  # desc "Display scrolls by exclusion"
+  # task :exclusions do
+  # 
+  # end
 end

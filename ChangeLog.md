@@ -8,7 +8,8 @@ New
 
 Internal
 
-* replace ZenTest with Guard
+* Replace ZenTest with Guard
+* Add 'rake list:categories' task
 
 ## v0.6
 
