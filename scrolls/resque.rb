@@ -20,10 +20,10 @@ after_bundler do
 require 'resque/tasks'
 RAKE
 
-  unless config['admin_secret'].blank?
+  unless config['resque_admin_secret'].blank?
     route <<-ROUTE
 require "resque/server"
-  mount Resque::Server.new, :at => "/resque/#{config['admin_secret']}"
+  mount Resque::Server.new, :at => "/resque/#{config['resque_admin_secret']}"
 ROUTE
     
   end
@@ -63,7 +63,7 @@ config:
       type: boolean
       prompt: "Install the great admin interface to Resque?"
 
-  - admin_secret:
+  - resque_admin_secret:
       type: string
       prompt: "Enter a secret string for the route /resque/YOUR-SECRET-STRING:"
       if: admin
