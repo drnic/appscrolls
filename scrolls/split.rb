@@ -1,4 +1,3 @@
-gem 'split'
 gem 'split', :require => 'split/dashboard'
 
 after_bundler do
