@@ -6,6 +6,10 @@ New
 * `spork` - clean running of tests
 * `resque` - always includes admin dashboard
 
+Fixed
+
+* `cucumber` - creates databases before running installer
+
 Internal
 
 * Replace ZenTest with Guard
