@@ -25,7 +25,6 @@ require "resque/server"
   mount Resque::Server.new, :at => "/resque/#{config['resque_admin_secret']}"
 ROUTE
     
-  end
   if scroll? "eycloud_recipes_on_deploy"
     
     say_wizard 'Installing deploy hooks to restart resque after deploys'
@@ -61,4 +60,3 @@ config:
   - resque_admin_secret:
       type: string
       prompt: "Enter a secret string for the route /resque/YOUR-SECRET-STRING:"
-      if: admin
