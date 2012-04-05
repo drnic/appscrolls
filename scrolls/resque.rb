@@ -1,4 +1,4 @@
-gem 'resque'
+gem 'resque', :require => "resque/server"
 
 say_wizard 'Applying fix suggested in https://github.com/defunkt/resque/pull/403...'
 append_file "Rakefile", "\ntask 'resque:setup' => :environment  # for https://github.com/defunkt/resque/pull/403\n"
@@ -20,10 +20,7 @@ after_bundler do
 require 'resque/tasks'
 RAKE
 
-  route <<-ROUTE
-require "resque/server"
-  mount Resque::Server.new, :at => "/resque/#{config['resque_admin_secret']}"
-ROUTE
+  route %{match "/resque/eycloud", :to => Resque::Server, :anchor => false}
     
   if scroll? "eycloud_recipes_on_deploy"
     

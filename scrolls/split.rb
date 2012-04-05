@@ -1,7 +1,7 @@
 gem 'split', :require => 'split/dashboard'
 
 after_bundler do
-  route "mount Split::Dashboard, :at => '/split/#{config['split_admin_secret']}'"
+  route %{match '/split/#{config['split_admin_secret']}', :to => Split::Dashboard, :anchor => false}
   
   initializer "split_config.rb", <<-RUBY
 Split.configure do |config|
