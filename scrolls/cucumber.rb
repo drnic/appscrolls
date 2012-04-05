@@ -6,6 +6,7 @@ end
 
 
 after_bundler do
+  rake "db:create"
   generate "cucumber:install --capybara#{' --rspec' if scrolls.include?('rspec')}#{' -D' unless scrolls.include?('activerecord')}"
 end
 
