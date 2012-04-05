@@ -37,7 +37,7 @@ on_app_servers_and_utilities do
 end
 RUBY
 
-    append_file "deploy/cookbooks/main/scrolls/default.rb", "\nrequire_scroll 'resque'\n"
+    append_file "deploy/cookbooks/main/recipes/default.rb", "\nrequire_recipe 'resque'\n"
   end
   
 end

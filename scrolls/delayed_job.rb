@@ -67,7 +67,7 @@ on_app_servers_and_utilities do
 end
 RUBY
 
-    append_file "deploy/cookbooks/main/scrolls/default.rb", "\nrequire_scroll 'delayed_job'\n"
+    append_file "deploy/cookbooks/main/recipes/default.rb", "\nrequire_recipe 'delayed_job'\n"
   end
 end
 
