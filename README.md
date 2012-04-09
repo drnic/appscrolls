@@ -10,7 +10,7 @@ Installation is simple:
 
 ## Usage
 
-The primary usage of the `eldar` gem is to utilize its interactive terminal command to build a Rails template. To get started, you can simply run the command thusly:
+The primary usage of the `eldar` gem is to utilize its interactive terminal command to build a new Rails application. To get started, you can simply run the command thusly:
 
     eldar new APP_NAME
 
@@ -18,9 +18,10 @@ Where `APP_NAME` is the directory in which you wish to create the app (it mirror
 
 ### Specifying Scrolls
 
-If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the `-r` option:
+If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the `-s` or `--scrolls` option:
 
-    eldar new APP_NAME -s jquery mongo_mapper sass
+    eldar new APP_NAME -s twitter_bootstrap mysql resque
+    eldar new APP_NAME --scrolls postgresql github eycloud
 
 This will automatically generate a Rails template with the provided scrolls and begin the app generator.
 
@@ -36,7 +37,11 @@ Or print out a list of scrolls for a specific category:
 
 ## Deployment Support
 
+Web applications are boring if they aren't running proudly on the internet. The Eldar Scrolls make this automatic for your favourite providers!
+
 ### Engine Yard
+
+Scroll: `eycloud`
 
 If you choose the `eycloud` scroll, your application will be automatically deployed to [Engine Yard Cloud][6]. Your code will also be automatically stored on a private/public GitHub repository.
 
