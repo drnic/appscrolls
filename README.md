@@ -1,5 +1,12 @@
 # The Eldar Scrolls for App Transformations
 
+```
+   ______   __           ____             ____  
+  / __/ /__/ /__ _____  / __/__________  / / /__
+ / _// / _  / _ `/ __/ _\ \/ __/ __/ _ \/ / (_-<
+/___/_/\_,_/\_,_/_/   /___/\__/_/  \___/_/_/___/
+```
+
 The Eldar Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. Authentication, testing, persistence, javascript, css, deployment, and templating - there's a magical scroll for you.
 
 ## Installation
@@ -94,6 +101,10 @@ This project wouldn't exist without Michael having created [Rails Wizard][4] dur
 Support for Engine Yard Cloud meant integration with Chef Recipes. This meant confusing language - Rails Wizard Recipes and Chef Recipes. He decided that wizards don't use recipes - they use scrolls. Alchemists use recipes. And screw alchemists and their dinky potions. Recipes became Scrolls.
 
 "Eldar Scrolls" is a deliberate misspelling of the popular [Elder Scrolls][8] computer game. Ok, it was accidental but "eldarscrolls" and "eldarscrolls" should now be much easier to search for on Twitter and Google; and [@eldarscrolls][9] [eldarscrolls.org][10] were available
+
+## Thanks
+
+ASCII banner - http://www.network-science.de/ascii/ using 'smslant' font.
 
 ## License
 
