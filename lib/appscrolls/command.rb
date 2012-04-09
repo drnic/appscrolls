@@ -1,7 +1,7 @@
-require 'eldarscrolls'
+require 'appscrolls'
 require 'thor'
 
-module EldarScrolls
+module AppScrollsScrolls
   class Command < Thor
     include Thor::Actions
     desc "new APP_NAME", "create a new Rails app"
@@ -17,7 +17,7 @@ module EldarScrolls
           if scroll == ''
             run_template(name, @scrolls)
             break
-          elsif EldarScrolls::Scrolls.list.include?(scroll)
+          elsif AppScrollsScrolls::Scrolls.list.include?(scroll)
             @scrolls << scroll
             puts
             puts "> #{green}Added '#{scroll}' to template.#{clear}"
@@ -32,9 +32,9 @@ module EldarScrolls
     desc "list [CATEGORY]", "list available scrolls (optionally by category)"
     def list(category = nil)
       if category
-        scrolls = EldarScrolls::Scrolls.for(category).map{|r| EldarScrolls::Scroll.from_mongo(r) }
+        scrolls = AppScrollsScrolls::Scrolls.for(category).map{|r| AppScrollsScrolls::Scroll.from_mongo(r) }
       else
-        scrolls = EldarScrolls::Scrolls.list_classes
+        scrolls = AppScrollsScrolls::Scrolls.list_classes
       end
 
       scrolls.each do |scroll|
@@ -58,7 +58,7 @@ module EldarScrolls
           puts "#{green}#{bold}Your Scrolls:#{clear} " + @scrolls.join(", ")
           puts
         end
-        puts "#{bold}#{cyan}Available Scrolls:#{clear} " + EldarScrolls::Scrolls.list.join(', ')
+        puts "#{bold}#{cyan}Available Scrolls:#{clear} " + AppScrollsScrolls::Scrolls.list.join(', ')
         puts
       end
 
@@ -68,7 +68,7 @@ module EldarScrolls
         puts "#{bold}Generating and Running Template..."
         puts
         file = Tempfile.new('template')        
-        template = EldarScrolls::Template.new(scrolls)
+        template = AppScrollsScrolls::Template.new(scrolls)
         file.write template.compile
         file.close
         if display_only

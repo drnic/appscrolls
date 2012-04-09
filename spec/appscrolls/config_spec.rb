@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe EldarScrolls::Config do
+describe AppScrollsScrolls::Config do
   describe '#initialize' do
-    subject{ EldarScrolls::Config.new(YAML.load(@schema)) }  
+    subject{ AppScrollsScrolls::Config.new(YAML.load(@schema)) }  
     it 'should add a question key for each key of the schema' do
       @schema = <<-YAML
       - test:
@@ -20,9 +20,9 @@ describe EldarScrolls::Config do
       - multiple_choice:
           type: multiple_choice
       YAML
-      subject.questions['string'].should be_kind_of(EldarScrolls::Config::Prompt)
-      subject.questions['boolean'].should be_kind_of(EldarScrolls::Config::TrueFalse)
-      subject.questions['multiple_choice'].should be_kind_of(EldarScrolls::Config::MultipleChoice)
+      subject.questions['string'].should be_kind_of(AppScrollsScrolls::Config::Prompt)
+      subject.questions['boolean'].should be_kind_of(AppScrollsScrolls::Config::TrueFalse)
+      subject.questions['multiple_choice'].should be_kind_of(AppScrollsScrolls::Config::MultipleChoice)
     end
 
     it 'should error on invalid question type' do
@@ -74,22 +74,22 @@ describe EldarScrolls::Config do
       end
     end
 
-    describe EldarScrolls::Config::Prompt do
-      subject{ EldarScrolls::Config::Prompt }
+    describe AppScrollsScrolls::Config::Prompt do
+      subject{ AppScrollsScrolls::Config::Prompt }
       it 'should compile to a prompt' do
         subject.new({'prompt' => "What's your favorite color?"}).question.should == 'ask_wizard("What\'s your favorite color?")'
       end
     end
 
-    describe EldarScrolls::Config::TrueFalse do
-      subject{ EldarScrolls::Config::TrueFalse }
+    describe AppScrollsScrolls::Config::TrueFalse do
+      subject{ AppScrollsScrolls::Config::TrueFalse }
       it 'should compile to a yes? question' do
         subject.new({'prompt' => 'Yes yes?'}).question.should == 'yes_wizard?("Yes yes?")'
       end
     end
 
-    describe EldarScrolls::Config::MultipleChoice do
-      subject{ EldarScrolls::Config::MultipleChoice }
+    describe AppScrollsScrolls::Config::MultipleChoice do
+      subject{ AppScrollsScrolls::Config::MultipleChoice }
       it 'should compile into a multiple_choice' do
         subject.new({'prompt' => 'What kind of fruit?', 'choices' => [['Apples', 'apples'], ['Bananas', 'bananas']]}).question.should ==
           'multiple_choice("What kind of fruit?", [["Apples", "apples"], ["Bananas", "bananas"]])'

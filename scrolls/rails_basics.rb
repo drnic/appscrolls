@@ -8,7 +8,7 @@ after_bundler do
   generate "controller home index"
   gsub_file "app/controllers/home_controller.rb", /def index/, <<-RUBY
 def index
-    flash.now[:notice] = "Welcome! - love Eldar Scrolls"
+    flash.now[:notice] = "Welcome! - love App Scrolls"
 RUBY
   route "root :to => 'home#index'"
   
@@ -26,7 +26,7 @@ ey deploy
 
 ## Thanks
 
-The original scaffold for this application was created by [Eldar Scrolls](http://railseldarscrolls.org).
+The original scaffold for this application was created by [App Scrolls](http://railsappscrolls.org).
 
 The project was created with the following scrolls:
 

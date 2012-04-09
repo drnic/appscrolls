@@ -1,10 +1,10 @@
-require 'eldarscrolls/config'
+require 'appscrolls/config'
 
 require 'active_support/inflector'
 require 'yaml'
 require 'erb'
 
-module EldarScrolls
+module AppScrollsScrolls
   class Scroll
     extend Comparable
     
@@ -38,7 +38,7 @@ module EldarScrolls
         template = template_or_file
       end
  
-      scroll_class = Class.new(EldarScrolls::Scroll) 
+      scroll_class = Class.new(AppScrollsScrolls::Scroll) 
       scroll_class.attributes = attributes
       scroll_class.template = template
       scroll_class.key = key
@@ -73,7 +73,7 @@ module EldarScrolls
 
     def self.config
       return nil unless attributes[:config]
-      EldarScrolls::Config.new(attributes[:config])
+      AppScrollsScrolls::Config.new(attributes[:config])
     end
 
     def attributes
@@ -95,8 +95,8 @@ module EldarScrolls
     end
 
     def self.from_mongo(key)
-      return key if key.respond_to?(:superclass) && key.superclass == EldarScrolls::Scroll
-      EldarScrolls::Scrolls[key]
+      return key if key.respond_to?(:superclass) && key.superclass == AppScrollsScrolls::Scroll
+      AppScrollsScrolls::Scrolls[key]
     end
 
     def self.get_binding

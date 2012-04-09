@@ -3,14 +3,14 @@ $:.push File.expand_path("../lib", __FILE__)
 require File.dirname(__FILE__) + "/version"
 
 Gem::Specification.new do |s|
-  s.name        = "eldarscrolls"
-  s.version     = EldarScrolls::VERSION
+  s.name        = "appscrolls"
+  s.version     = AppScrollsScrolls::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Michael Bleigh", "Dr Nic Williams"]
   s.email       = ["michael@intridea.com", "drnicwilliams@gmail.com"]
-  s.homepage    = "http://eldarscrolls.org/"
-  s.summary     = %q{The Eldar Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. }
-  s.description = %q{The Eldar Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. }
+  s.homepage    = "http://appscrolls.org/"
+  s.summary     = %q{The App Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. }
+  s.description = %q{The App Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. }
 
   s.add_dependency "i18n"
   s.add_dependency "json", "1.6.5"

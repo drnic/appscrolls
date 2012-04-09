@@ -1,6 +1,6 @@
 require 'active_support/ordered_hash'
 
-module EldarScrolls
+module AppScrollsScrolls
   class Config
     attr_reader :questions
 

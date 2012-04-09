@@ -1,30 +1,30 @@
-# The Eldar Scrolls for creating and transforming Rails apps
+# The App Scrolls for creating and transforming Rails apps
 
 ```
-   ______   __           ____             ____  
-  / __/ /__/ /__ _____  / __/__________  / / /__
- / _// / _  / _ `/ __/ _\ \/ __/ __/ _ \/ / (_-<
-/___/_/\_,_/\_,_/_/   /___/\__/_/  \___/_/_/___/
+             ___               ____             ____  
+            / _ | ___  ___    / __/__________  / / /__
+           / __ |/ _ \/ _ \  _\ \/ __/ __/ _ \/ / (_-<
+          /_/ |_/ .__/ .__/ /___/\__/_/  \___/_/_/___/
+               /_/  /_/                               
 ```
 
-The Eldar Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. Authentication, testing, persistence, javascript, css, deployment, and templating - there's a magical scroll for you.
+The App Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. Authentication, testing, persistence, javascript, css, deployment, and templating - there's a magical scroll for you.
 
-* Follow on twitter [@eldarscrolls][9]
+* Follow on twitter [@appscrolls][9]
 
-An example application that was built by the Eldar Scrolls is at [https://github.com/drnic/mydemoapp][14]. The generated README shows all the scrolls that were included.
+An example application that was built by the App Scrolls is at [https://github.com/drnic/mydemoapp][14]. The generated README shows all the scrolls that were included.
 
 ## Installation
 
 Installation is simple:
 
-    gem install eldarscrolls
+    gem install appscrolls
 
 ## Usage
 
-The primary usage of the `eldarscrolls` gem is to utilize its interactive terminal command to build a new Rails application. To get started, you can simply run the command thusly:
+The primary usage of the `appscrolls` gem is to utilize its interactive terminal command to build a new Rails application. To get started, you can simply run the command thusly:
 
-    eldar new APP_NAME
-    eldarscrolls new APP_NAME
+    appscrolls new APP_NAME
 
 Where `APP_NAME` is the directory in which you wish to create the app (it mirrors the Rails creation syntax). You will then be guided through the scroll selection process and subsequently the Rails app generator will automatically run with the template and all appropriate command line options included.
 
@@ -34,8 +34,8 @@ To transform an existing Rails app, you ... wait, that's not implemented yet. Bu
 
 If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the `-s` or `--scrolls` option:
 
-    eldar new APP_NAME -s twitter_bootstrap mysql resque
-    eldar new APP_NAME --scrolls postgresql github eycloud
+    appscrolls new APP_NAME -s twitter_bootstrap mysql resque
+    appscrolls new APP_NAME --scrolls postgresql github eycloud
 
 This will automatically generate a Rails template with the provided scrolls and begin the app generator.
 
@@ -43,15 +43,15 @@ This will automatically generate a Rails template with the provided scrolls and 
 
 You can also print out a simple list of scrolls:
 
-    eldar list
+    appscrolls list
 
 Or print out a list of scrolls for a specific category:
 
-    eldar list persistence
+    appscrolls list persistence
 
 ## Deployment Support
 
-Web applications are boring if they aren't running proudly on the internet. The Eldar Scrolls make this automatic for your favourite providers!
+Web applications are boring if they aren't running proudly on the internet. The App Scrolls make this automatic for your favourite providers!
 
 ### Engine Yard
 
@@ -66,13 +66,13 @@ The `eycloud` scroll magically transforms many other scrolls to work specificall
 
 ### Heroku
 
-The Eldar Scrolls needs a Heroku Master to support Heroku for the Eldar Scrolls. 
+The App Scrolls needs a Heroku Master to support Heroku for the App Scrolls. 
 
 There is some initial work in the [current scrolls][11] and the [archived/unsupported scrolls][12]
 
 ### CloudFoundry
 
-The Eldar Scrolls needs a CloudFoundry Master to support CloudFoundry for the Eldar Scrolls. 
+The App Scrolls needs a CloudFoundry Master to support CloudFoundry for the App Scrolls. 
 
 ## Authoring Scrolls of Magical Mystery
 
@@ -97,7 +97,7 @@ description: Installs SuperGem which is useful for things
 author: mbleigh
 ```
 
-It's really that simple. The gem has RSpec tests that automatically validate each scroll in the repository, so you should run `rake spec` as a basic sanity check before submitting a pull request. Note that these don't verify that your scroll code itself works, just that Eldar Scrolls could properly parse and understand your scroll file.
+It's really that simple. The gem has RSpec tests that automatically validate each scroll in the repository, so you should run `rake spec` as a basic sanity check before submitting a pull request. Note that these don't verify that your scroll code itself works, just that App Scrolls could properly parse and understand your scroll file.
 
 ## History
 
@@ -109,7 +109,7 @@ This project wouldn't exist without Michael having created [Rails Wizard][4] dur
 
 Support for Engine Yard Cloud meant integration with Chef Recipes. This meant confusing language - Rails Wizard Recipes and Chef Recipes. He decided that wizards don't use recipes - they use scrolls. Alchemists use recipes. And screw alchemists and their dinky potions. Recipes became Scrolls.
 
-"Eldar Scrolls" is a deliberate misspelling of the popular [Elder Scrolls][8] computer game. Ok, it was accidental but "eldarscrolls" and "eldarscrolls" should now be much easier to search for on Twitter and Google; and [@eldarscrolls][9] [eldarscrolls.org][1] were available
+"App Scrolls" is a deliberate misspelling of the popular [Elder Scrolls][8] computer game. Ok, it was accidental but "appscrolls" and "appscrolls" should now be much easier to search for on Twitter and Google; and [@appscrolls][9] [appscrolls.org][1] were available
 
 ## Future
 
@@ -139,19 +139,19 @@ ASCII banner - http://www.network-science.de/ascii/ using 'smslant' font.
 
 ## License
 
-Eldar Scrolls and its scrolls are distributed under the MIT License. See [MIT_LICENSE][10] for the actual words.
+App Scrolls and its scrolls are distributed under the MIT License. See [MIT_LICENSE][10] for the actual words.
 
-[1]:http://eldarscrolls.org/
-[2]:https://github.com/drnic/eldarscrolls
-[2]:https://github.com/drnic/eldarscrolls/tree/master/scrolls
+[1]:http://appscrolls.org/
+[2]:https://github.com/drnic/appscrolls
+[2]:https://github.com/drnic/appscrolls/tree/master/scrolls
 [4]:https://github.com/intridea/rails_wizard
 [5]:https://github.com/mbleigh
 [6]:http://www.engineyard.com/products/cloud
 [7]:http://drnicwilliams.com
 [8]:http://www.elderscrolls.com/
 [9]:https://twitter.com/elderscrolls
-[10]:https://github.com/drnic/eldarscrolls/blob/master/MIT_LICENSE
-[11]:https://github.com/drnic/eldarscrolls/tree/master/scrolls
-[12]:https://github.com/drnic/eldarscrolls/tree/master/scrolls/zzz
-[13]:https://github.com/drnic/eldarscrolls/tree/apply_scrolls
+[10]:https://github.com/drnic/appscrolls/blob/master/MIT_LICENSE
+[11]:https://github.com/drnic/appscrolls/tree/master/scrolls
+[12]:https://github.com/drnic/appscrolls/tree/master/scrolls/zzz
+[13]:https://github.com/drnic/appscrolls/tree/apply_scrolls
 [14]:https://github.com/drnic/mydemoapp

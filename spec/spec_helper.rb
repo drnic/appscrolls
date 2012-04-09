@@ -4,7 +4,7 @@ require 'rspec'
 
 Dir[File.dirname(__FILE__) + '/support/*'].each{|path| require path}
 
-require 'eldarscrolls'
+require 'appscrolls'
 
 RSpec.configure do |config|
 

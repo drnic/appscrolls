@@ -2,6 +2,6 @@
 $:.push File.dirname(__FILE__) + '/../lib'
 
 require 'rubygems'
-require 'eldarscrolls/command'
+require 'appscrolls/command'
 
-EldarScrolls::Command.start
+AppScrollsScrolls::Command.start
