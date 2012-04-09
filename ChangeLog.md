@@ -49,7 +49,7 @@ New
 
 * Resque recipe works a treat.
 
-Try this on EY Cloud! `ey_eldar new demomysql -r sqlite3 mysql resque rails_basics git`
+Try this on EY Cloud! `eldar new demomysql -r sqlite3 mysql resque rails_basics git`
 
 ## v0.2
 

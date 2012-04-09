@@ -44,7 +44,7 @@ When /^I run project executable "(.*)" with arguments "(.*)"/ do |executable, ar
 end
 
 When /^I run local executable "(.*)" with arguments "(.*)"/ do |executable, arguments|
-  if executable == "ey_eldar"
+  if executable == "eldar"
     require 'eldar'
     require 'eldar/command'
     in_project_folder do

@@ -6,13 +6,13 @@ The Eldar Scrolls is a magical tool to generate new Rails and modify existing Ra
 
 Installation is simple:
 
-    gem install ey_eldar
+    gem install eldar
 
 ## Usage
 
-The primary usage of the `ey_eldar` gem is to utilize its interactive terminal command to build a Rails template. To get started, you can simply run the command thusly:
+The primary usage of the `eldar` gem is to utilize its interactive terminal command to build a Rails template. To get started, you can simply run the command thusly:
 
-    ey_eldar new APP_NAME
+    eldar new APP_NAME
 
 Where `APP_NAME` is the directory in which you wish to create the app (it mirrors the Rails creation syntax). You will then be guided through the scroll selection process and subsequently the Rails app generator will automatically run with the template and all appropriate command line options included.
 
@@ -20,7 +20,7 @@ Where `APP_NAME` is the directory in which you wish to create the app (it mirror
 
 If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the `-r` option:
 
-    ey_eldar new APP_NAME -r jquery mongo_mapper sass
+    eldar new APP_NAME -r jquery mongo_mapper sass
 
 This will automatically generate a Rails template with the provided scrolls and begin the app generator.
 
@@ -28,11 +28,11 @@ This will automatically generate a Rails template with the provided scrolls and 
 
 You can also print out a simple list of scrolls:
 
-    ey_eldar list
+    eldar list
 
 Or print out a list of scrolls for a specific category:
 
-    ey_eldar list persistence
+    eldar list persistence
 
 ## Deployment Support
 
@@ -77,6 +77,6 @@ It's really that simple. The gem has RSpec tests that automatically validate eac
 Engine Yard Rails Wizard and its scrolls are distributed under the MIT License.
 
 [1]:http://railswizard.engineyard.com/
-[2]:https://github.com/engineyard/ey_eldar/tree/master/scrolls
-[3]:https://github.com/engineyard/ey_eldar.web
+[2]:https://github.com/engineyard/eldar/tree/master/scrolls
+[3]:https://github.com/engineyard/eldar.web
 [4]:https://github.com/intridea/eldar
