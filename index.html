@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Eldar Scrolls by drnic</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Eldar Scrolls</h1>
+        <p>The Eldar Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. </p>
+        <p class="view"><a href="https://github.com/drnic/eldarscrolls">View the Project on GitHub <small>drnic/eldarscrolls</small></a></p>
+        <ul>
+          <li><a href="https://github.com/drnic/eldarscrolls/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/drnic/eldarscrolls/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/drnic/eldarscrolls">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>The Eldar Scrolls for creating and transforming Rails apps</h1>
+
+<pre><code>   ______   __           ____             ____  
+  / __/ /__/ /__ _____  / __/__________  / / /__
+ / _// / _  / _ `/ __/ _\ \/ __/ __/ _ \/ / (_-&lt;
+/___/_/\_,_/\_,_/_/   /___/\__/_/  \___/_/_/___/
+</code></pre>
+
+<p>The Eldar Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. Authentication, testing, persistence, javascript, css, deployment, and templating - there's a magical scroll for you.</p>
+
+<ul>
+<li>Follow on twitter <a href="https://twitter.com/elderscrolls">@eldarscrolls</a>
+</li>
+</ul><p>An example application that was built by the Eldar Scrolls is at <a href="https://github.com/drnic/mydemoapp">https://github.com/drnic/mydemoapp</a>. The generated README shows all the scrolls that were included.</p>
+
+<h2>Installation</h2>
+
+<p>Installation is simple:</p>
+
+<pre><code>gem install eldarscrolls
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>The primary usage of the <code>eldarscrolls</code> gem is to utilize its interactive terminal command to build a new Rails application. To get started, you can simply run the command thusly:</p>
+
+<pre><code>eldar new APP_NAME
+eldarscrolls new APP_NAME
+</code></pre>
+
+<p>Where <code>APP_NAME</code> is the directory in which you wish to create the app (it mirrors the Rails creation syntax). You will then be guided through the scroll selection process and subsequently the Rails app generator will automatically run with the template and all appropriate command line options included.</p>
+
+<p>To transform an existing Rails app, you ... wait, that's not implemented yet. But since the "apply template" feature of <code>rails new APP_NAME -m template.rb</code> is implemented in Thor, I mean, how hard could it be?*</p>
+
+<h3>Specifying Scrolls</h3>
+
+<p>If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the <code>-s</code> or <code>--scrolls</code> option:</p>
+
+<pre><code>eldar new APP_NAME -s twitter_bootstrap mysql resque
+eldar new APP_NAME --scrolls postgresql github eycloud
+</code></pre>
+
+<p>This will automatically generate a Rails template with the provided scrolls and begin the app generator.</p>
+
+<h3>Listing Scrolls</h3>
+
+<p>You can also print out a simple list of scrolls:</p>
+
+<pre><code>eldar list
+</code></pre>
+
+<p>Or print out a list of scrolls for a specific category:</p>
+
+<pre><code>eldar list persistence
+</code></pre>
+
+<h2>Deployment Support</h2>
+
+<p>Web applications are boring if they aren't running proudly on the internet. The Eldar Scrolls make this automatic for your favourite providers!</p>
+
+<h3>Engine Yard</h3>
+
+<p>Scroll: <code>eycloud</code></p>
+
+<p>If you choose the <code>eycloud</code> scroll, your application will be automatically deployed to <a href="http://www.engineyard.com/products/cloud">Engine Yard Cloud</a>. Your code will also be automatically stored on a private/public GitHub repository.</p>
+
+<p>The <code>eycloud</code> scroll magically transforms many other scrolls to work specifically for <a href="http://www.engineyard.com/products/cloud">Engine Yard Cloud</a>. For example:</p>
+
+<ul>
+<li>
+<code>postgresql</code> - the environment will have PostgreSQL selected instead of MySQL</li>
+<li>
+<code>resque</code> - the environment will have Resque and Redis</li>
+</ul><h3>Heroku</h3>
+
+<p>The Eldar Scrolls needs a Heroku Master to support Heroku for the Eldar Scrolls. </p>
+
+<p>There is some initial work in the <a href="https://github.com/drnic/eldarscrolls/tree/master/scrolls">current scrolls</a> and the <a href="https://github.com/drnic/eldarscrolls/tree/master/scrolls/zzz">archived/unsupported scrolls</a></p>
+
+<h3>CloudFoundry</h3>
+
+<p>The Eldar Scrolls needs a CloudFoundry Master to support CloudFoundry for the Eldar Scrolls. </p>
+
+<h2>Authoring Scrolls of Magical Mystery</h2>
+
+<p>Create new scrolls using:</p>
+
+<pre><code>rake new NAME=scroll-name
+</code></pre>
+
+<p>Submitting a scroll is actually a very straightforward process. Scrolls are made of up <strong>template code</strong> and <strong>YAML back-matter</strong> stored in a ruby file. The <code>__END__</code> parsing convention is used so that each scroll is actually a valid, parseable Ruby file. The structure of a scroll looks something like this:</p>
+
+<div class="highlight">
+<pre><span class="n">gem</span> <span class="s1">'supergem'</span>
+
+<span class="n">after_bundler</span> <span class="k">do</span>
+  <span class="n">generate</span> <span class="s2">"supergem:install"</span>
+<span class="k">end</span>
+
+<span class="cp">__END__</span>
+
+<span class="cp">category: templating</span>
+<span class="cp">name: SuperGem</span>
+<span class="cp">description: Installs SuperGem which is useful for things</span>
+<span class="cp">author: mbleigh</span>
+</pre>
+</div>
+
+
+<p>It's really that simple. The gem has RSpec tests that automatically validate each scroll in the repository, so you should run <code>rake spec</code> as a basic sanity check before submitting a pull request. Note that these don't verify that your scroll code itself works, just that Eldar Scrolls could properly parse and understand your scroll file.</p>
+
+<h2>History</h2>
+
+<p>This project is an old fashioned fork of <a href="https://github.com/mbleigh">Michael Bleigh</a>'s <a href="https://github.com/intridea/rails_wizard">Rails Wizard</a>. A new name, new project, and new purpose. </p>
+
+<p>This project wouldn't exist without Michael having created <a href="https://github.com/intridea/rails_wizard">Rails Wizard</a> during Rails Rumble and maintaining and upgrading it for a long time. Sadly support dropped off, several recipes did not work with Rails 3.1+, </p>
+
+<p><a href="http://drnicwilliams.com">Dr Nic</a> originally worked on <a href="https://github.com/intridea/rails_wizard">Rails Wizard</a> to provide <a href="http://www.engineyard.com/products/cloud">Engine Yard Cloud</a> support, his employer and his favourite hosting platform. He also merged in a lot of recipes from other forks, and added new recipes for modern projects.</p>
+
+<p>Support for Engine Yard Cloud meant integration with Chef Recipes. This meant confusing language - Rails Wizard Recipes and Chef Recipes. He decided that wizards don't use recipes - they use scrolls. Alchemists use recipes. And screw alchemists and their dinky potions. Recipes became Scrolls.</p>
+
+<p>"Eldar Scrolls" is a deliberate misspelling of the popular <a href="http://www.elderscrolls.com/">Elder Scrolls</a> computer game. Ok, it was accidental but "eldarscrolls" and "eldarscrolls" should now be much easier to search for on Twitter and Google; and <a href="https://twitter.com/elderscrolls">@eldarscrolls</a> <a href="http://eldarscrolls.org/">eldarscrolls.org</a> were available</p>
+
+<h2>Future</h2>
+
+<ul>
+<li>Automatically setup Continuous Integration for new applications - branches "jenkins"</li>
+<li>Interactive mode is a wizard by categories "pick A, B, C or none"</li>
+<li>Apply scrolls to existing Rails applications - branch "<a href="https://github.com/drnic/eldarscrolls/tree/apply_scrolls">apply_scrolls</a>"*</li>
+<li>Scrolls work or fail fast on Heroku</li>
+<li>Scrolls work or fail fast on CloudFoundry</li>
+<li>Scrolls generate their own README - branch "readmes"</li>
+<li>3rd party services/add-ons enabled within deployment platform or directly with service</li>
+<li>Padrino / Sinatra applications</li>
+<li>Non-Ruby applications (Lithium for PHP, etc)</li>
+</ul><p>Missing scrolls</p>
+
+<ul>
+<li>MongoDB - branch "mongodb"</li>
+<li>OmniAuth - branch "omniauth"</li>
+<li>Sidekiq - branch "sidekiq"</li>
+</ul><p>How hard could it be?</p>
+
+<ul>
+<li>
+<code>*</code> 'How hard could it be to transform applications?' - pretty hard. Scrolls need to be aware of the current code base, rather than merely the list of other scrolls being used to create a new app. Scrolls also need to know about versions of Rails rather than just latest rails.</li>
+</ul><h2>Thanks</h2>
+
+<p>ASCII banner - <a href="http://www.network-science.de/ascii/">http://www.network-science.de/ascii/</a> using 'smslant' font.</p>
+
+<h2>License</h2>
+
+<p>Eldar Scrolls and its scrolls are distributed under the MIT License. See <a href="https://github.com/drnic/eldarscrolls/blob/master/MIT_LICENSE">MIT_LICENSE</a> for the actual words.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/drnic">drnic</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-764576-29");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
