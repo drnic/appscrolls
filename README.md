@@ -1,4 +1,4 @@
-# The Eldar Scrolls for App Transformations
+# The Eldar Scrolls for creating and transforming Rails apps
 
 ```
    ______   __           ____             ____  
