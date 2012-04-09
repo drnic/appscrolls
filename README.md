@@ -26,6 +26,8 @@ The primary usage of the `eldarscrolls` gem is to utilize its interactive termin
 
 Where `APP_NAME` is the directory in which you wish to create the app (it mirrors the Rails creation syntax). You will then be guided through the scroll selection process and subsequently the Rails app generator will automatically run with the template and all appropriate command line options included.
 
+To transform an existing Rails app, you ... wait, that's not implemented yet. But since the "apply template" feature of `rails new APP_NAME -m template.rb` is implemented in Thor, I mean, how hard could it be?*
+
 ### Specifying Scrolls
 
 If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the `-s` or `--scrolls` option:
@@ -111,7 +113,7 @@ Support for Engine Yard Cloud meant integration with Chef Recipes. This meant co
 
 * Automatically setup Continuous Integration for new applications - branches "jenkins"
 * Interactive mode is a wizard by categories "pick A, B, C or none"
-* Apply scrolls to existing Rails applications - branch "[apply_scrolls][13]"
+* Apply scrolls to existing Rails applications - branch "[apply_scrolls][13]"*
 * Scrolls work or fail fast on Heroku
 * Scrolls work or fail fast on CloudFoundry
 * Scrolls generate their own README - branch "readmes"
@@ -123,6 +125,9 @@ Missing scrolls
 * OmniAuth - branch "omniauth"
 * Sidekiq - branch "sidekiq"
 
+How hard could it be?
+
+* `*` 'How hard could it be to transform applications?' - pretty hard. Scrolls need to be aware of the current code base, rather than merely the list of other scrolls being used to create a new app. Scrolls also need to know about versions of Rails rather than just latest rails.
 
 ## Thanks
 
