@@ -44,7 +44,7 @@ after_everything do
     say_custom "eycloud", "Checking for availability of #{app_name}"
     @app_names ||= `ey_cli apps | grep "-" | sed "s/.* //"`.split(/\n/)
     while @app_names.include?(app_name)
-      app_name = ask_wizard "Application #{app_name} is already taken; what"
+      app_name = ask_wizard "Application #{app_name} is already exists. What name?"
     end
 
     name = File.basename(".")
