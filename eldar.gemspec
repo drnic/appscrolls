@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Michael Bleigh", "Dr Nic Williams"]
   s.email       = ["michael@intridea.com", "drnicwilliams@gmail.com"]
-  s.homepage    = "http://railswizard.engineyard.com/"
+  s.homepage    = "http://railseldarscrolls.org/"
   s.summary     = %q{A tool for quickly generating Rails applications for Engine Yard Cloud.}
   s.description = %q{Quickly and easily create Rails application templates featuring dozens of popular libraries tuned for Engine Yard Cloud}
 

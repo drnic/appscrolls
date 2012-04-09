@@ -20,7 +20,7 @@ Where `APP_NAME` is the directory in which you wish to create the app (it mirror
 
 If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the `-r` option:
 
-    eldar new APP_NAME -r jquery mongo_mapper sass
+    eldar new APP_NAME -s jquery mongo_mapper sass
 
 This will automatically generate a Rails template with the provided scrolls and begin the app generator.
 
@@ -38,14 +38,22 @@ Or print out a list of scrolls for a specific category:
 
 ### Engine Yard
 
-If you choose the `eycloud` scroll, your application will be automatically deployed to Engine Yard Cloud. Your code will also be automatically stored on a private/public GitHub repository.
+If you choose the `eycloud` scroll, your application will be automatically deployed to [Engine Yard Cloud][6]. Your code will also be automatically stored on a private/public GitHub repository.
 
-The `eycloud` scroll magically transforms many other scrolls to work specifically for Engine Yard Cloud. For example:
+The `eycloud` scroll magically transforms many other scrolls to work specifically for [Engine Yard Cloud][6]. For example:
 
 * `postgresql` - the environment will have PostgreSQL selected instead of MySQL
 * `resque` - the environment will have Resque and Redis
 
-## Submitting a Scroll
+### Heroku
+
+The Eldar Scrolls needs a Heroku Master to support Heroku for the Eldar Scrolls. 
+
+### CloudFoundry
+
+The Eldar Scrolls needs a CloudFoundry Master to support CloudFoundry for the Eldar Scrolls. 
+
+## Authoring Scrolls of Magical Mystery
 
 Create new scrolls using:
 
@@ -68,15 +76,31 @@ description: Installs SuperGem which is useful for things
 author: mbleigh
 ```
 
-It's really that simple. The gem has RSpec tests that automatically validate each scroll in the repository, so you should run `rake spec` as a basic sanity check before submitting a pull request. Note that these don't verify that your scroll code itself works, just that Engine Yard Rails Wizard could properly parse and understand your scroll file.
+It's really that simple. The gem has RSpec tests that automatically validate each scroll in the repository, so you should run `rake spec` as a basic sanity check before submitting a pull request. Note that these don't verify that your scroll code itself works, just that Eldar Scrolls could properly parse and understand your scroll file.
 
 ## History
 
+This project is an old fashioned fork of [Michael Bleigh][5]'s [Rails Wizard][4]. A new name, new project, and new purpose. 
+
+This project wouldn't exist without Michael having created [Rails Wizard][4] during Rails Rumble and maintaining and upgrading it for a long time. Sadly support dropped off, several recipes did not work with Rails 3.1+, 
+
+[Dr Nic][7] originally worked on [Rails Wizard][4] to provide [Engine Yard Cloud][6] support, his employer and his favourite hosting platform. He also merged in a lot of recipes from other forks, and added new recipes for modern projects.
+
+Support for Engine Yard Cloud meant integration with Chef Recipes. This meant confusing language - Rails Wizard Recipes and Chef Recipes. He decided that wizards don't use recipes - they use scrolls. Alchemists use recipes. And screw alchemists and their dinky potions. Recipes became Scrolls.
+
+"Eldar Scrolls" is a deliberate misspelling of the popular [Elder Scrolls][8] computer game. Ok, it was accidental but "eldar" and "eldarscrolls" should now be much easier to search for on Twitter and Google; and [@eldarscrolls][9] [eldarscrolls.org][10] were available
+
 ## License
 
-Engine Yard Rails Wizard and its scrolls are distributed under the MIT License.
+Eldar Scrolls and its scrolls are distributed under the MIT License.
 
-[1]:http://railswizard.engineyard.com/
-[2]:https://github.com/engineyard/eldar/tree/master/scrolls
-[3]:https://github.com/engineyard/eldar.web
-[4]:https://github.com/intridea/eldar
+[1]:http://eldarscrolls.org/
+[2]:https://github.com/drnic/eldar
+[2]:https://github.com/drnic/eldar/tree/master/scrolls
+[4]:https://github.com/intridea/rails_wizard
+[5]:https://github.com/mbleigh
+[6]:http://www.engineyard.com/products/cloud
+[7]:http://drnicwilliams.com
+[8]:http://www.elderscrolls.com/
+[9]:https://twitter.com/elderscrolls
+[10]:http://elderscrolls.org
