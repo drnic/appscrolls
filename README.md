@@ -9,6 +9,8 @@
 
 The Eldar Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. Authentication, testing, persistence, javascript, css, deployment, and templating - there's a magical scroll for you.
 
+* Follow on twitter [@eldarscrolls][9]
+
 ## Installation
 
 Installation is simple:
@@ -19,6 +21,7 @@ Installation is simple:
 
 The primary usage of the `eldarscrolls` gem is to utilize its interactive terminal command to build a new Rails application. To get started, you can simply run the command thusly:
 
+    eldar new APP_NAME
     eldarscrolls new APP_NAME
 
 Where `APP_NAME` is the directory in which you wish to create the app (it mirrors the Rails creation syntax). You will then be guided through the scroll selection process and subsequently the Rails app generator will automatically run with the template and all appropriate command line options included.
@@ -27,8 +30,8 @@ Where `APP_NAME` is the directory in which you wish to create the app (it mirror
 
 If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the `-s` or `--scrolls` option:
 
-    eldarscrolls new APP_NAME -s twitter_bootstrap mysql resque
-    eldarscrolls new APP_NAME --scrolls postgresql github eycloud
+    eldar new APP_NAME -s twitter_bootstrap mysql resque
+    eldar new APP_NAME --scrolls postgresql github eycloud
 
 This will automatically generate a Rails template with the provided scrolls and begin the app generator.
 
@@ -36,11 +39,11 @@ This will automatically generate a Rails template with the provided scrolls and 
 
 You can also print out a simple list of scrolls:
 
-    eldarscrolls list
+    eldar list
 
 Or print out a list of scrolls for a specific category:
 
-    eldarscrolls list persistence
+    eldar list persistence
 
 ## Deployment Support
 
