@@ -109,8 +109,6 @@ This project wouldn't exist without Michael having created [Rails Wizard][4] dur
 
 Support for Engine Yard Cloud meant integration with Chef Recipes. This meant confusing language - Rails Wizard Recipes and Chef Recipes. He decided that wizards don't use recipes - they use scrolls. Alchemists use recipes. And screw alchemists and their dinky potions. Recipes became Scrolls.
 
-"App Scrolls" is a deliberate misspelling of the popular [Elder Scrolls][8] computer game. Ok, it was accidental but "appscrolls" and "appscrolls" should now be much easier to search for on Twitter and Google; and [@appscrolls][9] [appscrolls.org][1] were available
-
 ## Future
 
 * Automatically setup Continuous Integration for new applications - branches "jenkins"
@@ -148,7 +146,6 @@ App Scrolls and its scrolls are distributed under the MIT License. See [MIT_LICE
 [5]:https://github.com/mbleigh
 [6]:http://www.engineyard.com/products/cloud
 [7]:http://drnicwilliams.com
-[8]:http://www.elderscrolls.com/
 [9]:https://twitter.com/elderscrolls
 [10]:https://github.com/drnic/appscrolls/blob/master/MIT_LICENSE
 [11]:https://github.com/drnic/appscrolls/tree/master/scrolls
