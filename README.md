@@ -110,7 +110,7 @@ ASCII banner - http://www.network-science.de/ascii/ using 'smslant' font.
 
 ## License
 
-Eldar Scrolls and its scrolls are distributed under the MIT License.
+Eldar Scrolls and its scrolls are distributed under the MIT License. See [MIT_LICENSE][10] for the actual words.
 
 [1]:http://eldarscrolls.org/
 [2]:https://github.com/drnic/eldarscrolls
@@ -121,5 +121,6 @@ Eldar Scrolls and its scrolls are distributed under the MIT License.
 [7]:http://drnicwilliams.com
 [8]:http://www.elderscrolls.com/
 [9]:https://twitter.com/elderscrolls
+[10]:https://github.com/drnic/eldarscrolls/blob/master/MIT_LICENSE
 [11]:https://github.com/drnic/eldarscrolls/tree/master/scrolls
 [12]:https://github.com/drnic/eldarscrolls/tree/master/scrolls/zzz
