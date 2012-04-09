@@ -6,13 +6,13 @@ The Eldar Scrolls is a magical tool to generate new Rails and modify existing Ra
 
 Installation is simple:
 
-    gem install eldar
+    gem install eldarscrolls
 
 ## Usage
 
-The primary usage of the `eldar` gem is to utilize its interactive terminal command to build a new Rails application. To get started, you can simply run the command thusly:
+The primary usage of the `eldarscrolls` gem is to utilize its interactive terminal command to build a new Rails application. To get started, you can simply run the command thusly:
 
-    eldar new APP_NAME
+    eldarscrolls new APP_NAME
 
 Where `APP_NAME` is the directory in which you wish to create the app (it mirrors the Rails creation syntax). You will then be guided through the scroll selection process and subsequently the Rails app generator will automatically run with the template and all appropriate command line options included.
 
@@ -20,8 +20,8 @@ Where `APP_NAME` is the directory in which you wish to create the app (it mirror
 
 If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the `-s` or `--scrolls` option:
 
-    eldar new APP_NAME -s twitter_bootstrap mysql resque
-    eldar new APP_NAME --scrolls postgresql github eycloud
+    eldarscrolls new APP_NAME -s twitter_bootstrap mysql resque
+    eldarscrolls new APP_NAME --scrolls postgresql github eycloud
 
 This will automatically generate a Rails template with the provided scrolls and begin the app generator.
 
@@ -29,11 +29,11 @@ This will automatically generate a Rails template with the provided scrolls and 
 
 You can also print out a simple list of scrolls:
 
-    eldar list
+    eldarscrolls list
 
 Or print out a list of scrolls for a specific category:
 
-    eldar list persistence
+    eldarscrolls list persistence
 
 ## Deployment Support
 
@@ -93,15 +93,15 @@ This project wouldn't exist without Michael having created [Rails Wizard][4] dur
 
 Support for Engine Yard Cloud meant integration with Chef Recipes. This meant confusing language - Rails Wizard Recipes and Chef Recipes. He decided that wizards don't use recipes - they use scrolls. Alchemists use recipes. And screw alchemists and their dinky potions. Recipes became Scrolls.
 
-"Eldar Scrolls" is a deliberate misspelling of the popular [Elder Scrolls][8] computer game. Ok, it was accidental but "eldar" and "eldarscrolls" should now be much easier to search for on Twitter and Google; and [@eldarscrolls][9] [eldarscrolls.org][10] were available
+"Eldar Scrolls" is a deliberate misspelling of the popular [Elder Scrolls][8] computer game. Ok, it was accidental but "eldarscrolls" and "eldarscrolls" should now be much easier to search for on Twitter and Google; and [@eldarscrolls][9] [eldarscrolls.org][10] were available
 
 ## License
 
 Eldar Scrolls and its scrolls are distributed under the MIT License.
 
 [1]:http://eldarscrolls.org/
-[2]:https://github.com/drnic/eldar
-[2]:https://github.com/drnic/eldar/tree/master/scrolls
+[2]:https://github.com/drnic/eldarscrolls
+[2]:https://github.com/drnic/eldarscrolls/tree/master/scrolls
 [4]:https://github.com/intridea/rails_wizard
 [5]:https://github.com/mbleigh
 [6]:http://www.engineyard.com/products/cloud

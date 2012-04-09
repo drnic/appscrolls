@@ -44,9 +44,9 @@ When /^I run project executable "(.*)" with arguments "(.*)"/ do |executable, ar
 end
 
 When /^I run local executable "(.*)" with arguments "(.*)"/ do |executable, arguments|
-  if executable == "eldar"
-    require 'eldar'
-    require 'eldar/command'
+  if executable == "eldarscrolls"
+    require 'eldarscrolls'
+    require 'eldarscrolls/command'
     in_project_folder do
       stdout, stderr = capture_stdios do
         Engineyard::Jenkins::CLI.start(arguments.split(/ /))

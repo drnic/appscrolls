@@ -18,7 +18,7 @@ task :run => :clean do
   scrolls = ENV['SCROLLS'].split(',')
 
   require 'tempfile'
-  require 'eldar'
+  require 'eldarscrolls'
 
   template = Eldar::Template.new(scrolls)
 
@@ -39,7 +39,7 @@ end
 
 desc "Prints out a template from the provided scrolls."
 task :print do
-  require 'eldar'
+  require 'eldarscrolls'
 
   scrolls = ENV['SCROLLS'].split(',')
   puts Eldar::Template.new(scrolls).compile
@@ -53,7 +53,7 @@ task :new do
   end
   require 'active_support/inflector'
   require 'erb'
-  require 'eldar/template'
+  require 'eldarscrolls/template'
   scroll = Eldar::Template.render("new_scroll", binding)
   scroll_path = "scrolls/#{name}.rb"
   File.open(scroll_path, "w") { |file| file << scroll }
@@ -63,7 +63,7 @@ end
 namespace :list do
   desc "Display scrolls by category"
   task :categories do
-    require 'eldar'
+    require 'eldarscrolls'
     categories = Eldar::Scrolls.categories.sort
     categories = (categories - ["other"]) + ["other"]
     categories.each do |category|

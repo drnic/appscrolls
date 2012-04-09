@@ -1,4 +1,4 @@
-require 'eldar/config'
+require 'eldarscrolls/config'
 
 require 'active_support/inflector'
 require 'yaml'

@@ -1,4 +1,4 @@
-require 'eldar'
+require 'eldarscrolls'
 require 'thor'
 
 module Eldar

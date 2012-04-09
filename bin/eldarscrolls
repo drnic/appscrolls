@@ -2,6 +2,6 @@
 $:.push File.dirname(__FILE__) + '/../lib'
 
 require 'rubygems'
-require 'eldar/command'
+require 'eldarscrolls/command'
 
 Eldar::Command.start
