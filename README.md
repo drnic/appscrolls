@@ -107,6 +107,23 @@ Support for Engine Yard Cloud meant integration with Chef Recipes. This meant co
 
 "Eldar Scrolls" is a deliberate misspelling of the popular [Elder Scrolls][8] computer game. Ok, it was accidental but "eldarscrolls" and "eldarscrolls" should now be much easier to search for on Twitter and Google; and [@eldarscrolls][9] [eldarscrolls.org][1] were available
 
+## Future
+
+* Automatically setup Continuous Integration for new applications - branches "jenkins"
+* Interactive mode is a wizard by categories "pick A, B, C or none"
+* Apply scrolls to existing Rails applications - branch "[apply_scrolls][13]"
+* Scrolls work or fail fast on Heroku
+* Scrolls work or fail fast on CloudFoundry
+* Scrolls generate their own README - branch "readmes"
+* 3rd party services/add-ons enabled within deployment platform or directly with service
+
+Missing scrolls
+
+* MongoDB - branch "mongodb"
+* OmniAuth - branch "omniauth"
+* Sidekiq - branch "sidekiq"
+
+
 ## Thanks
 
 ASCII banner - http://www.network-science.de/ascii/ using 'smslant' font.
@@ -127,3 +144,4 @@ Eldar Scrolls and its scrolls are distributed under the MIT License. See [MIT_LI
 [10]:https://github.com/drnic/eldarscrolls/blob/master/MIT_LICENSE
 [11]:https://github.com/drnic/eldarscrolls/tree/master/scrolls
 [12]:https://github.com/drnic/eldarscrolls/tree/master/scrolls/zzz
+[13]:https://github.com/drnic/eldarscrolls/tree/apply_scrolls
