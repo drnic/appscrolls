@@ -118,6 +118,8 @@ Support for Engine Yard Cloud meant integration with Chef Recipes. This meant co
 * Scrolls work or fail fast on CloudFoundry
 * Scrolls generate their own README - branch "readmes"
 * 3rd party services/add-ons enabled within deployment platform or directly with service
+* Padrino / Sinatra applications
+* Non-Ruby applications (Lithium for PHP, etc)
 
 Missing scrolls
 
