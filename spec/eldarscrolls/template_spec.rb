@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Eldar::Template do
-  subject{ Eldar::Template }
-  let(:scroll){ Eldar::Scroll.generate('name','# test') }
+describe EldarScrolls::Template do
+  subject{ EldarScrolls::Template }
+  let(:scroll){ EldarScrolls::Scroll.generate('name','# test') }
 
   describe '#initialize' do
     it 'should work with classes' do
@@ -12,15 +12,15 @@ describe Eldar::Template do
 
   describe '#scrolls_with_dependencies' do
     def s(*deps)
-      mock(:Class, :requires => deps, :superclass => Eldar::Scroll)
+      mock(:Class, :requires => deps, :superclass => EldarScrolls::Scroll)
     end
     
     def scroll(name)
-      Eldar::Scrolls[name]
+      EldarScrolls::Scrolls[name]
     end
     
     subject do
-      @template = Eldar::Template.new([]) 
+      @template = EldarScrolls::Template.new([]) 
       @template.stub!(:scrolls).and_return(@scrolls)
       @template.stub!(:scroll_classes).and_return(@scrolls)
       @template
@@ -50,7 +50,7 @@ describe Eldar::Template do
     end
     
     it 'should resolve and sort' do
-      template = Eldar::Template.new([scroll('eycloud')])
+      template = EldarScrolls::Template.new([scroll('eycloud')])
       template.resolve_scrolls.should == [scroll('eycloud_recipes_on_deploy'), scroll('git'), scroll('github'), scroll('eycloud')]
     end
   end

@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Eldar::Scroll do
+describe EldarScrolls::Scroll do
   context "with a generated scroll" do
-    subject{ Eldar::Scroll.generate('scroll_example', "# this is a test", :category => 'example', :name => "Eldar Example") }
+    subject{ EldarScrolls::Scroll.generate('scroll_example', "# this is a test", :category => 'example', :name => "Eldar Example") }
 
     context 'string setter methods' do
-      (Eldar::Scroll::ATTRIBUTES - ['config']).each do |setter|
+      (EldarScrolls::Scroll::ATTRIBUTES - ['config']).each do |setter|
         it "should be able to set #{setter} with an argument" do
           subject.send(setter + '=', "test")
           subject.send(setter).should == 'test'
@@ -26,8 +26,8 @@ describe Eldar::Scroll do
 
     describe '.generate' do
       it 'should work with a string and hash as arguments' do
-        scroll = Eldar::Scroll.generate('some_key', '# some code', :name => "Example")
-        scroll.superclass.should == Eldar::Scroll
+        scroll = EldarScrolls::Scroll.generate('some_key', '# some code', :name => "Example")
+        scroll.superclass.should == EldarScrolls::Scroll
       end
 
       it 'should work with an IO object' do
@@ -40,7 +40,7 @@ category: example
 name: This is an Example
 description: You know it's an exmaple.
 RUBY
-        scroll = Eldar::Scroll.generate('just_a_test', file)
+        scroll = EldarScrolls::Scroll.generate('just_a_test', file)
         scroll.template.should == '# this is an example'        
         scroll.category.should == 'example'
         scroll.name.should == 'This is an Example'
@@ -50,7 +50,7 @@ RUBY
         file = StringIO.new <<-RUBY
 # just ruby, no YAML
 RUBY
-        lambda{Eldar::Scroll.generate('testing',file)}.should raise_error(ArgumentError)
+        lambda{EldarScrolls::Scroll.generate('testing',file)}.should raise_error(ArgumentError)
       end
     end
 
@@ -68,15 +68,15 @@ RUBY
   end
 
   it 'should set default attributes' do
-    scroll = Eldar::Scroll.generate('abc','# test')
+    scroll = EldarScrolls::Scroll.generate('abc','# test')
     
-    Eldar::Scroll::DEFAULT_ATTRIBUTES.each_pair do |k,v|
+    EldarScrolls::Scroll::DEFAULT_ATTRIBUTES.each_pair do |k,v|
       scroll.send(k).should == v
     end
   end
 
   context 'Comparable' do
-    subject{ Eldar::Scroll }
+    subject{ EldarScrolls::Scroll }
     it 'a < b.run_after(a)' do
       A = subject.generate('a', '#')
       B = subject.generate('b', '#', :run_after => ['a'])

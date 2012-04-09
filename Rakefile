@@ -20,7 +20,7 @@ task :run => :clean do
   require 'tempfile'
   require 'eldarscrolls'
 
-  template = Eldar::Template.new(scrolls)
+  template = EldarScrolls::Template.new(scrolls)
 
   begin
     dir = Dir.mktmpdir "rails_template"
@@ -42,7 +42,7 @@ task :print do
   require 'eldarscrolls'
 
   scrolls = ENV['SCROLLS'].split(',')
-  puts Eldar::Template.new(scrolls).compile
+  puts EldarScrolls::Template.new(scrolls).compile
 end
 
 desc "Create a new scroll"
@@ -54,7 +54,7 @@ task :new do
   require 'active_support/inflector'
   require 'erb'
   require 'eldarscrolls/template'
-  scroll = Eldar::Template.render("new_scroll", binding)
+  scroll = EldarScrolls::Template.render("new_scroll", binding)
   scroll_path = "scrolls/#{name}.rb"
   File.open(scroll_path, "w") { |file| file << scroll }
   `open #{scroll_path}`
@@ -64,10 +64,10 @@ namespace :list do
   desc "Display scrolls by category"
   task :categories do
     require 'eldarscrolls'
-    categories = Eldar::Scrolls.categories.sort
+    categories = EldarScrolls::Scrolls.categories.sort
     categories = (categories - ["other"]) + ["other"]
     categories.each do |category|
-      puts "#{category}: #{Eldar::Scrolls.for(category).join(", ")}"
+      puts "#{category}: #{EldarScrolls::Scrolls.for(category).join(", ")}"
     end
   end
 

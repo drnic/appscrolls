@@ -1,11 +1,11 @@
-module Eldar
+module EldarScrolls
   class Template
     attr_reader :scrolls, :unknown_scroll_names
 
     def initialize(scrolls)
       @unknown_scroll_names = []
       @scrolls = scrolls.inject([]) do |list, name|
-        scroll = Eldar::Scroll.from_mongo(name)
+        scroll = EldarScrolls::Scroll.from_mongo(name)
         if scroll
           list << scroll
         else
@@ -32,7 +32,7 @@ module Eldar
     end
 
     def scroll_classes
-      @scroll_classes ||= scrolls.map { |name| Eldar::Scroll.from_mongo(name) }
+      @scroll_classes ||= scrolls.map { |name| EldarScrolls::Scroll.from_mongo(name) }
     end
 
     def scrolls_with_dependencies
@@ -41,7 +41,7 @@ module Eldar
       added_more = false
       for scroll in scroll_classes
         scroll.requires.each do |requirement|
-          requirement = Eldar::Scroll.from_mongo(requirement)
+          requirement = EldarScrolls::Scroll.from_mongo(requirement)
           count = @scrolls_with_dependencies.size
           (@scrolls_with_dependencies << requirement).uniq!
           unless @scrolls_with_dependencies.size == count

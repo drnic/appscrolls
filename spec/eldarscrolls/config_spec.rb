@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Eldar::Config do
+describe EldarScrolls::Config do
   describe '#initialize' do
-    subject{ Eldar::Config.new(YAML.load(@schema)) }  
+    subject{ EldarScrolls::Config.new(YAML.load(@schema)) }  
     it 'should add a question key for each key of the schema' do
       @schema = <<-YAML
       - test:
@@ -20,9 +20,9 @@ describe Eldar::Config do
       - multiple_choice:
           type: multiple_choice
       YAML
-      subject.questions['string'].should be_kind_of(Eldar::Config::Prompt)
-      subject.questions['boolean'].should be_kind_of(Eldar::Config::TrueFalse)
-      subject.questions['multiple_choice'].should be_kind_of(Eldar::Config::MultipleChoice)
+      subject.questions['string'].should be_kind_of(EldarScrolls::Config::Prompt)
+      subject.questions['boolean'].should be_kind_of(EldarScrolls::Config::TrueFalse)
+      subject.questions['multiple_choice'].should be_kind_of(EldarScrolls::Config::MultipleChoice)
     end
 
     it 'should error on invalid question type' do
@@ -74,22 +74,22 @@ describe Eldar::Config do
       end
     end
 
-    describe Eldar::Config::Prompt do
-      subject{ Eldar::Config::Prompt }
+    describe EldarScrolls::Config::Prompt do
+      subject{ EldarScrolls::Config::Prompt }
       it 'should compile to a prompt' do
         subject.new({'prompt' => "What's your favorite color?"}).question.should == 'ask_wizard("What\'s your favorite color?")'
       end
     end
 
-    describe Eldar::Config::TrueFalse do
-      subject{ Eldar::Config::TrueFalse }
+    describe EldarScrolls::Config::TrueFalse do
+      subject{ EldarScrolls::Config::TrueFalse }
       it 'should compile to a yes? question' do
         subject.new({'prompt' => 'Yes yes?'}).question.should == 'yes_wizard?("Yes yes?")'
       end
     end
 
-    describe Eldar::Config::MultipleChoice do
-      subject{ Eldar::Config::MultipleChoice }
+    describe EldarScrolls::Config::MultipleChoice do
+      subject{ EldarScrolls::Config::MultipleChoice }
       it 'should compile into a multiple_choice' do
         subject.new({'prompt' => 'What kind of fruit?', 'choices' => [['Apples', 'apples'], ['Bananas', 'bananas']]}).question.should ==
           'multiple_choice("What kind of fruit?", [["Apples", "apples"], ["Bananas", "bananas"]])'
