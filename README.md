@@ -61,6 +61,8 @@ The `eycloud` scroll magically transforms many other scrolls to work specificall
 
 The Eldar Scrolls needs a Heroku Master to support Heroku for the Eldar Scrolls. 
 
+There is some initial work in the [current scrolls][11] and the [archived/unsupported scrolls][12]
+
 ### CloudFoundry
 
 The Eldar Scrolls needs a CloudFoundry Master to support CloudFoundry for the Eldar Scrolls. 
@@ -100,7 +102,7 @@ This project wouldn't exist without Michael having created [Rails Wizard][4] dur
 
 Support for Engine Yard Cloud meant integration with Chef Recipes. This meant confusing language - Rails Wizard Recipes and Chef Recipes. He decided that wizards don't use recipes - they use scrolls. Alchemists use recipes. And screw alchemists and their dinky potions. Recipes became Scrolls.
 
-"Eldar Scrolls" is a deliberate misspelling of the popular [Elder Scrolls][8] computer game. Ok, it was accidental but "eldarscrolls" and "eldarscrolls" should now be much easier to search for on Twitter and Google; and [@eldarscrolls][9] [eldarscrolls.org][10] were available
+"Eldar Scrolls" is a deliberate misspelling of the popular [Elder Scrolls][8] computer game. Ok, it was accidental but "eldarscrolls" and "eldarscrolls" should now be much easier to search for on Twitter and Google; and [@eldarscrolls][9] [eldarscrolls.org][1] were available
 
 ## Thanks
 
@@ -119,4 +121,5 @@ Eldar Scrolls and its scrolls are distributed under the MIT License.
 [7]:http://drnicwilliams.com
 [8]:http://www.elderscrolls.com/
 [9]:https://twitter.com/elderscrolls
-[10]:http://elderscrolls.org
+[11]:https://github.com/drnic/eldarscrolls/tree/master/scrolls
+[12]:https://github.com/drnic/eldarscrolls/tree/master/scrolls/zzz
