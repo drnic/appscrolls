@@ -1,6 +1,8 @@
 # ChangeLog
 
-New
+## v0.7
+
+New name! "App Scrolls"
 
 * `split` - AB testing promoed in RailsCasts
 * `spork` - clean running of tests
