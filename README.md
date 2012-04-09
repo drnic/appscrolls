@@ -11,6 +11,8 @@ The Eldar Scrolls is a magical tool to generate new Rails and modify existing Ra
 
 * Follow on twitter [@eldarscrolls][9]
 
+An example application that was built by the Eldar Scrolls is at [https://github.com/drnic/mydemoapp][14]. The generated README shows all the scrolls that were included.
+
 ## Installation
 
 Installation is simple:
@@ -152,3 +154,4 @@ Eldar Scrolls and its scrolls are distributed under the MIT License. See [MIT_LI
 [11]:https://github.com/drnic/eldarscrolls/tree/master/scrolls
 [12]:https://github.com/drnic/eldarscrolls/tree/master/scrolls/zzz
 [13]:https://github.com/drnic/eldarscrolls/tree/apply_scrolls
+[14]:https://github.com/drnic/mydemoapp
