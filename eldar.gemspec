@@ -3,8 +3,8 @@ $:.push File.expand_path("../lib", __FILE__)
 require File.dirname(__FILE__) + "/version"
 
 Gem::Specification.new do |s|
-  s.name        = "ey_rails_wizard"
-  s.version     = RailsWizard::VERSION
+  s.name        = "ey_eldar"
+  s.version     = Eldar::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Michael Bleigh", "Dr Nic Williams"]
   s.email       = ["michael@intridea.com", "drnicwilliams@gmail.com"]

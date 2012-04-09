@@ -1,10 +1,10 @@
-require 'rails_wizard/config'
+require 'eldar/config'
 
 require 'active_support/inflector'
 require 'yaml'
 require 'erb'
 
-module RailsWizard
+module Eldar
   class Scroll
     extend Comparable
     
@@ -38,7 +38,7 @@ module RailsWizard
         template = template_or_file
       end
  
-      scroll_class = Class.new(RailsWizard::Scroll) 
+      scroll_class = Class.new(Eldar::Scroll) 
       scroll_class.attributes = attributes
       scroll_class.template = template
       scroll_class.key = key
@@ -73,7 +73,7 @@ module RailsWizard
 
     def self.config
       return nil unless attributes[:config]
-      RailsWizard::Config.new(attributes[:config])
+      Eldar::Config.new(attributes[:config])
     end
 
     def attributes
@@ -95,8 +95,8 @@ module RailsWizard
     end
 
     def self.from_mongo(key)
-      return key if key.respond_to?(:superclass) && key.superclass == RailsWizard::Scroll
-      RailsWizard::Scrolls[key]
+      return key if key.respond_to?(:superclass) && key.superclass == Eldar::Scroll
+      Eldar::Scrolls[key]
     end
 
     def self.get_binding

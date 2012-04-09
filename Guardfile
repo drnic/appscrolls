@@ -6,8 +6,8 @@ end
 
 guard 'rspec', :version => 2 do
   watch(%r{^spec/.+_spec\.rb$})
-  watch(%r{^scrolls/(.+)\.rb$})     { |m| "spec/rails_wizard/scrolls/sanity_spec.rb" }
-  watch(%r{^lib/rails_wizard/(.+)\.rb$})     { |m| "spec/rails_wizard/#{m[1]}_spec.rb" }
+  watch(%r{^scrolls/(.+)\.rb$})     { |m| "spec/eldar/scrolls/sanity_spec.rb" }
+  watch(%r{^lib/eldar/(.+)\.rb$})     { |m| "spec/eldar/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
 end
 

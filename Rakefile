@@ -18,9 +18,9 @@ task :run => :clean do
   scrolls = ENV['SCROLLS'].split(',')
 
   require 'tempfile'
-  require 'rails_wizard'
+  require 'eldar'
 
-  template = RailsWizard::Template.new(scrolls)
+  template = Eldar::Template.new(scrolls)
 
   begin
     dir = Dir.mktmpdir "rails_template"
@@ -39,10 +39,10 @@ end
 
 desc "Prints out a template from the provided scrolls."
 task :print do
-  require 'rails_wizard'
+  require 'eldar'
 
   scrolls = ENV['SCROLLS'].split(',')
-  puts RailsWizard::Template.new(scrolls).compile
+  puts Eldar::Template.new(scrolls).compile
 end
 
 desc "Create a new scroll"
@@ -53,8 +53,8 @@ task :new do
   end
   require 'active_support/inflector'
   require 'erb'
-  require 'rails_wizard/template'
-  scroll = RailsWizard::Template.render("new_scroll", binding)
+  require 'eldar/template'
+  scroll = Eldar::Template.render("new_scroll", binding)
   scroll_path = "scrolls/#{name}.rb"
   File.open(scroll_path, "w") { |file| file << scroll }
   `open #{scroll_path}`
@@ -63,11 +63,11 @@ end
 namespace :list do
   desc "Display scrolls by category"
   task :categories do
-    require 'rails_wizard'
-    categories = RailsWizard::Scrolls.categories.sort
+    require 'eldar'
+    categories = Eldar::Scrolls.categories.sort
     categories = (categories - ["other"]) + ["other"]
     categories.each do |category|
-      puts "#{category}: #{RailsWizard::Scrolls.for(category).join(", ")}"
+      puts "#{category}: #{Eldar::Scrolls.for(category).join(", ")}"
     end
   end
 

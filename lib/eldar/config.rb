@@ -1,6 +1,6 @@
 require 'active_support/ordered_hash'
 
-module RailsWizard
+module Eldar
   class Config
     attr_reader :questions
 

@@ -1,7 +1,7 @@
-require 'rails_wizard'
+require 'eldar'
 require 'thor'
 
-module RailsWizard
+module Eldar
   class Command < Thor
     include Thor::Actions
     desc "new APP_NAME", "create a new Rails app"
@@ -17,7 +17,7 @@ module RailsWizard
           if scroll == ''
             run_template(name, @scrolls)
             break
-          elsif RailsWizard::Scrolls.list.include?(scroll)
+          elsif Eldar::Scrolls.list.include?(scroll)
             @scrolls << scroll
             puts
             puts "> #{green}Added '#{scroll}' to template.#{clear}"
@@ -32,9 +32,9 @@ module RailsWizard
     desc "list [CATEGORY]", "list available scrolls (optionally by category)"
     def list(category = nil)
       if category
-        scrolls = RailsWizard::Scrolls.for(category).map{|r| RailsWizard::Scroll.from_mongo(r) }
+        scrolls = Eldar::Scrolls.for(category).map{|r| Eldar::Scroll.from_mongo(r) }
       else
-        scrolls = RailsWizard::Scrolls.list_classes
+        scrolls = Eldar::Scrolls.list_classes
       end
 
       scrolls.each do |scroll|
@@ -58,7 +58,7 @@ module RailsWizard
           puts "#{green}#{bold}Your Scrolls:#{clear} " + @scrolls.join(", ")
           puts
         end
-        puts "#{bold}#{cyan}Available Scrolls:#{clear} " + RailsWizard::Scrolls.list.join(', ')
+        puts "#{bold}#{cyan}Available Scrolls:#{clear} " + Eldar::Scrolls.list.join(', ')
         puts
       end
 
@@ -68,7 +68,7 @@ module RailsWizard
         puts "#{bold}Generating and Running Template..."
         puts
         file = Tempfile.new('template')        
-        template = RailsWizard::Template.new(scrolls)
+        template = Eldar::Template.new(scrolls)
         file.write template.compile
         file.close
         if display_only
