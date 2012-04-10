@@ -10,13 +10,13 @@ gem 'ey_config' # for partner services
 required_dbs = %w[mysql postgresql]
 required_app_servers = %w[unicorn trinidad passenger puma thin]
 
-selected_db = required_dbs.find {|db| scroll? db }
+selected_db = required_dbs.find { |db| scroll? db }
 unless selected_db
   say_custom "eycloud", "Please include a DB choice from: #{required_dbs.join ", "}"
   exit_now = true
 end
 
-selected_app_server = required_app_servers.find {|app| scroll? app }
+selected_app_server = required_app_servers.find { |app| scroll? app }
 unless selected_app_server
   say_custom "eycloud", "Please include an App Server choice from: #{required_app_servers.join ", "}"
   exit_now = true
@@ -31,7 +31,10 @@ after_everything do
   else
     run "ey login"
 
-    framework_env = multiple_choice "Which framework environment?", [%w[Production production], %w[Staging staging]]
+    framework_env = multiple_choice "Which framework environment?", [
+      ['Production', 'production'],
+      ['Staging (solo environment only)', 'staging']
+    ]
 
     # TODO check for app name first
     app_name = (@repo_name && @repo_name.size > 0) ? @repo_name : @name
@@ -59,11 +62,12 @@ after_everything do
     command += "--framework_env #{framework_env} "
     command += "--env_name #{@name}_#{framework_env} "
     command += "--stack #{selected_app_server} "
+    command += "--db_stack #{selected_db} " if selected_db
     case cluster_config.to_sym
     when :basic
-      command += "--app_instances 0 --db_instances 0 "
+      command += "--app_instances 1 "
     when :ha
-      command += "--app_instances 2 --db_instances 0 "
+      command += "--app_instances 3 "
     when :solo
       command += "--solo "
     end

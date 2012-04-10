@@ -1,5 +1,6 @@
 # ChangeLog
 
+* `postgresql` - supported on `eycloud` (Currently PostgreSQL 9.1)
 * `eycloud` - can boot clusters, in addition to solos
 * `mysql` - always generates `sample.rake`
 * bin/scrolls is short-form of bin/appscrolls
