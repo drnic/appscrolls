@@ -3,7 +3,7 @@
 * `eycloud` - can boot clusters, in addition to solos
 * `mysql` - always generates `sample.rake`
 * bin/scrolls is short-form of bin/appscrolls
-* `puma` - moved into zzz archive until Puma is released on EY Cloud
+* `puma` & `thin` - moved into zzz archive until Puma is released on EY Cloud; or another supporting platform added
 * `spork` - moved into zzz archive as part of simplification
 
 ## v0.7
