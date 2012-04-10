@@ -23,7 +23,7 @@ RUBY
 ```
 ey deploy
 ```
-
+Remove
 ## Thanks
 
 The original scaffold for this application was created by [App Scrolls](http://appscrolls.org).

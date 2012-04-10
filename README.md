@@ -76,7 +76,7 @@ Scroll: `eycloud`
 Example:
 
 ```
-scrolls new mydemoapp -s twitter_bootstrap rails_basics unicorn postgresql eycloud
+scrolls new mydemoapp -s twitter_bootstrap rails_basics unicorn postgresql resque eycloud
 ```
 
 The created application above will be automatically stored in a git private/public repository on GitHub, and then deployed to [Engine Yard Cloud][6].
@@ -85,6 +85,14 @@ When deploying to [Engine Yard Cloud][6] you will need to choose:
 
 * `unicorn` or `passenger` for your app server
 * `mysql` or `postgresql` for your SQL DB
+
+When choosing from the following scrolls, your Engine Yard Cloud environment will be automatically upgraded/configured with Chef recipes. 
+
+* `resque` - add utility instances called `resque` for workers [see [readme][15] for more information]
+* `redis` - add a utility called `redis` to have a dedicated redis DB; else it is run on your DB master or Solo instance
+* `delayed_job` - add utility instances called `delayed_job` or `dj` for workers [see [readme][16] for more information]
+
+Note: Resque is recommended instead of Delayed Job. Soon, Sidekiq will be recommended over both, and 
 
 Please open an Issue if you want an alternate option (`puma` or `thin`; or `mongodb`)
 
@@ -176,3 +184,5 @@ App Scrolls and its scrolls are distributed under the MIT License. See [MIT_LICE
 [12]:https://github.com/drnic/appscrolls/tree/master/scrolls/zzz
 [13]:https://github.com/drnic/appscrolls/tree/apply_scrolls
 [14]:https://github.com/drnic/mydemoapp
+[15]:https://github.com/engineyard/eycloud-recipe-resque#readme
+[16]:https://github.com/engineyard/eycloud-recipe-delayed_job#readme
