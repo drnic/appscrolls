@@ -18,6 +18,13 @@
 * `eycloud` - only unicorn and passenger initially supported
 * `eycloud` - don't check for available app name - this should be implemented in ey_cli
 
+### v0.8.2
+
+PUBLIC RELEASE! http://drnicwilliams.com/2012/04/10/instant-new-rails-applications-with-the-app-scrolls/
+
+* `delayed_job` - always get admin dashboard
+* `mysql` - always create local databases
+
 ## v0.7
 
 New name! "App Scrolls"
