@@ -3,6 +3,9 @@
 * `twitter_bootstrap` - includes `rails_basics`
 * `eycloud` - only using `ey_cli` (`engineyard` gem has `net-ssh` conflict with `chef` gem)
 * Display scrolls that will be used - explicitly requested (green) and implicitly included (yellow)
+* `eycloud` - only unicorn and passenger initially supported
+* `eycloud` - don't check for available app name - this should be implemented in ey_cli
+
 
 ## v0.8
 
