@@ -31,12 +31,6 @@ after_everything do
   else
     run "ey login"
 
-    if @mysql_stack
-      say_custom "eycloud", "Using mysql #{@mysql_stack}"
-    elsif @postgresql_stack
-      say_custom "eycloud", "Using postgresql #{@postgresql_stack}"
-    end
-  
     framework_env = multiple_choice "Which framework environment?", [%w[Production production], %w[Staging staging]]
 
     # TODO check for app name first
@@ -46,6 +40,18 @@ after_everything do
     while @app_names.include?(app_name)
       app_name = ask_wizard "Application #{app_name} is already exists. What name?"
     end
+    
+    if framework_env == "production"
+      say_custom "eycloud", "All configurations use High-CPU VM worth $170/mth each."
+      say_custom "eycloud", "Process numbers below are estimates."
+      cluster_config = multiple_choice "Select application cluster configuration?", [
+        ['Basic - 5 CPU-based processes (1 VM) & DB Master VM', 'basic'],
+        ['Pro   - 15 CPU-based highly-available processes (3 VMs) & DB Master VM', 'ha'],
+        ['Solo  - 1 VM for app processes, DB and other services', 'solo']
+      ]
+    else
+      say_custom "eycloud", "Defaulting to single/solo High-CPU medium instance for staging environment"
+    end
 
     name = File.basename(".")
     command = "bundle exec ey_cli create_app --name #{app_name} --type rails3 "
@@ -53,7 +59,15 @@ after_everything do
     command += "--framework_env #{framework_env} "
     command += "--env_name #{@name}_#{framework_env} "
     command += "--stack #{selected_app_server} "
-    command += "--solo"
+    case cluster_config.to_sym
+    when :basic
+      command += "--app_instances 0 --db_instances 0 "
+    when :ha
+      command += "--app_instances 2 --db_instances 0 "
+    when :solo
+      command += "--solo "
+    end
+      
     run command
 
   end
