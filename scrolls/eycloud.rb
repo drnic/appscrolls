@@ -35,6 +35,7 @@ after_everything do
 
     # TODO check for app name first
     app_name = (@repo_name && @repo_name.size > 0) ? @repo_name : @name
+    app_name.gsub!(/\W/, '') # only letters and numbers
     # say_custom "eycloud", "Checking for availability of #{app_name}"
     # @app_names ||= `bundle exec ey_cli apps | grep "-" | sed "s/.* //"`.split(/\n/)
     # while @app_names.include?(app_name)
@@ -51,6 +52,7 @@ after_everything do
       ]
     else
       say_custom "eycloud", "Defaulting to single/solo High-CPU medium instance for staging environment"
+      cluster_config = "solo"
     end
 
     name = File.basename(".")
