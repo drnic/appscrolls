@@ -31,6 +31,20 @@ Where `APP_NAME` is the directory in which you wish to create the app (it mirror
 
 To transform an existing Rails app, you ... wait, that's not implemented yet. But since the "apply template" feature of `rails new APP_NAME -m template.rb` is implemented in Thor, I mean, how hard could it be?*
 
+### Available Scrolls
+
+The current available scrolls grouped by category:
+
+* administration: active_admin
+* assets: jquery, prototype
+* deployment: eycloud, eycloud_recipes_on_deploy, git, github, passenger, thin, unicorn
+* persistence: mysql, postgresql, redis, sqlite3
+* stylesheet: twitter_bootstrap
+* templating: simple_form
+* testing: capybara, cucumber, rspec, test_unit
+* worker: delayed_job, resque
+* other: env_yaml, guard, rails_basics, split
+
 ### Specifying Scrolls
 
 If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the `-s` or `--scrolls` option:
