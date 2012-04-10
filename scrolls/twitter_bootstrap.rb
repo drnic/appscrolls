@@ -29,7 +29,7 @@ category: stylesheet
 exclusive: stylesheet
 tags: [css, stylesheet]
 
-requires: [simple_form]
+requires: [simple_form, rails_basics]
 run_before: [simple_form]
 
 config:

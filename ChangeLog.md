@@ -1,5 +1,7 @@
 # ChangeLog
 
+* `twitter_bootstrap` - includes `rails_basics`
+
 ## v0.8
 
 * `postgresql` - supported on `eycloud` (Currently PostgreSQL 9.1)

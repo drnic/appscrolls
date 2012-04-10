@@ -76,7 +76,7 @@ Scroll: `eycloud`
 Example:
 
 ```
-scrolls new mydemoapp -s twitter_bootstrap rails_basics unicorn postgresql resque eycloud
+scrolls new mydemoapp -s twitter_bootstrap unicorn postgresql resque eycloud
 ```
 
 The created application above will be automatically stored in a git private/public repository on GitHub, and then deployed to [Engine Yard Cloud][6].
