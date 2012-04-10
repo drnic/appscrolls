@@ -65,10 +65,18 @@ module AppScrollsScrolls
       def run_template(name, scrolls, display_only = false)
         puts
         puts
-        puts "#{bold}Generating and Running Template..."
+        puts "#{bold}Generating and Running Template...#{clear}"
         puts
         file = Tempfile.new('template')        
         template = AppScrollsScrolls::Template.new(scrolls)
+
+        puts "Using the following scrolls:"
+        template.resolve_scrolls.map do |scroll|
+          color = scrolls.include?(scroll.new.key) ? green : yellow # yellow - automatic dependency
+          puts "  #{color}* #{scroll.new.name}#{clear}"
+        end
+        puts
+
         file.write template.compile
         file.close
         if display_only
