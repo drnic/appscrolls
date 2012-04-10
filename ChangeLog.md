@@ -1,11 +1,5 @@
 # ChangeLog
 
-* `twitter_bootstrap` - includes `rails_basics`
-* `eycloud` - only using `ey_cli` (`engineyard` gem has `net-ssh` conflict with `chef` gem)
-* Display scrolls that will be used - explicitly requested (green) and implicitly included (yellow)
-* `eycloud` - only unicorn and passenger initially supported
-* `eycloud` - don't check for available app name - this should be implemented in ey_cli
-
 
 ## v0.8
 
@@ -15,6 +9,14 @@
 * bin/scrolls is short-form of bin/appscrolls
 * `puma` & `thin` - moved into zzz archive until Puma is released on EY Cloud; or another supporting platform added
 * `spork` - moved into zzz archive as part of simplification
+
+### v0.8.1
+
+* `twitter_bootstrap` - includes `rails_basics`
+* `eycloud` - only using `ey_cli` (`engineyard` gem has `net-ssh` conflict with `chef` gem)
+* Display scrolls that will be used - explicitly requested (green) and implicitly included (yellow)
+* `eycloud` - only unicorn and passenger initially supported
+* `eycloud` - don't check for available app name - this should be implemented in ey_cli
 
 ## v0.7
 
