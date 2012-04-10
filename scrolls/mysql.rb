@@ -1,7 +1,7 @@
 gem "mysql2"
 
 after_bundler do
-  rake "db:create:all" if config['auto_create']
+  rake "db:create:all"
   
   rakefile("sample.rake") do
 <<-RUBY
@@ -28,8 +28,3 @@ category: persistence
 run_before: [eycloud]
 
 args: -d mysql
-
-config:
-  - auto_create:
-      type: boolean
-      prompt: "Create local MySQL databases with default configuration?"
