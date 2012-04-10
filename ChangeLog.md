@@ -25,6 +25,10 @@ PUBLIC RELEASE! http://drnicwilliams.com/2012/04/10/instant-new-rails-applicatio
 * `delayed_job` - always get admin dashboard
 * `mysql` - always create local databases
 
+### v0.8.3
+
+* `resque` - Use "resque_admin_secret" instead of hardcoded string
+
 ## v0.7
 
 New name! "App Scrolls"
