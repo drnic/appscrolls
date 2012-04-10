@@ -4,7 +4,7 @@ gsub_file "config/database.yml", /username: .*/, "username: #{config['pg_usernam
 gsub_file "config/database.yml", /password: .*/, "password: #{config['pg_password']}"
 
 after_bundler do
-  rake "db:create:all" if config['auto_create']
+  rake "db:create:all"
   
   rakefile("sample.rake") do
 <<-RUBY
@@ -33,13 +33,9 @@ run_before: [eycloud]
 args: -d postgresql
 
 config:
-  - auto_create:
-      type: boolean
-      prompt: "Create local PostgreSQL databases with default configuration?"
-
   - pg_username:
       type: string
-      prompt: "PostgreSQL username:"
+      prompt: "Local development PostgreSQL username:"
   - pg_password:
       type: string
-      prompt: "PostgreSQL password:"
+      prompt: "Local development PostgreSQL password:"
