@@ -81,6 +81,22 @@ appscrolls new APP_NAME
 
 <p>To transform an existing Rails app, you ... wait, that's not implemented yet. But since the "apply template" feature of <code>rails new APP_NAME -m template.rb</code> is implemented in Thor, I mean, how hard could it be?*</p>
 
+<h3>Available Scrolls</h3>
+
+<p>The current available scrolls grouped by category:</p>
+
+<ul>
+  <li>administration: active_admin</li>
+  <li>assets: jquery, prototype</li>
+  <li>deployment: eycloud, eycloud_recipes_on_deploy, git, github, passenger, thin, unicorn</li>
+  <li>persistence: mysql, postgresql, redis, sqlite3</li>
+  <li>stylesheet: twitter_bootstrap</li>
+  <li>templating: simple_form</li>
+  <li>testing: capybara, cucumber, rspec, test_unit</li>
+  <li>worker: delayed_job, resque</li>
+  <li>other: env_yaml, guard, rails_basics, split</li>
+</ul>
+
 <h3>Specifying Scrolls</h3>
 
 <p>If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the <code>-s</code> or <code>--scrolls</code> option:</p>
