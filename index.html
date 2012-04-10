@@ -28,7 +28,7 @@
         <ul class="buttons">
           <li><a href="https://github.com/drnic/appscrolls">Add <strong>magic scrolls</strong></a></li>
           <li><a href="https://github.com/drnic/appscrolls/issues">Alert peasants <strong>to evil</strong></a></li>
-          <li><a href="https://github.com/drnic/appscrolls">Fork On <strong>GitHub</strong></a></li>
+          <li><a href="https://github.com/drnic/appscrolls">Torch or <strong>Fork</strong></a></li>
         </ul>
         
         <p>Sharing is simple:</p>
@@ -52,12 +52,12 @@
 <p>The App Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. Authentication, testing, persistence, javascript, css, deployment, and templating - there's a magical scroll for you.</p>
 
 <ul>
-<li>Follow on twitter <a href="https://twitter.com/elderscrolls">@appscrolls</a>
+<li>Follow on twitter <a href="https://twitter.com/appscrolls">@appscrolls</a>
 </li>
 </ul><p>An example application that was built by the App Scrolls is at <a href="https://github.com/drnic/mydemoapp">https://github.com/drnic/mydemoapp</a>. The generated README shows all the scrolls that were included.</p>
 
 <h2>Try this:</h2>
-<pre><code>scrolls new mynewapp -s twitter_bootstrap rails_basics
+<pre><code>scrolls new mynewapp -s twitter_bootstrap
 cd mynewapp
 rails s</code></pre>
         
@@ -88,7 +88,7 @@ scrolls new APP_NAME
 <ul>
   <li>administration: active_admin</li>
   <li>assets: jquery, prototype</li>
-  <li>deployment: eycloud, eycloud_recipes_on_deploy, git, github, passenger, thin, unicorn</li>
+  <li>deployment: eycloud, eycloud_recipes_on_deploy, git, github, passenger, unicorn</li>
   <li>persistence: mysql, postgresql, redis, sqlite3</li>
   <li>stylesheet: twitter_bootstrap</li>
   <li>templating: simple_form</li>
@@ -127,16 +127,28 @@ scrolls new APP_NAME --scrolls postgresql github eycloud
 
 <p>Scroll: <code>eycloud</code></p>
 
-<p>If you choose the <code>eycloud</code> scroll, your application will be automatically deployed to <a href="http://www.engineyard.com/products/cloud">Engine Yard Cloud</a>. Your code will also be automatically stored on a private/public GitHub repository.</p>
+<p>Example:</p>
 
-<p>The <code>eycloud</code> scroll magically transforms many other scrolls to work specifically for <a href="http://www.engineyard.com/products/cloud">Engine Yard Cloud</a>. For example:</p>
+<pre><code>scrolls new mydemoapp -s twitter_bootstrap unicorn postgresql resque github eycloud</code></pre>
+
+<p>The created application above will be automatically stored in a git private/public repository on GitHub and then deployed to Engine Yard Cloud.</p>
+
+<p>When deploying to Engine Yard Cloud you will need to choose:</p>
 
 <ul>
-<li>
-<code>postgresql</code> - the environment will have PostgreSQL selected instead of MySQL</li>
-<li>
-<code>resque</code> - the environment will have Resque and Redis</li>
-</ul><h3>Heroku</h3>
+  <li><code>unicorn</code> or <code>passenger</code> for your app server</li>
+  <li><code>mysql</code> or <code>postgresql</code> for your SQL DB</li>
+</ul>
+
+<p>When choosing from the following scrolls, your Engine Yard Cloud environment will be automatically upgraded/configured with Chef recipes.</p>
+
+<ul>
+  <li><code>resque</code> - add utility instances called resque for workers [see readme for more information]</li>
+  <li><code>redis</code> - add a utility called redis to have a dedicated redis DB; else it is run on your DB master or Solo instance</li>
+  <li><code>delayed_job</code> - add utility instances called delayed_job or dj for workers [see readme for more information]</li>
+</ul>
+
+<h3>Heroku</h3>
 
 <p>The App Scrolls needs a Heroku Master to support Heroku for the App Scrolls. </p>
 
@@ -173,6 +185,11 @@ scrolls new APP_NAME --scrolls postgresql github eycloud
 
 
 <p>It's really that simple. The gem has RSpec tests that automatically validate each scroll in the repository, so you should run <code>rake spec</code> as a basic sanity check before submitting a pull request. Note that these don't verify that your scroll code itself works, just that App Scrolls could properly parse and understand your scroll file.</p>
+
+<h2>News</h2>
+<ul>
+<li><a href="http://drnicwilliams.com/2012/04/10/instant-new-rails-applications-with-the-app-scrolls/" title="Dr Nic's   Instant new Rails applications with the App Scrolls">Instant new Rails applications with the App Scrolls</a> by Dr Nic, Apr 10, 2012</li>
+</ul>
 
 <h2>History</h2>
 
