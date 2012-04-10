@@ -1,19 +1,18 @@
 gem 'delayed_job_active_record'
 gem 'delayed_job_admin'
 
-if config["admin"]
-  inject_into_class "app/controllers/application_controller.rb", "ApplicationController" do
-    <<-RUBY
-  
-  def delayed_job_admin_authentication
-    # authentication_logic_goes_here
-    true
-  end
+inject_into_class "app/controllers/application_controller.rb", "ApplicationController" do
+<<-RUBY
 
-    RUBY
-  end
-  
-  create_file "readmes/delayed_job_admin.md", <<-MD
+def delayed_job_admin_authentication
+  # authentication_logic_goes_here
+  true
+end
+
+RUBY
+end
+
+create_file "readmes/delayed_job_admin.md", <<-MD
 # Delayed Job Admin README
 
 Delayed Job Admin console is available at [/delayed_job_admin](http://localhost:3000/delayed_job_admin).
@@ -45,8 +44,7 @@ def delayed_job_admin_authentication
 end
 ```
 
-  MD
-end
+MD
 
 if scroll? "eycloud_recipes_on_deploy"
   gem 'eycloud-recipe-delayed_job', :group => :eycloud
@@ -71,11 +69,6 @@ RUBY
   end
 end
 
-after_everything do
-  say_custom "readme", "Delayed Job Admin"
-  run %q{cat "readmes/delayed_job_admin.md"}
-end
-
 __END__
 
 name: Delayed Job
@@ -86,9 +79,4 @@ exclusive: worker
 category: worker
 tags: [worker,background-tasks]
 
-run_after: [eycloud_recipes_on_deploy]
-
-config:
-  - admin:
-      type: boolean
-      prompt: "Install simple admin interface to Delayed Job?"
+run_after: [eycloud_recipes_on_deploy, mysql, postgresql]
