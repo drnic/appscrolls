@@ -1,8 +1,8 @@
 @name = File.basename(File.expand_path("."))
 
 gem_group :development do
-  gem 'ey_cli'
-  gem 'engineyard'
+  gem 'ey_cli', '>= 0.3.0'
+  gem 'engineyard', '>= 1.4.28'
 end
 
 gem 'ey_config' # for partner services
