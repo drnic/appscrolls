@@ -1,6 +1,8 @@
 gem 'github', '>= 0.7.0', :require => nil, :group => [:development]
 
 after_everything do
+  github_private = multiple_choice "Create a GitHub repository?", [["Public", false], ["Private", true]]
+  
   tried_create_already = false
   while (@git_uri = `git config remote.origin.url`.strip) && @git_uri.size == 0
     if tried_create_already
@@ -30,9 +32,3 @@ exclusive: scm-hosting
 
 requires: [git]
 run_after: [git]
-
-config:
-  - github_private:
-      prompt: "Create a GitHub repository?"
-      type: multiple_choice
-      choices: [["Public", false], ["Private", true]]
