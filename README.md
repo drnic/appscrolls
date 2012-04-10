@@ -11,6 +11,7 @@
 The App Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. Authentication, testing, persistence, javascript, css, deployment, and templating - there's a magical scroll for you.
 
 * Follow on twitter [@appscrolls][9]
+* [![Build Status](https://secure.travis-ci.org/drnic/appscrolls.png?branch=master)](http://travis-ci.org/drnic/appscrolls)
 
 An example application that was built by the App Scrolls is at [https://github.com/drnic/mydemoapp][14]. The generated README shows all the scrolls that were included.
 
