@@ -1,5 +1,7 @@
 # ChangeLog
 
+* `eycloud` - can boot clusters, in addition to solos
+* `mysql` - always generates `sample.rake`
 * bin/scrolls is short-form of bin/appscrolls
 
 ## v0.7
