@@ -4,6 +4,7 @@
 * `mysql` - always generates `sample.rake`
 * bin/scrolls is short-form of bin/appscrolls
 * `puma` - moved into zzz archive until Puma is released on EY Cloud
+* `spork` - moved into zzz archive as part of simplification
 
 ## v0.7
 
