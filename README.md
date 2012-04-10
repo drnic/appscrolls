@@ -25,6 +25,7 @@ Installation is simple:
 The primary usage of the `appscrolls` gem is to utilize its interactive terminal command to build a new Rails application. To get started, you can simply run the command thusly:
 
     appscrolls new APP_NAME
+    scrolls new APP_NAME
 
 Where `APP_NAME` is the directory in which you wish to create the app (it mirrors the Rails creation syntax). You will then be guided through the scroll selection process and subsequently the Rails app generator will automatically run with the template and all appropriate command line options included.
 
@@ -34,8 +35,8 @@ To transform an existing Rails app, you ... wait, that's not implemented yet. Bu
 
 If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the `-s` or `--scrolls` option:
 
-    appscrolls new APP_NAME -s twitter_bootstrap mysql resque
-    appscrolls new APP_NAME --scrolls postgresql github eycloud
+    scrolls new APP_NAME -s twitter_bootstrap mysql resque
+    scrolls new APP_NAME --scrolls postgresql github eycloud
 
 This will automatically generate a Rails template with the provided scrolls and begin the app generator.
 
@@ -43,11 +44,11 @@ This will automatically generate a Rails template with the provided scrolls and 
 
 You can also print out a simple list of scrolls:
 
-    appscrolls list
+    scrolls list
 
 Or print out a list of scrolls for a specific category:
 
-    appscrolls list persistence
+    scrolls list persistence
 
 ## Deployment Support
 

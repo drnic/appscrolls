@@ -1,5 +1,7 @@
 # ChangeLog
 
+* bin/scrolls is short-form of bin/appscrolls
+
 ## v0.7
 
 New name! "App Scrolls"
