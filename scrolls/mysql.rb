@@ -13,17 +13,16 @@ gem "mysql2"
 after_bundler do
   rake "db:create:all" if config['auto_create']
   
-  if config['populate_rake_task']
-    sample_rake = <<-RUBY
-require './config/environment'
+  rakefile("sample.rake") do
+<<-RUBY
 namespace :db do
   desc "Populate the database with sample data"
-  task :sample do
+  task :sample => :environment do
+    
   end
   task :populate => :sample
 end
 RUBY
-    File.open("lib/tasks/sample.rake", 'w') {|f| f.write(sample_rake)}
   end
 end
 
@@ -44,8 +43,3 @@ config:
   - auto_create:
       type: boolean
       prompt: "Create MySQL database with default configuration?"
-
-  - populate_rake_task:
-      type: boolean
-      prompt: "Add db:sample rake task?"
-
