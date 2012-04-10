@@ -20,7 +20,7 @@ after_bundler do
 require 'resque/tasks'
 RAKE
 
-  route %{match "/resque/eycloud", :to => Resque::Server, :anchor => false}
+  route %Q{match "/resque/#{config['resque_admin_secret']}", :to => Resque::Server, :anchor => false}
     
   if scroll? "eycloud_recipes_on_deploy"
     
