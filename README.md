@@ -73,12 +73,20 @@ Web applications are boring if they aren't running proudly on the internet. The 
 
 Scroll: `eycloud`
 
-If you choose the `eycloud` scroll, your application will be automatically deployed to [Engine Yard Cloud][6]. Your code will also be automatically stored on a private/public GitHub repository.
+Example:
 
-The `eycloud` scroll magically transforms many other scrolls to work specifically for [Engine Yard Cloud][6]. For example:
+```
+scrolls new mydemoapp -s twitter_bootstrap rails_basics unicorn postgresql eycloud
+```
 
-* `postgresql` - the environment will have PostgreSQL selected instead of MySQL
-* `resque` - the environment will have Resque and Redis
+The created application above will be automatically stored in a git private/public repository on GitHub, and then deployed to [Engine Yard Cloud][6].
+
+When deploying to [Engine Yard Cloud][6] you will need to choose:
+
+* `unicorn` or `passenger` for your app server
+* `mysql` or `postgresql` for your SQL DB
+
+Please open an Issue if you want an alternate option (`puma` or `thin`; or `mongodb`)
 
 ### Heroku
 
