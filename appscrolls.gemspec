@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{The App Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. }
   s.description = %q{The App Scrolls is a magical tool to generate new Rails and modify existing Rails applications (coming) to include your favourite, powerful magic. }
 
+  s.add_dependency "rails", "~> 3.2.2"
   s.add_dependency "i18n"
   s.add_dependency "json", "1.6.5"
   s.add_dependency "activesupport", "~> 3.0"

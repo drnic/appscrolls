@@ -17,6 +17,10 @@ Internal
 * Replace ZenTest with Guard
 * Add 'rake list:categories' task
 
+### v0.7.1
+
+* Force rails ~> 3.2.2 as a dependency
+
 ## v0.6
 
 * `twitter_bootstrap` - automatically includes `simple_form`; includes flash msg
