@@ -76,10 +76,10 @@ Scroll: `eycloud`
 Example:
 
 ```
-scrolls new mydemoapp -s twitter_bootstrap unicorn postgresql resque eycloud
+scrolls new mydemoapp -s twitter_bootstrap unicorn postgresql resque github eycloud
 ```
 
-The created application above will be automatically stored in a git private/public repository on GitHub, and then deployed to [Engine Yard Cloud][6].
+The created application above will be automatically stored in a git private/public repository on GitHub and then deployed to [Engine Yard Cloud][6].
 
 When deploying to [Engine Yard Cloud][6] you will need to choose:
 
