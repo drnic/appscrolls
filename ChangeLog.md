@@ -1,5 +1,7 @@
 # ChangeLog
 
+## v0.8
+
 * `postgresql` - supported on `eycloud` (Currently PostgreSQL 9.1)
 * `eycloud` - can boot clusters, in addition to solos
 * `mysql` - always generates `sample.rake`
