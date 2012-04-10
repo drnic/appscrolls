@@ -3,10 +3,6 @@ gem "pg"
 gsub_file "config/database.yml", /username: .*/, "username: #{config['pg_username']}"
 gsub_file "config/database.yml", /password: .*/, "password: #{config['pg_password']}"
 
-if scroll?("eycloud")
-  @db_stack = "postgresql"
-end
-
 after_bundler do
   rake "db:create:all" if config['auto_create']
   

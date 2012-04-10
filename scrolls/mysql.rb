@@ -1,9 +1,5 @@
 gem "mysql2"
 
-if scroll?("eycloud")
-  @db_stack = "mysql"
-end
-
 after_bundler do
   rake "db:create:all" if config['auto_create']
   
