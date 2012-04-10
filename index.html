@@ -22,7 +22,7 @@
         <pre><code>gem install appscrolls</code></pre>
 
         <p>Usage is simple:</p>
-        <pre><code>appscrolls new mynewapp</code></pre>
+        <pre><code>scrolls new mynewapp</code></pre>
         
         <p>Helping is simple:</p>
         <ul class="buttons">
@@ -57,7 +57,7 @@
 </ul><p>An example application that was built by the App Scrolls is at <a href="https://github.com/drnic/mydemoapp">https://github.com/drnic/mydemoapp</a>. The generated README shows all the scrolls that were included.</p>
 
 <h2>Try this:</h2>
-<pre><code>appscrolls new mynewapp -s twitter_bootstrap rails_basics
+<pre><code>scrolls new mynewapp -s twitter_bootstrap rails_basics
 cd mynewapp
 rails s</code></pre>
         
@@ -74,7 +74,7 @@ rails s</code></pre>
 <p>The primary usage of the <code>appscrolls</code> gem is to utilize its interactive terminal command to build a new Rails application. To get started, you can simply run the command thusly:</p>
 
 <pre><code>appscrolls new APP_NAME
-appscrolls new APP_NAME
+scrolls new APP_NAME
 </code></pre>
 
 <p>Where <code>APP_NAME</code> is the directory in which you wish to create the app (it mirrors the Rails creation syntax). You will then be guided through the scroll selection process and subsequently the Rails app generator will automatically run with the template and all appropriate command line options included.</p>
@@ -101,8 +101,8 @@ appscrolls new APP_NAME
 
 <p>If you wish to skip the interactive scroll selector, you may provide instead a list of scrolls with the <code>-s</code> or <code>--scrolls</code> option:</p>
 
-<pre><code>appscrolls new APP_NAME -s twitter_bootstrap mysql resque
-appscrolls new APP_NAME --scrolls postgresql github eycloud
+<pre><code>scrolls new APP_NAME -s twitter_bootstrap mysql resque
+scrolls new APP_NAME --scrolls postgresql github eycloud
 </code></pre>
 
 <p>This will automatically generate a Rails template with the provided scrolls and begin the app generator.</p>
@@ -111,12 +111,12 @@ appscrolls new APP_NAME --scrolls postgresql github eycloud
 
 <p>You can also print out a simple list of scrolls:</p>
 
-<pre><code>appscrolls list
+<pre><code>scrolls list
 </code></pre>
 
 <p>Or print out a list of scrolls for a specific category:</p>
 
-<pre><code>appscrolls list persistence
+<pre><code>scrolls list persistence
 </code></pre>
 
 <h2>Deployment Support</h2>
