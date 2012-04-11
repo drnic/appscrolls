@@ -1,5 +1,6 @@
 # ChangeLog
 
+* `github` - if private, then create private repo [thx @CraigCottingham]
 
 ## v0.8
 
