@@ -178,7 +178,7 @@ App Scrolls and its scrolls are distributed under the MIT License. See [MIT_LICE
 [5]:https://github.com/mbleigh
 [6]:http://www.engineyard.com/products/cloud
 [7]:http://drnicwilliams.com
-[9]:https://twitter.com/elderscrolls
+[9]:https://twitter.com/appscrolls
 [10]:https://github.com/drnic/appscrolls/blob/master/MIT_LICENSE
 [11]:https://github.com/drnic/appscrolls/tree/master/scrolls
 [12]:https://github.com/drnic/appscrolls/tree/master/scrolls/zzz
