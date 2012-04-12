@@ -1,11 +1,14 @@
 gem "pg"
 
-gsub_file "config/database.yml", /username: .*/, "username: #{config['pg_username']}"
-gsub_file "config/database.yml", /password: .*/, "password: #{config['pg_password']}"
-
 after_bundler do
+  pg_username = ask_wizard "Local development PostgreSQL username:"
+  pg_password = ask_wizard "Local development PostgreSQL password:"
+
+  gsub_file "config/database.yml", /username:\s?.*/, "username: #{pg_username}"
+  gsub_file "config/database.yml", /password:\s?.*/, "password: #{pg_password}"
+
   rake "db:create:all"
-  
+
   rakefile("sample.rake") do
 <<-RUBY
 namespace :db do
@@ -31,11 +34,3 @@ category: persistence
 run_before: [eycloud]
 
 args: -d postgresql
-
-config:
-  - pg_username:
-      type: string
-      prompt: "Local development PostgreSQL username:"
-  - pg_password:
-      type: string
-      prompt: "Local development PostgreSQL password:"
