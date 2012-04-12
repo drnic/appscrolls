@@ -10,7 +10,7 @@ after_everything do
     else
       @repo_name = ""
     end
-    if config["github_private"]
+    if github_private
       run "bundle exec gh create-from-local #{@repo_name} --private"
     else
       run "bundle exec gh create-from-local #{@repo_name}"

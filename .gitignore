@@ -5,4 +5,4 @@ Gemfile.lock
 dist/*
 .idea
 .rvmrc
-
+.DS_Store
