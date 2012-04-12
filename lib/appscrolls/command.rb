@@ -54,11 +54,13 @@ module AppScrollsScrolls
         puts
         puts
         puts
+        available = AppScrollsScrolls::Scrolls.list
         if @scrolls && @scrolls.any?
           puts "#{green}#{bold}Your Scrolls:#{clear} " + @scrolls.join(", ")
           puts
+          available = available - @scrolls
         end
-        puts "#{bold}#{cyan}Available Scrolls:#{clear} " + AppScrollsScrolls::Scrolls.list.join(', ')
+        puts "#{bold}#{cyan}Available Scrolls:#{clear} " + available.join(', ')
         puts
       end
 
@@ -67,7 +69,7 @@ module AppScrollsScrolls
         puts
         puts "#{bold}Generating and Running Template...#{clear}"
         puts
-        file = Tempfile.new('template')        
+        file = Tempfile.new('template')
         template = AppScrollsScrolls::Template.new(scrolls)
 
         puts "Using the following scrolls:"
