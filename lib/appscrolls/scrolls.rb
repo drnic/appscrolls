@@ -2,9 +2,9 @@ module AppScrollsScrolls
   module Scrolls
     @@categories = {}
     @@list = {}
-    
+
     def self.add(scroll)
-      AppScrollsScrolls::Scrolls.const_set ActiveSupport::Inflector.camelize(scroll.key), scroll
+      AppScrollsScrolls::Scrolls.const_set ActiveSupport::Inflector.camelize(scroll.key.gsub("-", "_")), scroll
       @@list[scroll.key] = scroll
       (@@categories[scroll.category.to_s] ||= []) << scroll.key
       @@categories[scroll.category.to_s].uniq!
