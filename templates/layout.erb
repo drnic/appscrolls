@@ -44,7 +44,7 @@ end
 
 say_wizard "Running Bundler install. This will take a while."
 run 'bundle install'
-git_commit("recipe : 'bundle install'") if use_git
+git_commit("bundle install") if use_git
 
 
 say_wizard "Running after Bundler callbacks."
