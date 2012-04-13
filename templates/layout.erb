@@ -19,12 +19,20 @@ end
 RUBY
 
 @scrolls = <%= resolve_scrolls.map(&:key).inspect %> 
+use_git = @scrolls.include?('git')
 
 <%= render "helpers" %>
 
 <% resolve_scrolls.each do |scroll| %>
 <%= render 'scroll', scroll.get_binding %>
 <% end %>
+
+
+say_wizard "Running before_everything callbacks."
+@before_everything_blocks.each do |b|
+  execute_block(b)
+  git_commit("recipe : '#{b.first}'") if use_git
+end
 
 <% if custom_code? %># >-----------------------------[ Custom Code ]-------------------------------<
 
@@ -36,9 +44,19 @@ RUBY
 
 say_wizard "Running Bundler install. This will take a while."
 run 'bundle install'
+git_commit("recipe : 'bundle install'") if use_git
+
+
 say_wizard "Running after Bundler callbacks."
-@after_blocks.each{|b| config = @configs[b[0]] || {}; @current_scroll = b[0]; b[1].call}
+@after_blocks.each do |b|
+  execute_block(b)
+  git_commit("recipe : '#{b.first}'") if use_git
+end
 
 @current_scroll = nil
-say_wizard "Running after everything callbacks."
-@after_everything_blocks.each{|b| config = @configs[b[0]] || {}; @current_scroll = b[0]; b[1].call}
+say_wizard "Running after_everything callbacks."
+@after_everything_blocks.each do |b|
+  execute_block(b)
+  git_commit("recipe : '#{b.first}'") if use_git
+end
+

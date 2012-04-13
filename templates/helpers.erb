@@ -37,9 +37,22 @@ end
 @current_scroll = nil
 @configs = {}
 
+@before_everything_blocks = []
+def before_everything(&block); @before_everything_blocks << [@current_scroll, block]; end
 @after_blocks = []
 def after_bundler(&block); @after_blocks << [@current_scroll, block]; end
 @after_everything_blocks = []
 def after_everything(&block); @after_everything_blocks << [@current_scroll, block]; end
 @before_configs = {}
 def before_config(&block); @before_configs[@current_scroll] = block; end
+
+def git_commit(message)
+  `git add .`
+  `git commit -m "#{message}"`
+end
+
+def execute_block(block)
+  config = @configs[block[0]] || {}
+  @current_scroll = block[0];
+  block[1].call
+end
