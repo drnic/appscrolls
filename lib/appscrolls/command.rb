@@ -67,11 +67,28 @@ module AppScrollsScrolls
         puts
         puts "#{bold}Generating and Running Template...#{clear}"
         puts
-        file = Tempfile.new('template')        
+        file = Tempfile.new('template')
         template = AppScrollsScrolls::Template.new(scrolls)
 
+        all_scrolls = template.resolve_scrolls
+
+        # check all_scrolls for conflicting exclusive attributes
+        exclusives = {}
+        all_scrolls.each do | scroll |
+          unless scroll.new.exclusive.nil?
+            exclusives[scroll.new.exclusive] ||= []
+            exclusives[scroll.new.exclusive] << scroll.new.name
+          end
+        end
+        conflict = false
+        exclusives.select { | _, v | v.size > 1 }.each do | k, v |
+          puts %Q[#{bold}#{red}Conflict on "#{k}": #{v.join ', '}#{clear}]
+          conflict = true
+        end
+        exit 1 if conflict
+
         puts "Using the following scrolls:"
-        template.resolve_scrolls.map do |scroll|
+        all_scrolls.map do |scroll|
           color = scrolls.include?(scroll.new.key) ? green : yellow # yellow - automatic dependency
           puts "  #{color}* #{scroll.new.name}#{clear}"
         end
