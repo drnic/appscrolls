@@ -2,6 +2,23 @@ gem 'heroku'
 
 heroku_name = app_name.gsub('_','')
 
+required_dbs = %w[postgresql]
+# required_app_servers = %w[unicorn] # TODO trinidad puma thin
+
+selected_db = required_dbs.find { |db| scroll? db }
+unless selected_db
+  say_custom "heroku", "Please include a DB choice from: #{required_dbs.join ", "}"
+  exit_now = true
+end
+
+# selected_app_server = required_app_servers.find { |app| scroll? app }
+# unless selected_app_server
+#   say_custom "heroku", "Please include an App Server choice from: #{required_app_servers.join ", "}"
+#   exit_now = true
+# end
+
+exit 1 if exit_now
+
 after_everything do
   if config['create']
     say_wizard "Creating Heroku app '#{heroku_name}.heroku.com'"
