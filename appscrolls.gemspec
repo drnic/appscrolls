@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency "json", "1.6.5"
   s.add_dependency "activesupport", "~> 3.0"
   s.add_dependency "thor"
-  s.add_development_dependency "rspec", "~> 2.5.0"
+  s.add_development_dependency "rspec"
   s.add_development_dependency "guard-rspec"
   s.add_development_dependency "cucumber"
   s.add_development_dependency "guard-cucumber"
