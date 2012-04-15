@@ -36,7 +36,7 @@ To transform an existing Rails app, you ... wait, that's not implemented yet. Bu
 
 The current available scrolls grouped by category:
 
-* administration: active_admin
+* administration: active_admin, rails_admin
 * assets: jquery, prototype
 * deployment: eycloud, eycloud_recipes_on_deploy, git, github, passenger, thin, unicorn
 * persistence: mysql, postgresql, redis, sqlite3
