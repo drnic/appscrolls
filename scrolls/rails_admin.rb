@@ -1,4 +1,4 @@
-gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'rails_admin'
 
 after_bundler do
   generate "rails_admin:install"
