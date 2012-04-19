@@ -4,6 +4,8 @@ module AppScrollsScrolls
     @@list = {}
 
     def self.add(scroll)
+      sym = ActiveSupport::Inflector.camelize(scroll.key.gsub("-", "_"))
+      return if AppScrollsScrolls::Scrolls.const_defined?(sym)
       AppScrollsScrolls::Scrolls.const_set ActiveSupport::Inflector.camelize(scroll.key.gsub("-", "_")), scroll
       @@list[scroll.key] = scroll
       (@@categories[scroll.category.to_s] ||= []) << scroll.key
