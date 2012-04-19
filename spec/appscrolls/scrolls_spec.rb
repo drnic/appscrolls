@@ -16,6 +16,13 @@ describe AppScrollsScrolls::Scrolls do
     subject.list.should be_include('scroll_test')
   end
 
+  it '.add should not overwrite scroll of same key' do
+    new_scroll = AppScrollsScrolls::Scroll.generate("scroll_test", "# Overwrite Testing", :name => "New Test Scroll", :category => "test", :description => "Just an overwrite test.")
+    AppScrollsScrolls::Scrolls.add(new_scroll)
+    subject["scroll_test"].should eql(scroll)
+    subject["scroll_test"].should_not eql(new_scroll)
+  end
+
   describe '.for' do
     it 'should find for a given category' do
       AppScrollsScrolls::Scrolls.for('test').should be_include('scroll_test')
