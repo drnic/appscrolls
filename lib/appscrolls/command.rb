@@ -7,15 +7,11 @@ module AppScrollsScrolls
     desc "new APP_NAME", "create a new Rails app"
     method_option :scrolls, :type => :array, :aliases => "-s", :desc => "List scrolls, e.g. -s resque rails_basics jquery"
     method_option :save, :desc => "Save the selection of scrolls. Usage: '--save NAME'"
-    method_option :use, :desc => "Use a saved set of scrolls. Usage: '--use NAME'"
     method_option :template, :type => :boolean, :aliases => "-t", :desc => "Only display template that would be used"
     def new(name)
       if options[:scrolls]
         run_template(name, options[:scrolls], options[:template])
         save_scroll_selections if options[:save]
-      elsif options[:use]
-        scrolls = get_existing_saves
-        run_template(name, scrolls[options[:use]], options[:template])
       else
         @scrolls = []
 
