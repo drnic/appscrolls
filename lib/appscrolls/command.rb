@@ -7,11 +7,15 @@ module AppScrollsScrolls
     desc "new APP_NAME", "create a new Rails app"
     method_option :scrolls, :type => :array, :aliases => "-s", :desc => "List scrolls, e.g. -s resque rails_basics jquery"
     method_option :save, :desc => "Save the selection of scrolls. Usage: '--save NAME'"
+    method_option :use, :desc => "Use a saved set of scrolls. Usage: '--use NAME'"
     method_option :template, :type => :boolean, :aliases => "-t", :desc => "Only display template that would be used"
     def new(name)
       if options[:scrolls]
         run_template(name, options[:scrolls], options[:template])
         save_scroll_selections if options[:save]
+      elsif options[:use]
+        scrolls = get_existing_saves
+        run_template(name, scrolls[options[:use]], options[:template])
       else
         @scrolls = []
 
@@ -91,14 +95,19 @@ module AppScrollsScrolls
         file.unlink
       end
 
+      def saved_scroll_filename
+        File.join(ENV['HOME'], '.saved_scrolls')
+      end
+
+      def get_existing_saves
+        File.exists?(saved_scroll_filename) ? YAML.load_file(saved_scroll_filename) : {}
+      end
+
       def save_scroll_selections
-        save_file = File.join(ENV['HOME'], '.saved_scrolls')
-        saved_scrolls = File.exists?(save_file) ? YAML.load_file(save_file) : {}
+        saved_scrolls = get_existing_saves
         saved_scrolls[options[:save]] = options[:scrolls]
 
-        File.open(save_file, 'w') do |out|
-           YAML.dump(saved_scrolls, out)
-        end
+        File.open(saved_scroll_filename, 'w') { |out| YAML.dump(saved_scrolls, out) }
       end
     end
   end
