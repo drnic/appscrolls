@@ -11,13 +11,14 @@ module AppScrollsScrolls
     def new(name)
       if options[:scrolls]
         run_template(name, options[:scrolls], options[:template])
-        save_scroll_selections if options[:save]
+        save_scroll_selections(options[:scrolls]) if options[:save]
       else
         @scrolls = []
 
         while scroll = ask("#{print_scrolls}#{bold}Which scroll would you like to add? #{clear}#{yellow}(blank to finish)#{clear}")
           if scroll == ''
             run_template(name, @scrolls)
+            save_scroll_selections(@scrolls) if options[:save]
             break
           elsif AppScrollsScrolls::Scrolls.list.include?(scroll)
             @scrolls << scroll
@@ -91,19 +92,14 @@ module AppScrollsScrolls
         file.unlink
       end
 
-      def saved_scroll_filename
-        File.join(ENV['HOME'], '.saved_scrolls')
-      end
-
-      def get_existing_saves
-        File.exists?(saved_scroll_filename) ? YAML.load_file(saved_scroll_filename) : {}
-      end
-
-      def save_scroll_selections
-        saved_scrolls = get_existing_saves
-        saved_scrolls[options[:save]] = options[:scrolls]
-
-        File.open(saved_scroll_filename, 'w') { |out| YAML.dump(saved_scrolls, out) }
+      def save_scroll_selections(requires)
+        require 'active_support/inflector'
+        require 'erb'
+        require 'appscrolls/template'
+        name = options[:save]
+        scroll = AppScrollsScrolls::Template.render("saved_scrolls", binding)
+        scroll_path = "scrolls/#{name}.rb"
+        File.open(scroll_path, "w") { |file| file << scroll }
       end
     end
   end
