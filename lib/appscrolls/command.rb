@@ -6,10 +6,12 @@ module AppScrollsScrolls
     include Thor::Actions
     desc "new APP_NAME", "create a new Rails app"
     method_option :scrolls, :type => :array, :aliases => "-s", :desc => "List scrolls, e.g. -s resque rails_basics jquery"
+    method_option :save, :desc => "Save the selection of scrolls. Usage: '--save NAME'"
     method_option :template, :type => :boolean, :aliases => "-t", :desc => "Only display template that would be used"
     def new(name)
       if options[:scrolls]
         run_template(name, options[:scrolls], options[:template])
+        save_scroll_selections if options[:save]
       else
         @scrolls = []
 
@@ -87,6 +89,16 @@ module AppScrollsScrolls
         end
       ensure
         file.unlink
+      end
+
+      def save_scroll_selections
+        save_file = File.join(ENV['HOME'], '.saved_scrolls')
+        saved_scrolls = File.exists?(save_file) ? YAML.load_file(save_file) : {}
+        saved_scrolls[options[:save]] = options[:scrolls]
+
+        File.open(save_file, 'w') do |out|
+           YAML.dump(saved_scrolls, out)
+        end
       end
     end
   end
