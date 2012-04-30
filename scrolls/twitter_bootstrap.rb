@@ -1,5 +1,6 @@
 gem_group :assets do
   gem 'twitter-bootstrap-rails'
+  gem 'therubyracer'
 end
 
 after_bundler do
