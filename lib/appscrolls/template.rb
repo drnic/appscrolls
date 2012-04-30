@@ -10,7 +10,13 @@ module AppScrollsScrolls
           list << scroll
         else
           @unknown_scroll_names << name
-          $stderr.puts "Unknown scroll '#{name}'. Skipping."
+          $stderr.print "Unknown scroll '#{name}'. Continue? (y/n): "
+          answer = STDIN.gets.strip
+
+          if answer=='n' or answer=='N'
+            $stderr.puts "Exiting."
+            exit
+          end
         end
         list
       end
