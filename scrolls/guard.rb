@@ -1,28 +1,21 @@
-prepend_file 'Gemfile' do <<-RUBY
 require 'rbconfig'
 HOST_OS = RbConfig::CONFIG['host_os']
 
-RUBY
-end
-
-append_file 'Gemfile' do <<-RUBY
-
+append_file 'Gemfile', <<-RUBY
 guard_notifications = #{config['guard_notifications'].inspect}
-group :development do
-  case HOST_OS
-  when /darwin/i
-    gem 'rb-fsevent'
-    gem 'ruby_gntp' if guard_notifications
-  when /linux/i
-    gem 'libnotify'
-    gem 'rb-inotify'
-  when /mswin|windows/i
-    gem 'rb-fchange'
-    gem 'win32console'
-    gem 'rb-notifu' if guard_notifications
-  end
-end
 RUBY
+
+case HOST_OS
+when /darwin/i
+  gem 'rb-fsevent', :group => :development
+  append_file 'Gemfile', "\ngem 'ruby_gntp', :group => :development if guard_notifications\n"
+when /linux/i
+  gem 'libnotify', :group => :development
+  gem 'rb-inotify', :group => :development
+when /mswin|windows/i
+  gem 'rb-fchange', :group => :development
+  gem 'win32console', :group => :development
+  append_file 'Gemfile', "\ngem 'rb-notifu' if guard_notifications\n"
 end
 
 
