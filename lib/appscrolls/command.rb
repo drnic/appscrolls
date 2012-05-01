@@ -6,19 +6,16 @@ module AppScrollsScrolls
     include Thor::Actions
     desc "new APP_NAME", "create a new Rails app"
     method_option :scrolls, :type => :array, :aliases => "-s", :desc => "List scrolls, e.g. -s resque rails_basics jquery"
-    method_option :save, :desc => "Save the selection of scrolls. Usage: '--save NAME'"
     method_option :template, :type => :boolean, :aliases => "-t", :desc => "Only display template that would be used"
     def new(name)
       if options[:scrolls]
         run_template(name, options[:scrolls], options[:template])
-        save_scroll_selections(options[:scrolls]) if options[:save]
       else
         @scrolls = []
 
         while scroll = ask("#{print_scrolls}#{bold}Which scroll would you like to add? #{clear}#{yellow}(blank to finish)#{clear}")
           if scroll == ''
             run_template(name, @scrolls)
-            save_scroll_selections(@scrolls) if options[:save]
             break
           elsif AppScrollsScrolls::Scrolls.list.include?(scroll)
             @scrolls << scroll
@@ -29,6 +26,15 @@ module AppScrollsScrolls
             puts "> #{red}Invalid scroll, please try again.#{clear}"
           end
         end
+      end
+    end
+
+    desc "history", "view history of past scroll choices"
+    method_option :save, :desc => "Save a past choice of scrolls to a new scroll."
+    def history
+      lines = File.readlines history_file
+      lines.each_with_index do |line, i|
+        puts "#{i}: #{line}"
       end
     end
 
@@ -88,18 +94,28 @@ module AppScrollsScrolls
         else
           system "rails new #{name} -m #{file.path} #{template.args.join(' ')}"
         end
+        write_history scrolls
       ensure
         file.unlink
       end
 
-      def save_scroll_selections(requires)
-        require 'active_support/inflector'
-        require 'erb'
-        require 'appscrolls/template'
-        name = options[:save]
-        scroll = AppScrollsScrolls::Template.render("saved_scrolls", binding)
-        scroll_path = "scrolls/#{name}.rb"
-        File.open(scroll_path, "w") { |file| file << scroll }
+      def scrolls_dir
+        File.join ENV['HOME'], '.scrolls'
+      end
+
+      def ensure_scrolls_dir
+        Dir.mkdir scrolls_dir unless Dir.exists? scrolls_dir
+      end
+
+      def history_file
+        ensure_scrolls_dir
+        File.join scrolls_dir, 'history'
+      end
+
+      def write_history(scrolls)
+        File.open(history_file, "a") do |file|
+          file.puts scrolls.join(' ')
+        end
       end
     end
   end
