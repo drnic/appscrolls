@@ -31,6 +31,7 @@ module AppScrollsScrolls
 
     desc "history", "view history of past scroll choices"
     method_option :save, :desc => "Save a past choice of scrolls to a new scroll."
+    method_option :use, :desc => "Directly use a past choice of scrolls to generate a new app."
     def history
       lines = File.readlines history_file
       lines.each_with_index do |line, i|
@@ -40,6 +41,10 @@ module AppScrollsScrolls
         print "Enter line number and name to save to a new scroll (e.g. 1 my_defaults): "
         index, name = STDIN.gets.strip.split(' ')
         create_new_scroll(:scrolls => lines[index.to_i].chomp.split(' '), :name => name)
+      elsif options[:use]
+        print "Enter line number and name to create a new scroll from past selection (e.g. 1 new_app_name): "
+        index, name = STDIN.gets.strip.split(' ')
+        run_template(name, lines[index.to_i].chomp.split(' '))
       end
     end
 
