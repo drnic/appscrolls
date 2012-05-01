@@ -36,6 +36,11 @@ module AppScrollsScrolls
       lines.each_with_index do |line, i|
         puts "#{i}: #{line}"
       end
+      if options[:save]
+        print "Enter line number and name to save to a new scroll (e.g. 1 my_defaults): "
+        index, name = STDIN.gets.strip.split(' ')
+        create_new_scroll(:scrolls => lines[index.to_i].chomp.split(' '), :name => name)
+      end
     end
 
     desc "list [CATEGORY]", "list available scrolls (optionally by category)"
@@ -116,6 +121,17 @@ module AppScrollsScrolls
         File.open(history_file, "a") do |file|
           file.puts scrolls.join(' ')
         end
+      end
+
+      def create_new_scroll(hash)
+        require 'active_support/inflector'
+        require 'erb'
+        require 'appscrolls/template'
+        name = hash[:name]
+        requires = hash[:scrolls]
+        scroll = AppScrollsScrolls::Template.render("saved_scrolls", binding)
+        scroll_path = "scrolls/#{name}.rb"
+        File.open(scroll_path, "w") { |file| file << scroll }
       end
     end
   end
