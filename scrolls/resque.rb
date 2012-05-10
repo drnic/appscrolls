@@ -14,6 +14,10 @@ if scroll? "eycloud_recipes_on_deploy"
   RUBY
 end
 
+if scroll? "procfile"
+  append_file "Procfile", "resque: bundle exec rake resque:work\n"
+end
+
 after_bundler do
   say_wizard 'Adding resque.rake task to lib/tasks'
   create_file "lib/tasks/resque.rake", <<-RAKE
@@ -47,7 +51,7 @@ author: drnic
 website: https://github.com/defunkt/resque
 
 requires: [redis]
-run_after: [redis, eycloud_recipes_on_deploy]
+run_after: [redis, eycloud_recipes_on_deploy, procfile]
 
 category: worker
 tags: [background, worker]
