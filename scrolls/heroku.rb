@@ -1,8 +1,12 @@
 heroku_name = app_name.gsub('_','')
 
+if scroll? "redis"
+  # ensure that a redis service (redistogo) used
+end
+
 after_everything do
   if config['create']
-    say_wizard "Creating Heroku app '#{heroku_name}.heroku.com'"  
+    say_wizard "Creating Heroku app '#{heroku_name}.herokuapp.com'"  
     while !system("heroku create #{heroku_name}")
       heroku_name = ask_wizard("What do you want to call your app? ")
     end
@@ -34,8 +38,8 @@ name: Heroku
 description: Create Heroku application and instantly deploy.
 author: mbleigh
 
-requires: [git]
-run_after: [git]
+requires: [git, procfile]
+run_after: [git, procfile]
 exclusive: deployment
 category: deployment
 tags: [provider]
