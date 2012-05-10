@@ -17,6 +17,10 @@ module AppScrollsScrolls
           if scroll == ''
             run_template(name, @scrolls)
             break
+          elsif @scrolls.include?(scroll)
+            @scrolls.delete(scroll)
+            puts
+            puts "> #{yellow}Removed '#{scroll}' from tempate.#{clear}"
           elsif AppScrollsScrolls::Scrolls.list.include?(scroll)
             @scrolls << scroll
             puts
@@ -67,7 +71,7 @@ module AppScrollsScrolls
         puts
         puts "#{bold}Generating and Running Template...#{clear}"
         puts
-        file = Tempfile.new('template')        
+        file = Tempfile.new('template')
         template = AppScrollsScrolls::Template.new(scrolls)
 
         puts "Using the following scrolls:"
