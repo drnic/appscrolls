@@ -13,11 +13,9 @@ module AppScrollsScrolls
       else
         @scrolls = []
 
-        while scroll = ask("#{print_scrolls}#{bold}Which scroll would you like to add? #{clear}#{yellow}(blank to finish)#{clear}")
-          if scroll == ''
-            run_template(name, @scrolls)
-            break
-          elsif @scrolls.include?(scroll)
+        question = "#{print_scrolls}#{bold}Which scroll would you like to add? #{clear}#{yellow}(blank to finish)#{clear}"
+        while (scroll = ask(question)) != ''
+          if @scrolls.include?(scroll)
             @scrolls.delete(scroll)
             puts
             puts "> #{yellow}Removed '#{scroll}' from tempate.#{clear}"
@@ -30,6 +28,8 @@ module AppScrollsScrolls
             puts "> #{red}Invalid scroll, please try again.#{clear}"
           end
         end
+
+        run_template(name, @scrolls)
       end
     end
 
