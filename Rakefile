@@ -54,8 +54,11 @@ task :new do
   require 'active_support/inflector'
   require 'erb'
   require 'appscrolls/template'
+  unless (scrolls_dir = ENV["APPSCROLLS_DIR"]) and scrolls_dir != ""
+    scrolls_dir = "scrolls"
+  end
   scroll = AppScrollsScrolls::Template.render("new_scroll", binding)
-  scroll_path = "scrolls/#{name}.rb"
+  scroll_path = "#{scrolls_dir}/#{name}.rb"
   File.open(scroll_path, "w") { |file| file << scroll }
   `open #{scroll_path}`
 end
