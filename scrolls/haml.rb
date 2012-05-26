@@ -6,7 +6,6 @@ inject_into_file "config/initializers/generators.rb", :after => "Rails.applicati
 end
 
 after_bundler do
-	remove_file "app/views/layouts/application.html.erb" 
   create_file "app/views/layouts/application.html.haml", <<-RUBY
 !!!
 %html
