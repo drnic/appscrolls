@@ -13,8 +13,8 @@ module AppScrollsScrolls
       else
         @scrolls = []
 
-        question = "#{print_scrolls}#{bold}Which scroll would you like to add/remove? #{clear}#{yellow}(blank to finish)#{clear}"
-        while (scroll = ask(question)) != ''
+        question = "#{bold}Which scroll would you like to add/remove? #{clear}#{yellow}(blank to finish)#{clear}"
+        while (scroll = ask(scrolls_message + question)) != ''
           if @scrolls.include?(scroll)
             @scrolls.delete(scroll)
             puts
@@ -54,16 +54,14 @@ module AppScrollsScrolls
       def green; "\033[32m" end
       def yellow; "\033[33m" end
 
-      def print_scrolls
-        puts
-        puts
-        puts
+      def scrolls_message
+        message = "\n\n\n"
         if @scrolls && @scrolls.any?
-          puts "#{green}#{bold}Your Scrolls:#{clear} " + @scrolls.join(", ")
-          puts
+          message << "#{green}#{bold}Your Scrolls:#{clear} #{@scrolls.join(", ")}"
+          message << "\n"
         end
-        puts "#{bold}#{cyan}Available Scrolls:#{clear} " + AppScrollsScrolls::Scrolls.list.join(', ')
-        puts
+        message << "#{bold}#{cyan}Available Scrolls:#{clear} #{AppScrollsScrolls::Scrolls.list.join(', ')}"
+        message << "\n\n"
       end
 
       def run_template(name, scrolls, display_only = false)
