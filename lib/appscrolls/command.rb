@@ -58,10 +58,14 @@ module AppScrollsScrolls
         message = "\n\n\n"
         if @scrolls && @scrolls.any?
           message << "#{green}#{bold}Your Scrolls:#{clear} #{@scrolls.join(", ")}"
-          message << "\n"
+          message << "\n\n"
         end
-        message << "#{bold}#{cyan}Available Scrolls:#{clear} #{AppScrollsScrolls::Scrolls.list.join(', ')}"
-        message << "\n\n"
+        available_scrolls = AppScrollsScrolls::Scrolls.list - @scrolls
+        if available_scrolls.any?
+          message << "#{bold}#{cyan}Available Scrolls:#{clear} #{available_scrolls.join(', ')}"
+          message << "\n\n"
+        end
+        message
       end
 
       def run_template(name, scrolls, display_only = false)
