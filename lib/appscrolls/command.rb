@@ -13,12 +13,12 @@ module AppScrollsScrolls
       else
         @scrolls = []
 
-        question = "#{print_scrolls}#{bold}Which scroll would you like to add? #{clear}#{yellow}(blank to finish)#{clear}"
+        question = "#{print_scrolls}#{bold}Which scroll would you like to add/remove? #{clear}#{yellow}(blank to finish)#{clear}"
         while (scroll = ask(question)) != ''
           if @scrolls.include?(scroll)
             @scrolls.delete(scroll)
             puts
-            puts "> #{yellow}Removed '#{scroll}' from tempate.#{clear}"
+            puts "> #{yellow}Removed '#{scroll}' from template.#{clear}"
           elsif AppScrollsScrolls::Scrolls.list.include?(scroll)
             @scrolls << scroll
             puts
