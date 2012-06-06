@@ -1,17 +1,17 @@
 gem '<%= name %>'
 
 after_bundler do
-  
+
 end
 
 after_everything do
-  
+
 end
 
 __END__
 
 name: <%= name.humanize.capitalize %>
-description: 
+description:
 website:
 author: <%= `whoami`.strip %>
 
@@ -20,7 +20,7 @@ run_after: []
 run_before: []
 
 category: other # authentication, testing, persistence, javascript, css, services, deployment, and templating
-# exclusive: 
+# exclusive:
 
 # config:
 #   - foo:

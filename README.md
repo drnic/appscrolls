@@ -111,7 +111,7 @@ The App Scrolls needs a CloudFoundry Master to support CloudFoundry for the App 
 
 Create new scrolls using:
 
-    rake new NAME=scroll-name
+    thor :new scroll-name
 
 Submitting a scroll is actually a very straightforward process. Scrolls are made of up **template code** and **YAML back-matter** stored in a ruby file. The `__END__` parsing convention is used so that each scroll is actually a valid, parseable Ruby file. The structure of a scroll looks something like this:
 
