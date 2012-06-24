@@ -1,7 +1,5 @@
 # ChangeLog
 
-* `github` - if private, then create private repo [thx @CraigCottingham]
-
 ## v0.8
 
 * `postgresql` - supported on `eycloud` (Currently PostgreSQL 9.1)
@@ -29,6 +27,14 @@ PUBLIC RELEASE! http://drnicwilliams.com/2012/04/10/instant-new-rails-applicatio
 ### v0.8.3
 
 * `resque` - Use "resque_admin_secret" instead of hardcoded string
+
+### v0.8.4
+
+* `github` - if private, then create private repo [thx @CraigCottingham]
+* `thin` - moved to active
+* `rails_admin` - new scroll [thx @sferik]
+* `twitter_bootstrap` - Added `therubyracer` gem as a dependency [thx @jackdempsey]
+* added support for scrolls with dashes in their names [thx @grk]
 
 ## v0.7
 

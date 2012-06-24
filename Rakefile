@@ -45,21 +45,6 @@ task :print do
   puts AppScrollsScrolls::Template.new(scrolls).compile
 end
 
-desc "Create a new scroll"
-task :new do
-  unless (name = ENV['NAME']) && name.size > 0
-    $stderr.puts "USAGE: rake new NAME=scroll-name"
-    exit 1
-  end
-  require 'active_support/inflector'
-  require 'erb'
-  require 'appscrolls/template'
-  scroll = AppScrollsScrolls::Template.render("new_scroll", binding)
-  scroll_path = "scrolls/#{name}.rb"
-  File.open(scroll_path, "w") { |file| file << scroll }
-  `open #{scroll_path}`
-end
-
 namespace :list do
   desc "Display scrolls by category"
   task :categories do

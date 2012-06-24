@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.2"
   s.add_dependency "json", "~> 1.7.0"
   s.add_dependency "thor"
-  s.add_development_dependency "bundler", "~> 1.1.0"
   s.add_development_dependency "cucumber"
   s.add_development_dependency "guard-bundler"
   s.add_development_dependency "guard-cucumber"

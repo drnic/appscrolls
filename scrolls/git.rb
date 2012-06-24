@@ -1,4 +1,4 @@
-after_everything do
+before_everything do
   git :init
   git :add => '.'
   git :commit => '-m "Initial import."'
