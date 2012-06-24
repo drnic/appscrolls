@@ -1,9 +1,7 @@
 require 'rbconfig'
 HOST_OS = RbConfig::CONFIG['host_os']
 
-append_file 'Gemfile', <<-RUBY
-guard_notifications = #{config['guard_notifications'].inspect}
-RUBY
+append_file 'Gemfile', "\nguard_notifications = #{config['guard_notifications'].inspect}\n"
 
 case HOST_OS
 when /darwin/i
