@@ -72,8 +72,7 @@ module AppScrollsScrolls
     end
 
     def self.config
-      return nil unless attributes[:config]
-      AppScrollsScrolls::Config.new(attributes[:config])
+      AppScrollsScrolls::Config.new(attributes[:config]||[])
     end
 
     def attributes
