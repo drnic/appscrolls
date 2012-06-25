@@ -1,9 +1,10 @@
 module AppScrollsScrolls
   class Template
-    attr_reader :scrolls, :unknown_scroll_names
+    attr_reader :scrolls, :unknown_scroll_names, :config_script
 
-    def initialize(scrolls)
+    def initialize(scrolls, options={})
       @unknown_scroll_names = []
+      @config_script = options[:config_script]
       @scrolls = scrolls.inject([]) do |list, name|
         scroll = AppScrollsScrolls::Scroll.from_mongo(name)
         if scroll
@@ -60,7 +61,7 @@ module AppScrollsScrolls
     def args
       scrolls.map(&:args).uniq
     end
-
+    
     def custom_code?; false end
     def custom_code; nil end
   end

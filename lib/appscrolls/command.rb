@@ -7,9 +7,10 @@ module AppScrollsScrolls
     desc "new APP_NAME", "create a new Rails app"
     method_option :scrolls, :type => :array, :aliases => "-s", :desc => "List scrolls, e.g. -s resque rails_basics jquery"
     method_option :template, :type => :boolean, :aliases => "-t", :desc => "Only display template that would be used"
+    method_option :config, :type => :string, :aliases => "-c", :desc => "Path to config script to run before scrolls"
     def new(name)
       if options[:scrolls]
-        run_template(name, options[:scrolls], options[:template])
+        run_template(name, options[:scrolls], :display_only => options[:template], :config_file => options[:config])
       else
         @scrolls = []
 
@@ -29,7 +30,7 @@ module AppScrollsScrolls
           end
         end
 
-        run_template(name, @scrolls, options[:template])
+        run_template(name, @scrolls, :display_only => options[:template], :config_file => options[:config])
       end
     end
 
@@ -68,13 +69,15 @@ module AppScrollsScrolls
         message
       end
 
-      def run_template(name, scrolls, display_only = false)
+      def run_template(name, scrolls, options = {})
         puts
         puts
         puts "#{bold}Generating and Running Template...#{clear}"
         puts
         file = Tempfile.new('template')
-        template = AppScrollsScrolls::Template.new(scrolls)
+        template_options = {}
+        template_options[:config_script] = File.read(options[:config_file]) if options[:config_file]
+        template = AppScrollsScrolls::Template.new(scrolls, template_options)
 
         puts "Using the following scrolls:"
         template.resolve_scrolls.map do |scroll|
@@ -85,14 +88,14 @@ module AppScrollsScrolls
 
         file.write template.compile
         file.close
-        if display_only
+        if options[:display_only]
           puts "Template stored to #{file.path}"
           puts File.read(file.path)
         else
           system "rails new #{name} -m #{file.path} #{template.args.join(' ')}"
         end
       ensure
-        file.unlink unless display_only
+        file.unlink unless options[:display_only]
       end
     end
   end

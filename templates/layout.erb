@@ -23,6 +23,10 @@ use_git = @scrolls.include?('git')
 
 <%= render "helpers" %>
 
+<% if config_script %># >----------------------------[ Config Script ]------------------------------<
+
+<%= config_script %><% end %>
+
 <% resolve_scrolls.each do |scroll| %>
 <%= render 'scroll', scroll.get_binding %>
 <% end %>
