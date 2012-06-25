@@ -18,7 +18,7 @@ module AppScrollsScrolls
 
     def compile(values = {})
       result = []
-      result << "config = #{values.inspect}"
+      result << "config.merge! #{values.inspect}" unless values.empty?
       @questions.each_pair do |key, question|
         result << "config['#{key}'] = #{question.compile} unless config.key?('#{key}')"
       end
@@ -33,7 +33,7 @@ module AppScrollsScrolls
       end
 
       def compile
-        "#{question} if #{conditions}"
+        "#{question}#{conditions}"
       end
 
       def question
@@ -41,7 +41,8 @@ module AppScrollsScrolls
       end
 
       def conditions
-        [config_conditions, scroll_conditions].join(' && ')
+        conditions_string = [config_conditions, scroll_conditions].reject{|v| v=='true'}.join(' && ')
+        " if " + conditions_string unless conditions_string.empty?
       end
 
       def config_conditions

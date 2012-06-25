@@ -5,8 +5,6 @@ create_file "config/compass.rb", <<-END
 project_type = :rails
 END
 
-layout = config["layout"]
-
 after_everything do
   append_file "app/assets/stylesheets/application.css.scss", <<-END
 @import "bootstrap_and_overrides";
@@ -20,7 +18,7 @@ END
   create_file "app/assets/stylesheets/_bootstrap_and_overrides.css.scss", <<-END
 @import "bootstrap_variables";
 @import "compass_twitter_bootstrap_awesome";
-@import "#{layout}"
+@import "#{config["layout"]}"
 END
 
   gsub_file "app/assets/javascripts/application.js", "//= require_tree .", <<-END

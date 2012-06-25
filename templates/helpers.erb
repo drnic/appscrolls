@@ -51,8 +51,11 @@ def git_commit(message)
   `git commit -m "#{message}"`
 end
 
+def config
+  @configs[@current_scroll] ||= {}
+end
+
 def execute_block(block)
-  config = @configs[block[0]] || {}
   @current_scroll = block[0];
   block[1].call
 end

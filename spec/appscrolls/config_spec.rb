@@ -54,23 +54,23 @@ describe AppScrollsScrolls::Config do
       end
 
       it 'should include all questions' do
-        lines.size.should == 4
+        lines.size.should == 3
       end
 
       it 'should handle "if"' do
-        lines[1].should be_include("config['is_true']")
+        lines[0].should be_include("config['is_true']")
       end
 
       it 'should handle "unless"' do
-        lines[2].should be_include("!config['is_false']")
+        lines[1].should be_include("!config['is_false']")
       end
 
       it 'should handle "if_scroll"' do
-        lines[2].should be_include("scroll?('awesome')")
+        lines[1].should be_include("scroll?('awesome')")
       end
 
-      it 'should handle "unelss_scroll"' do
-        lines[3].should be_include("!scroll?('awesome')")
+      it 'should handle "unless_scroll"' do
+        lines[2].should be_include("!scroll?('awesome')")
       end
     end
 
