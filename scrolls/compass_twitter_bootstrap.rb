@@ -1,11 +1,11 @@
 gem 'compass_twitter_bootstrap', :group => :assets
 
-create_file "config/compass.rb", <<-END
+after_everything do
+  create_file "config/compass.rb", <<-END
 # Require any additional compass plugins here.
 project_type = :rails
 END
 
-after_everything do
   append_file "app/assets/stylesheets/application.css.scss", <<-END
 @import "bootstrap_and_overrides";
 END
@@ -25,11 +25,10 @@ END
 //= require bootstrap-all
 //= require_tree .
 END
-end
-
 
   run "ln -s `bundle show compass_twitter_bootstrap`/stylesheets app/assets/stylesheets/bootstrap"
   append_file ".gitignore", "\napp/assets/stylesheets/bootstrap" if scrolls.include? 'git'
+end
   
 __END__
 
