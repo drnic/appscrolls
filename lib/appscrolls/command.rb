@@ -29,7 +29,7 @@ module AppScrollsScrolls
           end
         end
 
-        run_template(name, @scrolls)
+        run_template(name, @scrolls, options[:template])
       end
     end
 
