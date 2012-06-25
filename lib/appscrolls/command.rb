@@ -92,7 +92,7 @@ module AppScrollsScrolls
           system "rails new #{name} -m #{file.path} #{template.args.join(' ')}"
         end
       ensure
-        file.unlink
+        file.unlink unless display_only
       end
     end
   end
