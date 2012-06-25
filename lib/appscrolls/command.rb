@@ -9,8 +9,9 @@ module AppScrollsScrolls
     method_option :template, :type => :boolean, :aliases => "-t", :desc => "Only display template that would be used"
     method_option :config, :type => :string, :aliases => "-c", :desc => "Path to config script to run before scrolls"
     def new(name)
+      config_file = options[:config] || ENV['APPSCROLLS_CONFIG']
       if options[:scrolls]
-        run_template(name, options[:scrolls], :display_only => options[:template], :config_file => options[:config])
+        run_template(name, options[:scrolls], :display_only => options[:template], :config_file => config_file)
       else
         @scrolls = []
 
@@ -30,7 +31,7 @@ module AppScrollsScrolls
           end
         end
 
-        run_template(name, @scrolls, :display_only => options[:template], :config_file => options[:config])
+        run_template(name, @scrolls, :display_only => options[:template], :config_file => config_file)
       end
     end
 

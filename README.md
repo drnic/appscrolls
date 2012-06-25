@@ -85,6 +85,8 @@ This config file is a script that can provide defaults for any scrolls by settin
 @configs['guard']['guard_notifications'] = false
 ```
 
+Or instead of passing a flag each time, just set the APPSCROLLS_CONFIG environment variable to include it every time:
+    export APPSCROLLS_CONFIG=~/.scrolls_config.rb
 
 ## Deployment Support
 
