@@ -1,7 +1,7 @@
 gem 'simple_form'
 
 after_bundler do
-  if scroll? "twitter_bootstrap"
+  if scroll?("twitter_bootstrap") || scroll?("compass_twitter_bootstrap")
     generate "simple_form:install --bootstrap"
   else
     generate "simple_form:install"
