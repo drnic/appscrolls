@@ -35,6 +35,7 @@ def multiple_choice(question, choices)
 end
 
 @current_scroll = nil
+@configs = config
 
 @before_everything_blocks = []
 def before_everything(&block); @before_everything_blocks << [@current_scroll, block]; end
@@ -55,18 +56,28 @@ def execute_block(block)
   block[1].call
 end
 
-# So you can also access config hash like such: config.pg_password = 'god'
-module ConfigHash
+def scroll key, &block
+  @current_scroll = key
+  @before_configs[key].call if @before_configs[key]
+  yield(@configs[key] ||= {})
+end
+
+# So instead of setting: (@configs['postgresql']||={})['pg_password'] = ''
+# you can now just just set: config.postgresql.pg_password = ''
+module ConfigMapper
   def method_missing(method, *args, &block)
     method = method.to_s
     if method.gsub!(/=$/, '')
       self[method] = args.first
-    elsif self[method]
-      self[method]
     else
-      super(*args, &block)
+      if self.has_key?(method)
+        self[method].extend ConfigMapper if self[method].is_a? Hash
+      else
+        self[method] = {}
+        self[method].extend ConfigMapper
+      end
+      self[method]
     end
   end
 end
-
-config.extend ConfigHash
+config.extend ConfigMapper
