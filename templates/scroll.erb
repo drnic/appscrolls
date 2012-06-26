@@ -1,6 +1,9 @@
 # ><%= "[ #{name} ]".center(75,'-') %><
-scroll '<%= key %>' do |config|
+@current_scroll = "<%= key %>"
+config = @configs[@current_scroll] ||= {}
+@before_configs["<%= key %>"].call if @before_configs["<%= key %>"]
 say_scroll '<%= name %>'
-<%= "\n" + config.compile + "\n" if config %>
+
+<%= config.compile if config %>
+
 <%= template %>
-end # <%= key %>

@@ -56,12 +56,6 @@ def execute_block(block)
   block[1].call
 end
 
-def scroll key, &block
-  @current_scroll = key
-  @before_configs[key].call if @before_configs[key]
-  yield(@configs[key] ||= {})
-end
-
 # So instead of setting: (@configs['postgresql']||={})['pg_password'] = ''
 # you can now just just set: config.postgresql.pg_password = ''
 module ConfigMapper
