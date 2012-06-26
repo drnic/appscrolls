@@ -78,11 +78,11 @@ If you wish to skip any configuration questions, you can provide the path to a c
 
     scrolls new APP_NAME -c ~/.scrolls_config.rb
     
-This config file is a script that can provide defaults for any scrolls by setting @configs[SCROLL_NAME][OPTION_NAME].  For example:
+This config file is a script that can provide defaults for scrolls by setting config.SCROLL_NAME.OPTION_NAME.  For example:
 ```
-@configs['postgresql']['pg_username'] = 'root'
-@configs['postgresql']['pg_password'] = ''
-@configs['guard']['guard_notifications'] = false
+config.postgresql.pg_username = 'root'
+config.postgresql.pg_password = ''
+config.guard.guard_notifications = false
 ```
 
 Or instead of passing a flag each time, just set the APPSCROLLS_CONFIG environment variable to include it every time:
