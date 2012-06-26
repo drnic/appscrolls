@@ -18,7 +18,7 @@ END
   create_file "app/assets/stylesheets/_bootstrap_and_overrides.css.scss", <<-END
 @import "bootstrap_variables";
 @import "compass_twitter_bootstrap_awesome";
-@import "#{config["layout"]}"
+@import "#{config["compass_twitter_bootstrap_layout"]}"
 END
 
   gsub_file "app/assets/javascripts/application.js", "//= require_tree .", <<-END
@@ -42,7 +42,7 @@ tags: [css, stylesheet]
 requires: [compass]
 
 config:
-  - layout:
+  - compass_twitter_bootstrap_layout:
       prompt: "Responsive layout?"
       type: multiple_choice
       choices: [["Normal", "compass_twitter_bootstrap"], ["Responsive", "compass_twitter_bootstrap_responsive"]]

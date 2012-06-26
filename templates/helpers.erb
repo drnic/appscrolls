@@ -28,14 +28,13 @@ def multiple_choice(question, choices)
   values = {}
   choices.each_with_index do |choice,i| 
     values[(i + 1).to_s] = choice[1]
-    say_custom (i + 1).to_s + ')', choice[0]
+    say_custom((i + 1).to_s + ')', choice[0])
   end
   answer = ask_wizard("Enter your selection:") while !values.keys.include?(answer)
   values[answer]
 end
 
 @current_scroll = nil
-@configs = {}
 
 @before_everything_blocks = []
 def before_everything(&block); @before_everything_blocks << [@current_scroll, block]; end
@@ -56,26 +55,18 @@ def execute_block(block)
   block[1].call
 end
 
-def config
-  if @current_scroll
-    @configs[@current_scroll] ||= {}
-  else
-    @config_mapper ||= ConfigMapper.new(@configs)
-  end
-end
-
-# So instead of setting: (@configs['postgresql']||={})['pg_password'] = ''
-# you can now just just set: config.postgresql.pg_password = ''
-class ConfigMapper
-  def initialize(configs)
-    @configs = configs
-  end
+# So you can also access config hash like such: config.pg_password = 'god'
+module ConfigHash
   def method_missing(method, *args, &block)
     method = method.to_s
     if method.gsub!(/=$/, '')
-      @configs[method] = args.first
+      self[method] = args.first
+    elsif self[method]
+      self[method]
     else
-      ConfigMapper.new(@configs[method] ||= {})
+      super(*args, &block)
     end
   end
 end
+
+config.extend ConfigHash
