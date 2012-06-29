@@ -23,7 +23,7 @@ after_everything do
   end
 
   if scrolls.include? 'heroku'
-    inject_into_file 'config/environments/application.rb', "\n# Force application to not access DB or load models when precompiling your assets (Devise+heroku recommended)\nconfig.assets.initialize_on_precompile = false\n", :after => "class Application < Rails::Application"
+    inject_into_file 'config/application.rb', "\n# Force application to not access DB or load models when precompiling your assets (Devise+heroku recommended)\nconfig.assets.initialize_on_precompile = false\n", :after => "class Application < Rails::Application"
   end
 end
 
