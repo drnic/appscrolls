@@ -47,5 +47,4 @@ git_commit("bundle install") if use_git
 
 execute_callbacks :after_bundler
 execute_callbacks :after_everything
-git_commit("before final callbacks") if use_git
 execute_callbacks :finally

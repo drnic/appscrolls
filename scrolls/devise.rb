@@ -1,8 +1,8 @@
 gem 'devise'
 
-inject_into_file 'config/environments/development.rb', "\nconfig.action_mailer.default_url_options = { :host => 'localhost:3000' }\n", :after => "Application.configure do"
-inject_into_file 'config/environments/test.rb',        "\nconfig.action_mailer.default_url_options = { :host => 'localhost:3000' }\n", :after => "Application.configure do"
-inject_into_file 'config/environments/production.rb',  "\nconfig.action_mailer.default_url_options = { :host => '#{app_name}.com' }\n", :after => "Application.configure do"
+inject_into_file 'config/environments/development.rb', "\n  config.action_mailer.default_url_options = { :host => 'localhost:3000' }\n", :after => "Application.configure do"
+inject_into_file 'config/environments/test.rb',        "\n  config.action_mailer.default_url_options = { :host => 'localhost:3000' }\n", :after => "Application.configure do"
+inject_into_file 'config/environments/production.rb',  "\n  config.action_mailer.default_url_options = { :host => '#{app_name}.com' }\n", :after => "Application.configure do"
 
 after_everything do
   generate 'devise:install' unless scrolls.include? 'active_admin'
@@ -23,7 +23,7 @@ after_everything do
   end
 
   if scrolls.include? 'heroku'
-    inject_into_file 'config/application.rb', "\n# Force application to not access DB or load models when precompiling your assets (Devise+heroku recommended)\nconfig.assets.initialize_on_precompile = false\n", :after => "class Application < Rails::Application"
+    inject_into_file 'config/application.rb', "\n    # Force application to not access DB or load models when precompiling your assets (Devise+heroku recommended)\n    config.assets.initialize_on_precompile = false\n", :after => "class Application < Rails::Application"
   end
 end
 
