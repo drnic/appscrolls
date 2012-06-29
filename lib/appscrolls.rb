@@ -14,13 +14,13 @@ def enroll_scroll_at(path)
   AppScrollsScrolls::Scrolls.add(scroll)
 end
 
+scroll_files = Dir[File.dirname(__FILE__) + '/../scrolls/*.rb']
+
 # set up local scrolls if available
 if dir = ENV['APPSCROLLS_DIR'] and dir != ""
-  (Dir[dir + '/*.rb'] + Dir[dir + '/**/*.rb']).each do |path|
-    enroll_scroll_at(path)
-  end
+  scroll_files = Dir[dir+"/**{,/*/**}/*.rb"] + scroll_files
 end
 
-Dir[File.dirname(__FILE__) + '/../scrolls/*.rb'].each do |path|
+scroll_files.each do |path|
   enroll_scroll_at(path)
 end
