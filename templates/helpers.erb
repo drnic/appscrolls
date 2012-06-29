@@ -62,8 +62,7 @@ def scroll key, &block
   yield(@configs[key] ||= {})
 end
 
-# So instead of setting: (@configs['postgresql']||={})['pg_password'] = ''
-# you can now just just set: config.postgresql.pg_password = ''
+# So you can set options in config file: config.postgresql.pg_password = ''
 module ConfigMapper
   def method_missing(method, *args, &block)
     method = method.to_s
