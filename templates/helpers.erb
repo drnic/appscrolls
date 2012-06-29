@@ -37,28 +37,37 @@ end
 @current_scroll = nil
 @configs = config
 
-@before_everything_blocks = []
-def before_everything(&block); @before_everything_blocks << [@current_scroll, block]; end
-@after_blocks = []
-def after_bundler(&block); @after_blocks << [@current_scroll, block]; end
-@after_everything_blocks = []
-def after_everything(&block); @after_everything_blocks << [@current_scroll, block]; end
-@before_configs = {}
-def before_config(&block); @before_configs[@current_scroll] = block; end
+def define_callback(name)
+  var = "@#{name}_blocks"
+  instance_variable_set(var, [])
+  eigenclass = class << self; self; end
+  eigenclass.send :define_method, name.to_sym do |&block|
+    instance_variable_get(var) << [@current_scroll, block]
+  end
+end
+
+def execute_callbacks name
+  say_wizard "Running #{name} callbacks."  
+  instance_variable_get("@#{name}_blocks").each do |current_scroll, block|
+    @current_scroll = current_scroll
+    block.call
+    git_commit("recipe : #{current_scroll} (#{name})") if @scrolls.include?('git')
+  end
+  @current_scroll = nil
+end
+
+define_callback :before_everything
+define_callback :after_bundler
+define_callback :after_everything
+define_callback :finally
 
 def git_commit(message)
   `git add .`
-  `git commit -m "#{message}"`
-end
-
-def execute_block(block)
-  @current_scroll = block[0];
-  block[1].call
+  `git commit -am "#{message}"`
 end
 
 def scroll key, &block
   @current_scroll = key
-  @before_configs[key].call if @before_configs[key]
   yield(@configs[key] ||= {})
 end
 

@@ -31,12 +31,7 @@ use_git = @scrolls.include?('git')
 <%= render 'scroll', scroll.get_binding %>
 <% end %>
 
-
-say_wizard "Running before_everything callbacks."
-@before_everything_blocks.each do |b|
-  execute_block(b)
-  git_commit("recipe : '#{b.first}' (before_everything)") if use_git
-end
+execute_callbacks :before_everything
 
 <% if custom_code? %># >-----------------------------[ Custom Code ]-------------------------------<
 
@@ -50,17 +45,7 @@ say_wizard "Running Bundler install. This will take a while."
 run 'bundle install'
 git_commit("bundle install") if use_git
 
-
-say_wizard "Running after Bundler callbacks."
-@after_blocks.each do |b|
-  execute_block(b)
-  git_commit("recipe : '#{b.first}' (after_bundler)") if use_git
-end
-
-@current_scroll = nil
-say_wizard "Running after_everything callbacks."
-@after_everything_blocks.each do |b|
-  execute_block(b)
-  git_commit("recipe : '#{b.first}' (after_everything)") if use_git
-end
-
+execute_callbacks :after_bundler
+execute_callbacks :after_everything
+git_commit("before final callbacks") if use_git
+execute_callbacks :finally

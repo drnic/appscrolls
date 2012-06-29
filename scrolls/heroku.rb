@@ -26,8 +26,13 @@ after_everything do
     run "heroku addons:add custom_domains"
     run "heroku domains:add #{config['domain']}"
   end
+end
 
-  git :push => "#{config['staging'] ? 'staging' : 'heroku'} master" if config['deploy']
+if config['deploy']
+  finally do
+    git :push => "#{config['staging'] ? 'staging' : 'heroku'} master"
+    run "heroku run rake db:migrate"
+  end
 end
 
 __END__
