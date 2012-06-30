@@ -8,7 +8,10 @@ after_everything do
     while !system("heroku create #{heroku_name}")
       heroku_name = ask_wizard("What do you want to call your app? ")
     end
+  else
+    git :remote => "add heroku git@heroku.com:#{heroku_name}.git"
   end
+
 
   if config['staging']
     staging_name = "#{heroku_name}-staging"
