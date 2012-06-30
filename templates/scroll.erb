@@ -1,6 +1,6 @@
 # ><%= "[ #{name} ]".center(75,'-') %><
 scroll '<%= key %>' do |config|
-say_scroll '<%= name %>'
+say_scroll '<%= name.gsub("'", "\\'") %>'
 <%= "\n" + config.compile + "\n" if config %>
 <%= template %>
 end # <%= key %>

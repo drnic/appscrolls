@@ -7,3 +7,4 @@ dist/*
 .rvmrc
 .DS_Store
 local_scrolls
+scroll_config.rb

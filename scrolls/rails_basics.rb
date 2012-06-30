@@ -6,10 +6,6 @@ after_bundler do
   remove_file "public/index.html"
   remove_file "public/images/rails.png"
   generate "controller home index"
-  gsub_file "app/controllers/home_controller.rb", /def index/, <<-RUBY
-def index
-    flash.now[:notice] = "Welcome! - love App Scrolls"
-RUBY
   route "root :to => 'home#index'"
   
   run "mv README.rdoc RAILS_README.rdoc"
@@ -29,8 +25,9 @@ Remove
 The original scaffold for this application was created by [App Scrolls](http://appscrolls.org).
 
 The project was created with the following scrolls:
-
-#{ scrolls.map {|r| "* #{r}"}.join("\n")}
+```
+appscrolls new #{app_name} #{ scrolls.join(" ") }
+```
 
 README
 

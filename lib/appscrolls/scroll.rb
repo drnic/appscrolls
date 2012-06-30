@@ -8,6 +8,7 @@ module AppScrollsScrolls
   class Scroll
     extend Comparable
     
+    # TODO: This doesn't work; replace with http://en.wikipedia.org/wiki/Topological_sorting
     def self.<=>(another)
       return -1 if another.run_after.include?(self.key) || self.run_before.include?(another.key)
       return 1 if another.run_before.include?(self.key) || self.run_after.include?(another.key)
@@ -80,7 +81,7 @@ module AppScrollsScrolls
     end
 
     def self.compile
-      "# >#{"[ #{name} ]".center(75,'-')}<\n\n# #{description}\nsay_scroll '#{name}'\n\n#{template}\n"
+      "# >#{"[ #{name} ]".center(75,'-')}<\n\n# #{description}\nsay_scroll '#{name.gsub("'", "\\'")}'\n\n#{template}\n"
     end
     def compile; self.class.compile end
 

@@ -19,8 +19,8 @@ end
 RUBY
 
 @scrolls = <%= resolve_scrolls.map(&:key).inspect %> 
-use_git = @scrolls.include?('git')
-
+using_git = @scrolls.include?('git')
+using_database = @scrolls.include?('mysql') || @scrolls.include?('postgresql')
 <%= render "helpers" %>
 
 <% if config_script %># >----------------------------[ Config Script ]------------------------------<
@@ -43,8 +43,8 @@ execute_callbacks :before_everything
 
 say_wizard "Running Bundler install. This will take a while."
 run 'bundle install'
-git_commit("bundle install") if use_git
-
+git_commit("bundle install") if using_git
+rake "db:create:all" if using_database
 execute_callbacks :after_bundler
 execute_callbacks :after_everything
 execute_callbacks :finally

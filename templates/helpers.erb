@@ -2,7 +2,7 @@ def scrolls; @scrolls end
 def scroll?(name); @scrolls.include?(name) end
 
 def say_custom(tag, text); say "\033[1m\033[36m" + tag.to_s.rjust(10) + "\033[0m" + "  #{text}" end
-def say_scroll(name); say "\033[1m\033[36m" + "scroll".rjust(10) + "\033[0m" + "  Running #{name} scroll..." end
+def say_scroll(name, extra=nil); say "\033[1m\033[36m" + "scroll".rjust(10) + "\033[0m" + "  Running #{name} scroll...#{extra}" end
 def say_wizard(text); say_custom(@current_scroll || 'wizard', text) end
 
 def ask_wizard(question)
@@ -47,11 +47,12 @@ def define_callback(name)
 end
 
 def execute_callbacks name
-  say_wizard "Running #{name} callbacks."  
+  say_wizard "Running #{name} callbacks."
   instance_variable_get("@#{name}_blocks").each do |current_scroll, block|
     @current_scroll = current_scroll
+    say_scroll current_scroll, " (#{name})"
     block.call
-    git_commit("recipe : #{current_scroll} (#{name})") if @scrolls.include?('git')
+    git_commit("appscroll : #{current_scroll} (#{name})") if @scrolls.include?('git')
   end
   @current_scroll = nil
 end

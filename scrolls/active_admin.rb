@@ -3,7 +3,7 @@
 #end
 gem 'activeadmin'
 
-after_everything do
+after_bundler do
   generate "active_admin:install"
 end
 
