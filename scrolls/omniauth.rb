@@ -43,6 +43,7 @@ after_bundler do
   providers.each do |provider|
     inject_into_file 'config/initializers/devise.rb', "\n  config.omniauth :#{provider}, Rails.configuration.#{provider}_key, Rails.configuration.#{provider}_secret, client_options", :after => "  # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'"
     inject_into_file 'config/application.rb', "\n    config.#{provider}_key = '#{config["#{provider}_key"]}'\n    config.#{provider}_secret = '#{config["#{provider}_secret"]}'\n", :after => "class Application < Rails::Application"
+    inject_into_file 'config/environments/production.rb', "\n    config.#{provider}_key = ENV['#{provider.upcase}_KEY']\n    config.#{provider}_secret = ENV['#{provider.upcase}_SECRET']\n", :after => "class Application < Rails::Application"
   end
 
   inject_into_file 'config/initializers/devise.rb', "\n  client_options = { :client_options => { :ssl => { :ca_file => '/etc/ssl/certs/ca-certificates.crt'} } }", :after => "  # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'"
