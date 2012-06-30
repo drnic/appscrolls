@@ -5,7 +5,7 @@ if defined? ExceptionNotifier
   Rails.application.config.middleware.use ExceptionNotifier,
         :email_prefix => "[#{app_name}] ",
         :sender_address => %{"notifier" <notifier@#{app_name}.com>},
-        :exception_recipients => %w{exception@#{app_name}.com}
+        :exception_recipients => %w{#{default_email}}
 end
 END
 

@@ -90,3 +90,7 @@ module ConfigMapper
   end
 end
 config.extend ConfigMapper
+
+def default_email
+  @default_email ||= `git config -l`.match(/^user\.email=(.*)/)[1]
+end
