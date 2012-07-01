@@ -29,7 +29,34 @@ module AppScrolls
 
 
     def resolve_scrolls
-      @resolve_scrolls ||= scrolls_with_dependencies.sort.sort
+      return @resolve_scrolls if @resolve_scrolls
+      priority_map = {} # for each scroll (key), array of scrolls that must run earlier
+      scrolls_with_dependencies.each do |scroll|
+        (priority_map[scroll.key] ||= []).push(*scroll.run_after)
+        scroll.run_before.each do |scroll_to_run_later|
+          if scrolls_with_dependencies.find{|s| s.key == scroll_to_run_later} # if a scroll must run before another included scroll
+            (priority_map[scroll_to_run_later] ||= []).push scroll.key # add a dependency to that scroll
+          end
+        end
+      end
+      priority_map.each_value do |precursors| # remove scrolls we're not using from the dependencies
+        precursors.reject! do |key|
+          !scrolls_with_dependencies.find{|s| s.key == key}
+        end
+      end
+      @resolve_scrolls = []
+      while scroll_without_precursors = priority_map.find{|key, value| value.empty?} # pop a scroll without dependencies
+        key, empty_array = scroll_without_precursors
+        priority_map.delete(key)
+        scroll = scrolls_with_dependencies.find{|s| s.key == key}
+        raise key if !scroll
+        @resolve_scrolls << scroll # stick it into our result queue
+        priority_map.each_value{|precursors| precursors.delete(key)} # take it off other scroll's dependency lists
+      end
+      unless priority_map.empty?
+        raise "circular dependency with run_after/run_before clauses: #{priority_map.inspect}"
+      end
+      @resolve_scrolls
     end
 
     def scroll_classes
