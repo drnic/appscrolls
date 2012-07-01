@@ -1,9 +1,16 @@
 require 'appscrolls'
 require 'thor'
+require File.dirname(__FILE__) + "/../../version"
 
 module AppScrollsScrolls
   class Command < Thor
     include Thor::Actions
+
+    desc "version", "show version of currently installed AppScrolls gem"
+    def version
+      puts "AppScrolls version #{AppScrollsScrolls::VERSION} ready to make magic."
+    end
+
     desc "new APP_NAME", "create a new Rails app"
     method_option :scrolls, :type => :array, :aliases => "-s", :desc => "List scrolls, e.g. -s resque rails_basics jquery"
     method_option :template, :type => :boolean, :aliases => "-t", :desc => "Only display template that would be used"
