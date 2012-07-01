@@ -29,7 +29,6 @@ module AppScrolls
 
 
     def resolve_scrolls
-      # TODO: This doesn't work; replace with http://en.wikipedia.org/wiki/Topological_sorting
       @resolve_scrolls ||= scrolls_with_dependencies.sort.sort
     end
 

@@ -8,7 +8,6 @@ module AppScrolls
   class Scroll
     extend Comparable
     
-    # TODO: This doesn't work; replace with http://en.wikipedia.org/wiki/Topological_sorting
     def self.<=>(another)
       return -1 if another.run_after.include?(self.key) || self.run_before.include?(another.key)
       return 1 if another.run_before.include?(self.key) || self.run_after.include?(another.key)
