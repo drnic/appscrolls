@@ -13,24 +13,23 @@ END
   inject_into_file 'config/application.rb', :after => "class Application < Rails::Application" do
 <<-END
 
-config.action_mailer.smtp_settings = YAML.load(File.open("\#{Rails.root}/config/mailer.yml")) unless Rails.env.production?
-config.action_mailer.default_url_options = { :host => 'localhost', :port => 3000 }
-routes.default_url_options = { :host => 'localhost', :port => 3000 }
+    config.action_mailer.smtp_settings = YAML.load(File.open("\#{Rails.root}/config/mailer.yml")) unless Rails.env.production?
+    config.action_mailer.default_url_options = { :host => 'localhost', :port => 3000 }
+    routes.default_url_options = { :host => 'localhost', :port => 3000 }
 END
   end
 
-  inject_into_file 'config/environments/production.rb', :after => "class Application < Rails::Application" do
+  inject_into_file 'config/environments/production.rb', :after => "Application.configure do" do
 <<-END
 
-routes.default_url_options = { :host => '#{app_name}.com' }
-config.action_mailer.smtp_settings = {
-     :authentication => :plain,
-     :address => "smtp.mailgun.org",
-     :port => 587,
-     :domain => ENV["MAILGUN_DOMAIN"],
-     :user_name => ENV["MAILGUN_USERNAME"],
-     :password => ENV["MAILGUN_PASSWORD"]
-}
+  routes.default_url_options = { :host => '#{app_name}.com' }
+  config.action_mailer.smtp_settings = {
+      :authentication => :plain,
+      :address => "smtp.mailgun.org",
+      :port => 587,
+      :domain => ENV["MAILGUN_DOMAIN"],
+      :user_name => ENV["MAILGUN_USERNAME"],
+      :password => ENV["MAILGUN_PASSWORD"]}
 END
   end
 
