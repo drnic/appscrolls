@@ -26,6 +26,7 @@ after_bundler do
   generate 'devise user'
   generate 'devise:views'
 
+  gsub_file "config/initializers/devise.rb", "please-change-me-at-config-initializers-devise@example.com", "help@#{app_name}.com"
 end
 
 __END__
