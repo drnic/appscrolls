@@ -21,3 +21,4 @@ website: http://activeadmin.info/
 exclusive: administration
 category: administration
 tags: [administration]
+run_after: [devise, omniauth]

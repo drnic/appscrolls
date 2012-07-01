@@ -13,7 +13,7 @@ index 0000000..c575e78
 +    column :sign_in_count
 +    default_actions
 +  end
-+  
++
 +  form do |f|
 +    f.inputs "Admin Details" do
 +      f.input :email
@@ -51,7 +51,7 @@ index 0000000..931975d
 +    end
 +    active_admin_comments
 +  end
-+  
++
 +  form do |f|
 +    f.inputs "User Details" do
 +      f.input :email

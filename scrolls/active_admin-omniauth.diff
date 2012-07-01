@@ -27,7 +27,7 @@ index 931975d..4e3135b 100644
        row :current_sign_in_at
        row :last_sign_in_at
 @@ -24,6 +32,7 @@ ActiveAdmin.register User do
-   
+ 
    form do |f|
      f.inputs "User Details" do
 +      f.input :name
