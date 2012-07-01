@@ -78,9 +78,7 @@ devise_scope :user do
     get 'xx' => 'devise/registrations#destroy'
   end
 END
-end
 
-after_everything do
   if scrolls.include?('rails_basics') && scrolls.include?('haml')
     append_file 'app/views/home/index.html.haml', <<-END
 
