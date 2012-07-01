@@ -72,6 +72,10 @@ def scroll key, &block
   yield(@configs[key] ||= {})
 end
 
+def apply_diff(suffix=nil)
+  run "git apply #{@diff_path + @current_scroll + (suffix ? "_" + suffix : "")}.diff"
+end
+
 # So you can set options in config file: config.postgresql.pg_password = ''
 module ConfigMapper
   def method_missing(method, *args, &block)

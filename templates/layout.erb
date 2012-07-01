@@ -19,6 +19,9 @@ end
 RUBY
 
 @scrolls = <%= resolve_scrolls.map(&:key).inspect %> 
+puts "Diff Path:"
+@diff_path = "<%= Template.template_root + '/../scrolls/' %>"
+puts @diff_path
 using_git = @scrolls.include?('git')
 using_database = @scrolls.include?('mysql') || @scrolls.include?('postgresql')
 <%= render "helpers" %>
