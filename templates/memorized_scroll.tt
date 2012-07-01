@@ -1,5 +1,5 @@
 after_everything do
-  apply_patch # applies a diff file with the name filename and .diff extension
+  apply_patch # applies a diff file with the same filename and .diff extension
 end
 
 __END__
