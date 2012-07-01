@@ -21,7 +21,7 @@ index c488db7..0000000
 -<%= render "devise/shared/links" %>
 diff --git a/app/views/devise/confirmations/new.html.haml b/app/views/devise/confirmations/new.html.haml
 new file mode 100644
-index 0000000..23221ba
+index 0000000..c5b31f5
 --- /dev/null
 +++ b/app/views/devise/confirmations/new.html.haml
 @@ -0,0 +1,12 @@
@@ -30,11 +30,11 @@ index 0000000..23221ba
 += simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
 +  = f.error_notification
 +
-+.form-inputs
-+  = f.input :email, :required => true
++  .form-inputs
++    = f.input :email, :required => true
 +
-+.form-actions
-+  = f.button :submit, "Resend confirmation instructions"
++  .form-actions
++    = f.button :submit, "Resend confirmation instructions"
 +
 += render "devise/shared/links"
 diff --git a/app/views/devise/mailer/confirmation_instructions.html.erb b/app/views/devise/mailer/confirmation_instructions.html.erb
@@ -140,7 +140,7 @@ index 149520c..0000000
 -<%= render "devise/shared/links" %>
 diff --git a/app/views/devise/passwords/edit.html.haml b/app/views/devise/passwords/edit.html.haml
 new file mode 100644
-index 0000000..a5879c9
+index 0000000..156f8f4
 --- /dev/null
 +++ b/app/views/devise/passwords/edit.html.haml
 @@ -0,0 +1,16 @@
@@ -229,10 +229,10 @@ index 6a9a4b3..0000000
 -<%= link_to "Back", :back %>
 diff --git a/app/views/devise/registrations/edit.html.haml b/app/views/devise/registrations/edit.html.haml
 new file mode 100644
-index 0000000..b25504d
+index 0000000..4c5e660
 --- /dev/null
 +++ b/app/views/devise/registrations/edit.html.haml
-@@ -0,0 +1,20 @@
+@@ -0,0 +1,21 @@
 +%h2 Edit #{resource_name.to_s.humanize}
 +
 += simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
@@ -249,7 +249,8 @@ index 0000000..b25504d
 +
 +%h3 Cancel my account
 +
-+%p Unhappy?
++%p
++  Unhappy?
 +  = link_to "Cancel my account.", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete
 +
 += link_to "Back", :back
@@ -319,7 +320,7 @@ index fa53ea8..0000000
 -<%= render "devise/shared/links" %>
 diff --git a/app/views/devise/sessions/new.html.haml b/app/views/devise/sessions/new.html.haml
 new file mode 100644
-index 0000000..05b6de3
+index 0000000..48eb148
 --- /dev/null
 +++ b/app/views/devise/sessions/new.html.haml
 @@ -0,0 +1,12 @@
@@ -331,8 +332,8 @@ index 0000000..05b6de3
 +    = f.input :password, :required => false
 +    = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
 +
-+.form-actions
-+  = f.button :submit, "Sign in"
++  .form-actions
++    = f.button :submit, "Sign in"
 +
 += render "devise/shared/links"
 diff --git a/app/views/devise/shared/_links.erb b/app/views/devise/shared/_links.erb
@@ -420,7 +421,7 @@ index 9cce4c3..0000000
 -<%= render "devise/shared/links" %>
 diff --git a/app/views/devise/unlocks/new.html.haml b/app/views/devise/unlocks/new.html.haml
 new file mode 100644
-index 0000000..cabb0de
+index 0000000..9da9d6f
 --- /dev/null
 +++ b/app/views/devise/unlocks/new.html.haml
 @@ -0,0 +1,12 @@
@@ -429,10 +430,10 @@ index 0000000..cabb0de
 += simple_form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f|
 +  = f.error_notification
 +
-+.form-inputs
-+  = f.input :email, :required => true
++  .form-inputs
++    = f.input :email, :required => true
 +
-+.form-actions
-+  = f.button :submit, "Resend unlock instructions"
++  .form-actions
++    = f.button :submit, "Resend unlock instructions"
 +
 += render "devise/shared/links"
