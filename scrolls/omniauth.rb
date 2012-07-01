@@ -81,7 +81,7 @@ END
 end
 
 after_everything do
-  if scrolls.include? 'rails_basics'
+  if scrolls.include?('rails_basics') && scrolls.include?('haml')
     append_file 'app/views/home/index.html.haml', <<-END
 
 - if current_user

@@ -8,10 +8,10 @@ def enroll_scroll_at(path)
   scroll_class_name = ActiveSupport::Inflector.camelize(key.gsub("-", "_"))
 
   # default files of same keys as local scrolls are discarded
-  return if AppScrollsScrolls::Scrolls.const_defined?(scroll_class_name)
+  return if AppScrolls::Scrolls.const_defined?(scroll_class_name)
 
-  scroll = AppScrollsScrolls::Scroll.generate(key, File.open(path))
-  AppScrollsScrolls::Scrolls.add(scroll)
+  scroll = AppScrolls::Scroll.generate(key, File.open(path))
+  AppScrolls::Scrolls.add(scroll)
 end
 
 scroll_files = Dir[File.dirname(__FILE__) + '/../scrolls/*.rb']

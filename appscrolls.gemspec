@@ -4,7 +4,7 @@ require File.dirname(__FILE__) + "/version"
 
 Gem::Specification.new do |s|
   s.name        = "appscrolls"
-  s.version     = AppScrollsScrolls::VERSION
+  s.version     = AppScrolls::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Michael Bleigh", "Dr Nic Williams"]
   s.email       = ["michael@intridea.com", "drnicwilliams@gmail.com"]

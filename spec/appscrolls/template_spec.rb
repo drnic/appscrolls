@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe AppScrollsScrolls::Template do
-  subject{ AppScrollsScrolls::Template }
-  let(:scroll){ AppScrollsScrolls::Scroll.generate('name','# test') }
+describe AppScrolls::Template do
+  subject{ AppScrolls::Template }
+  let(:scroll){ AppScrolls::Scroll.generate('name','# test') }
 
   describe '#initialize' do
     it 'should work with classes' do
@@ -12,15 +12,15 @@ describe AppScrollsScrolls::Template do
 
   describe '#scrolls_with_dependencies' do
     def s(*deps)
-      mock(:Class, :requires => deps, :superclass => AppScrollsScrolls::Scroll)
+      mock(:Class, :requires => deps, :superclass => AppScrolls::Scroll)
     end
     
     def scroll(name)
-      AppScrollsScrolls::Scrolls[name]
+      AppScrolls::Scrolls[name]
     end
     
     subject do
-      @template = AppScrollsScrolls::Template.new([]) 
+      @template = AppScrolls::Template.new([]) 
       @template.stub!(:scrolls).and_return(@scrolls)
       @template.stub!(:scroll_classes).and_return(@scrolls)
       @template
@@ -50,7 +50,7 @@ describe AppScrollsScrolls::Template do
     end
     
     it 'should resolve and sort' do
-      template = AppScrollsScrolls::Template.new([scroll('eycloud')])
+      template = AppScrolls::Template.new([scroll('eycloud')])
       template.resolve_scrolls.should == [scroll('eycloud_recipes_on_deploy'), scroll('git'), scroll('github'), scroll('eycloud')]
     end
   end

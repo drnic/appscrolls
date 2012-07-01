@@ -12,5 +12,5 @@ name: Devise HAML
 description: "Replace Devise views with HAML"
 author: allangrant
 category: templating
-requires: [devise, git]
+requires: [devise, git, haml]
 run_after: [devise]

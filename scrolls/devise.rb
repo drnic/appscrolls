@@ -1,7 +1,7 @@
 gem 'devise'
 
-inject_into_file 'config/environments/development.rb', "\n  config.action_mailer.default_url_options = { :host => 'localhost:3000' }\n", :after => "Application.configure do"
-inject_into_file 'config/environments/test.rb',        "\n  config.action_mailer.default_url_options = { :host => 'localhost:3000' }\n", :after => "Application.configure do"
+inject_into_file 'config/environments/development.rb', "\n  config.action_mailer.default_url_options = { :host => 'localhost', :port => 3000 }\n", :after => "Application.configure do"
+inject_into_file 'config/environments/test.rb',        "\n  config.action_mailer.default_url_options = { :host => 'localhost', :port => 3000 }\n", :after => "Application.configure do"
 inject_into_file 'config/environments/production.rb',  "\n  config.action_mailer.default_url_options = { :host => '#{app_name}.com' }\n", :after => "Application.configure do"
 
 if scrolls.include? 'heroku'
