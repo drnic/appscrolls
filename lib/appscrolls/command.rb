@@ -54,6 +54,20 @@ module AppScrolls
         puts scroll.key.ljust(15) + "# #{scroll.description}"
       end
     end
+    
+    desc "memorize NEW_SCROLL", "saves last git commit as a patch and creates scroll to apply it (alpha feature)"
+    def memorize(scroll_name)
+      scrolls_path = File.expand_path("../../../scrolls", __FILE__)
+      patch_file = scrolls_path + "/#{scroll_name}.diff"
+      scroll_file = scrolls_path + "/#{scroll_name}.rb"
+      @name = scroll_name
+      self.class.source_root File.expand_path("../../../templates", __FILE__)
+      self.class.attr_reader :name
+      template "diff_patch.tt", patch_file
+      template "memorized_scroll.tt", scroll_file
+      puts "Memorized #{scroll_name} into scroll diff patch #{scroll_name}.diff and scroll #{scroll_file}"
+      `open #{patch_file} #{scroll_file}`
+    end
 
     no_tasks do
       def cyan; "\033[36m" end
