@@ -1,7 +1,10 @@
 after_everything do
 
-  apply_diff
-  
+  if scrolls.include?('simple_form')
+    apply_patch :simple_form
+  else
+    apply_patch
+  end
 end
 
 __END__
@@ -9,5 +12,5 @@ name: Devise HAML
 description: "Replace Devise views with HAML"
 author: allangrant
 category: templating
-requires: [devise, simple_form, git]
+requires: [devise, git]
 run_after: [devise]

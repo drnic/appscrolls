@@ -1,18 +1,21 @@
 diff --git a/app/views/devise/confirmations/new.html.erb b/app/views/devise/confirmations/new.html.erb
 deleted file mode 100644
-index 81e4472..0000000
+index c488db7..0000000
 --- a/app/views/devise/confirmations/new.html.erb
 +++ /dev/null
-@@ -1,12 +0,0 @@
+@@ -1,15 +0,0 @@
 -<h2>Resend confirmation instructions</h2>
 -
--<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
--  <%= devise_error_messages! %>
+-<%= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+-  <%= f.error_notification %>
 -
--  <div><%= f.label :email %><br />
--  <%= f.email_field :email %></div>
+-  <div class="form-inputs">
+-    <%= f.input :email, :required => true %>
+-  </div>
 -
--  <div><%= f.submit "Resend confirmation instructions" %></div>
+-  <div class="form-actions">
+-    <%= f.button :submit, "Resend confirmation instructions" %>
+-  </div>
 -<% end %>
 -
 -<%= render "devise/shared/links" %>
@@ -112,29 +115,32 @@ index 0000000..2719e0e
 +%p= link_to 'Unlock my account', unlock_url(@resource, :unlock_token => @resource.unlock_token)
 diff --git a/app/views/devise/passwords/edit.html.erb b/app/views/devise/passwords/edit.html.erb
 deleted file mode 100644
-index fe620ef..0000000
+index 149520c..0000000
 --- a/app/views/devise/passwords/edit.html.erb
 +++ /dev/null
-@@ -1,16 +0,0 @@
+@@ -1,19 +0,0 @@
 -<h2>Change your password</h2>
 -
--<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
--  <%= devise_error_messages! %>
--  <%= f.hidden_field :reset_password_token %>
+-<%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+-  <%= f.error_notification %>
 -
--  <div><%= f.label :password, "New password" %><br />
--  <%= f.password_field :password %></div>
+-  <%= f.input :reset_password_token, :as => :hidden %>
+-  <%= f.full_error :reset_password_token %>
 -
--  <div><%= f.label :password_confirmation, "Confirm new password" %><br />
--  <%= f.password_field :password_confirmation %></div>
+-  <div class="form-inputs">
+-    <%= f.input :password, :label => "New password", :required => true %>
+-    <%= f.input :password_confirmation, :label => "Confirm your new password", :required => true %>
+-  </div>
 -
--  <div><%= f.submit "Change my password" %></div>
+-  <div class="form-actions">
+-    <%= f.button :submit, "Change my password" %>
+-  </div>
 -<% end %>
 -
 -<%= render "devise/shared/links" %>
 diff --git a/app/views/devise/passwords/edit.html.haml b/app/views/devise/passwords/edit.html.haml
 new file mode 100644
-index 0000000..156f8f4
+index 0000000..a5879c9
 --- /dev/null
 +++ b/app/views/devise/passwords/edit.html.haml
 @@ -0,0 +1,16 @@
@@ -156,19 +162,22 @@ index 0000000..156f8f4
 += render "devise/shared/links"
 diff --git a/app/views/devise/passwords/new.html.erb b/app/views/devise/passwords/new.html.erb
 deleted file mode 100644
-index 2350164..0000000
+index de33627..0000000
 --- a/app/views/devise/passwords/new.html.erb
 +++ /dev/null
-@@ -1,12 +0,0 @@
+@@ -1,15 +0,0 @@
 -<h2>Forgot your password?</h2>
 -
--<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
--  <%= devise_error_messages! %>
+-<%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+-  <%= f.error_notification %>
 -
--  <div><%= f.label :email %><br />
--  <%= f.email_field :email %></div>
+-  <div class="form-inputs">
+-    <%= f.input :email, :required => true %>
+-  </div>
 -
--  <div><%= f.submit "Send me reset password instructions" %></div>
+-  <div class="form-actions">
+-    <%= f.button :submit, "Send me reset password instructions" %>
+-  </div>
 -<% end %>
 -
 -<%= render "devise/shared/links" %>
@@ -192,28 +201,25 @@ index 0000000..dcefbf1
 += render "devise/shared/links"
 diff --git a/app/views/devise/registrations/edit.html.erb b/app/views/devise/registrations/edit.html.erb
 deleted file mode 100644
-index ebca9ed..0000000
+index 6a9a4b3..0000000
 --- a/app/views/devise/registrations/edit.html.erb
 +++ /dev/null
-@@ -1,25 +0,0 @@
+@@ -1,22 +0,0 @@
 -<h2>Edit <%= resource_name.to_s.humanize %></h2>
 -
--<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
--  <%= devise_error_messages! %>
+-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+-  <%= f.error_notification %>
 -
--  <div><%= f.label :email %><br />
--  <%= f.email_field :email %></div>
+-  <div class="form-inputs">
+-    <%= f.input :email, :required => true, :autofocus => true %>
+-    <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
+-    <%= f.input :password_confirmation, :required => false %>
+-    <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
+-  </div>
 -
--  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
--  <%= f.password_field :password, :autocomplete => "off" %></div>
--
--  <div><%= f.label :password_confirmation %><br />
--  <%= f.password_field :password_confirmation %></div>
--
--  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
--  <%= f.password_field :current_password %></div>
--
--  <div><%= f.submit "Update" %></div>
+-  <div class="form-actions">
+-    <%= f.button :submit, "Update" %>
+-  </div>
 -<% end %>
 -
 -<h3>Cancel my account</h3>
@@ -223,7 +229,7 @@ index ebca9ed..0000000
 -<%= link_to "Back", :back %>
 diff --git a/app/views/devise/registrations/edit.html.haml b/app/views/devise/registrations/edit.html.haml
 new file mode 100644
-index 0000000..4f7d6d4
+index 0000000..b25504d
 --- /dev/null
 +++ b/app/views/devise/registrations/edit.html.haml
 @@ -0,0 +1,20 @@
@@ -249,25 +255,24 @@ index 0000000..4f7d6d4
 += link_to "Back", :back
 diff --git a/app/views/devise/registrations/new.html.erb b/app/views/devise/registrations/new.html.erb
 deleted file mode 100644
-index 9703db3..0000000
+index 2665b08..0000000
 --- a/app/views/devise/registrations/new.html.erb
 +++ /dev/null
-@@ -1,18 +0,0 @@
+@@ -1,17 +0,0 @@
 -<h2>Sign up</h2>
 -
--<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
--  <%= devise_error_messages! %>
+-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+-  <%= f.error_notification %>
 -
--  <div><%= f.label :email %><br />
--  <%= f.email_field :email %></div>
+-  <div class="form-inputs">
+-    <%= f.input :email, :required => true, :autofocus => true %>
+-    <%= f.input :password, :required => true %>
+-    <%= f.input :password_confirmation, :required => true %>
+-  </div>
 -
--  <div><%= f.label :password %><br />
--  <%= f.password_field :password %></div>
--
--  <div><%= f.label :password_confirmation %><br />
--  <%= f.password_field :password_confirmation %></div>
--
--  <div><%= f.submit "Sign up" %></div>
+-  <div class="form-actions">
+-    <%= f.button :submit, "Sign up" %>
+-  </div>
 -<% end %>
 -
 -<%= render "devise/shared/links" %>
@@ -293,24 +298,22 @@ index 0000000..f8eb7f0
 += render "devise/shared/links"
 diff --git a/app/views/devise/sessions/new.html.erb b/app/views/devise/sessions/new.html.erb
 deleted file mode 100644
-index 7966ab9..0000000
+index fa53ea8..0000000
 --- a/app/views/devise/sessions/new.html.erb
 +++ /dev/null
-@@ -1,17 +0,0 @@
+@@ -1,15 +0,0 @@
 -<h2>Sign in</h2>
 -
--<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
--  <div><%= f.label :email %><br />
--  <%= f.email_field :email %></div>
+-<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+-  <div class="form-inputs">
+-    <%= f.input :email, :required => false, :autofocus => true %>
+-    <%= f.input :password, :required => false %>
+-    <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+-  </div>
 -
--  <div><%= f.label :password %><br />
--  <%= f.password_field :password %></div>
--
--  <% if devise_mapping.rememberable? -%>
--    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
--  <% end -%>
--
--  <div><%= f.submit "Sign in" %></div>
+-  <div class="form-actions">
+-    <%= f.button :submit, "Sign in" %>
+-  </div>
 -<% end %>
 -
 -<%= render "devise/shared/links" %>
@@ -396,19 +399,22 @@ index 0000000..4e2ca58
 +    %br
 diff --git a/app/views/devise/unlocks/new.html.erb b/app/views/devise/unlocks/new.html.erb
 deleted file mode 100644
-index e55e82e..0000000
+index 9cce4c3..0000000
 --- a/app/views/devise/unlocks/new.html.erb
 +++ /dev/null
-@@ -1,12 +0,0 @@
+@@ -1,15 +0,0 @@
 -<h2>Resend unlock instructions</h2>
 -
--<%= form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f| %>
--  <%= devise_error_messages! %>
+-<%= simple_form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f| %>
+-  <%= f.error_notification %>
 -
--  <div><%= f.label :email %><br />
--  <%= f.email_field :email %></div>
+-  <div class="form-inputs">
+-    <%= f.input :email, :required => true %>
+-  </div>
 -
--  <div><%= f.submit "Resend unlock instructions" %></div>
+-  <div class="form-actions">
+-    <%= f.button :submit, "Resend unlock instructions" %>
+-  </div>
 -<% end %>
 -
 -<%= render "devise/shared/links" %>

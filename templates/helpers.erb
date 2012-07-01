@@ -72,8 +72,10 @@ def scroll key, &block
   yield(@configs[key] ||= {})
 end
 
-def apply_diff(suffix=nil)
-  run "git apply #{@diff_path + @current_scroll + (suffix ? "_" + suffix : "")}.diff"
+def apply_patch(suffix=nil)
+  diff_file = "#{@current_scroll + (suffix ? "-#{suffix}" : "")}.diff"
+  say_wizard "Applying patch #{diff_file}"
+  run "git apply #{@diff_path + diff_file}"
 end
 
 # So you can set options in config file: config.postgresql.pg_password = ''
