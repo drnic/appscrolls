@@ -19,7 +19,7 @@ end
 RUBY
 
 @scrolls = <%= resolve_scrolls.map(&:key).inspect %> 
-@diff_path = "<%= File.expand_path(Template.template_root + '/../scrolls/') %>"
+@diff_path = "<%= File.expand_path(Template.template_root + '/../scrolls') +'/' %>"
 using_git = @scrolls.include?('git')
 using_database = @scrolls.include?('mysql') || @scrolls.include?('postgresql')
 
