@@ -51,8 +51,12 @@ if scroll? "eycloud_recipes_on_deploy"
 end
 
 
-after_bundler do
-  generate 'delayed_job'
+after_everything do
+  if scroll?("sqlite3") || scroll?("postgresql") || scroll?("mysql")
+    generate 'delayed_job:active_record'
+  else
+    generate 'delayed_job'
+  end
 
   if scroll? "eycloud_recipes_on_deploy"
     say_wizard 'Installing deploy hooks to restart delayed_job after deploys'

@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe AppScrollsScrolls::Template do
-  subject{ AppScrollsScrolls::Template }
-  let(:scroll){ AppScrollsScrolls::Scroll.generate('name','# test') }
+describe AppScrolls::Template do
+  subject{ AppScrolls::Template }
+  let(:scroll){ AppScrolls::Scroll.generate('name','# test') }
 
   describe '#initialize' do
     it 'should work with classes' do
@@ -12,15 +12,19 @@ describe AppScrollsScrolls::Template do
 
   describe '#scrolls_with_dependencies' do
     def s(*deps)
-      mock(:Class, :requires => deps, :superclass => AppScrollsScrolls::Scroll)
+      mock(:Class, :requires => deps, :superclass => AppScrolls::Scroll)
     end
-    
+
     def scroll(name)
-      AppScrollsScrolls::Scrolls[name]
+      AppScrolls::Scrolls[name]
     end
     
+    def scrolls(names)
+      names.split.map(&method(:scroll))
+    end
+
     subject do
-      @template = AppScrollsScrolls::Template.new([]) 
+      @template = AppScrolls::Template.new([]) 
       @template.stub!(:scrolls).and_return(@scrolls)
       @template.stub!(:scroll_classes).and_return(@scrolls)
       @template
@@ -50,8 +54,23 @@ describe AppScrollsScrolls::Template do
     end
     
     it 'should resolve and sort' do
-      template = AppScrollsScrolls::Template.new([scroll('eycloud')])
+      template = AppScrolls::Template.new([scroll('eycloud')])
       template.resolve_scrolls.should == [scroll('eycloud_recipes_on_deploy'), scroll('git'), scroll('github'), scroll('eycloud')]
+    end
+    
+    it 'should correctly sort long dependencies' do
+      template = AppScrolls::Template.new(scrolls('active_admin postgresql simple_form compass_twitter_bootstrap delayed_job guard rails_basics git thin haml exception_notification devise_haml omniauth tweaks rvm mailgun heroku'))
+      ordered = template.resolve_scrolls
+      ordered.each_with_index do |scroll, index|
+        scroll.run_after.each do |scroll_name|
+          earlier_scroll_index = ordered.index(scroll(scroll_name))
+          earlier_scroll_index.should be < index if earlier_scroll_index
+        end
+        scroll.run_before.each do |scroll_name|
+          later_scroll_index = ordered.index(scroll(scroll_name))
+          later_scroll_index.should be > index if later_scroll_index
+        end
+      end
     end
   end
 end

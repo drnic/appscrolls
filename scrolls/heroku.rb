@@ -1,12 +1,17 @@
 heroku_name = app_name.gsub('_','')
 
+inject_into_file 'Gemfile', "\nruby '1.9.3'\n", :after => "source 'https://rubygems.org'"
+
 after_everything do
   if config['create']
-    say_wizard "Creating Heroku app '#{heroku_name}.heroku.com'"  
+    say_wizard "Creating Heroku app '#{heroku_name}.heroku.com'"
     while !system("heroku create #{heroku_name}")
       heroku_name = ask_wizard("What do you want to call your app? ")
     end
+  else
+    git :remote => "add heroku git@heroku.com:#{heroku_name}.git"
   end
+
 
   if config['staging']
     staging_name = "#{heroku_name}-staging"
@@ -24,8 +29,13 @@ after_everything do
     run "heroku addons:add custom_domains"
     run "heroku domains:add #{config['domain']}"
   end
+end
 
-  git :push => "#{config['staging'] ? 'staging' : 'heroku'} master" if config['deploy']
+if config['deploy']
+  finally do
+    git :push => "#{config['staging'] ? 'staging' : 'heroku'} master"
+    run "heroku run rake db:migrate"
+  end
 end
 
 __END__
@@ -33,12 +43,11 @@ __END__
 name: Heroku
 description: Create Heroku application and instantly deploy.
 author: mbleigh
-
-requires: [git]
 run_after: [git]
 exclusive: deployment
 category: deployment
 tags: [provider]
+requires: [git, postgresql]
 
 config:
   - create:

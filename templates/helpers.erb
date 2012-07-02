@@ -2,7 +2,7 @@ def scrolls; @scrolls end
 def scroll?(name); @scrolls.include?(name) end
 
 def say_custom(tag, text); say "\033[1m\033[36m" + tag.to_s.rjust(10) + "\033[0m" + "  #{text}" end
-def say_scroll(name); say "\033[1m\033[36m" + "scroll".rjust(10) + "\033[0m" + "  Running #{name} scroll..." end
+def say_scroll(name, extra=nil); say "\033[1m\033[36m" + "scroll".rjust(10) + "\033[0m" + "  Running #{name} scroll...#{extra}" end
 def say_wizard(text); say_custom(@current_scroll || 'wizard', text) end
 
 def ask_wizard(question)
@@ -28,31 +28,75 @@ def multiple_choice(question, choices)
   values = {}
   choices.each_with_index do |choice,i| 
     values[(i + 1).to_s] = choice[1]
-    say_custom (i + 1).to_s + ')', choice[0]
+    say_custom((i + 1).to_s + ')', choice[0])
   end
   answer = ask_wizard("Enter your selection:") while !values.keys.include?(answer)
   values[answer]
 end
 
 @current_scroll = nil
-@configs = {}
+@configs = config
 
-@before_everything_blocks = []
-def before_everything(&block); @before_everything_blocks << [@current_scroll, block]; end
-@after_blocks = []
-def after_bundler(&block); @after_blocks << [@current_scroll, block]; end
-@after_everything_blocks = []
-def after_everything(&block); @after_everything_blocks << [@current_scroll, block]; end
-@before_configs = {}
-def before_config(&block); @before_configs[@current_scroll] = block; end
+def define_callback(name)
+  var = "@#{name}_blocks"
+  instance_variable_set(var, [])
+  eigenclass = class << self; self; end
+  eigenclass.send :define_method, name.to_sym do |&block|
+    instance_variable_get(var) << [@current_scroll, block]
+  end
+end
+
+def execute_callbacks name
+  say_wizard "Running #{name} callbacks."
+  instance_variable_get("@#{name}_blocks").each do |current_scroll, block|
+    @current_scroll = current_scroll
+    say_scroll current_scroll, " (#{name})"
+    block.call
+    git_commit("appscroll : #{current_scroll} (#{name})") if @scrolls.include?('git')
+  end
+  @current_scroll = nil
+end
+
+define_callback :before_everything
+define_callback :after_bundler
+define_callback :after_everything
+define_callback :finally
 
 def git_commit(message)
   `git add .`
-  `git commit -m "#{message}"`
+  `git commit -am "#{message}"`
 end
 
-def execute_block(block)
-  config = @configs[block[0]] || {}
-  @current_scroll = block[0];
-  block[1].call
+def scroll key, &block
+  @current_scroll = key
+  yield(@configs[key] ||= {})
+end
+
+def apply_patch(suffix=nil)
+  diff_file = "#{@current_scroll + (suffix ? "-#{suffix}" : "")}.diff"
+  say_wizard "Applying patch #{diff_file}"
+  run "git apply #{@diff_path + diff_file}"
+end
+
+# So you can set options in config file: config.postgresql.pg_password = ''
+module ConfigMapper
+  def method_missing(method, *args, &block)
+    method = method.to_s
+    if method.gsub!(/=$/, '')
+      self[method] = args.first
+    else
+      if self.has_key?(method)
+        self[method].extend ConfigMapper if self[method].is_a? Hash
+      else
+        self[method] = {}
+        self[method].extend ConfigMapper
+      end
+      self[method]
+    end
+  end
+end
+config.extend ConfigMapper
+
+def default_email
+  @default_email ||= `git config -l`.match(/^user\.email=(.*)/)[1]
 end

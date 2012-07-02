@@ -4,7 +4,7 @@ require 'active_support/inflector'
 require 'yaml'
 require 'erb'
 
-module AppScrollsScrolls
+module AppScrolls
   class Scroll
     extend Comparable
     
@@ -38,7 +38,7 @@ module AppScrollsScrolls
         template = template_or_file
       end
  
-      scroll_class = Class.new(AppScrollsScrolls::Scroll) 
+      scroll_class = Class.new(AppScrolls::Scroll) 
       scroll_class.attributes = attributes
       scroll_class.template = template
       scroll_class.key = key
@@ -72,8 +72,7 @@ module AppScrollsScrolls
     end
 
     def self.config
-      return nil unless attributes[:config]
-      AppScrollsScrolls::Config.new(attributes[:config])
+      AppScrolls::Config.new(attributes[:config]||[])
     end
 
     def attributes
@@ -81,7 +80,7 @@ module AppScrollsScrolls
     end
 
     def self.compile
-      "# >#{"[ #{name} ]".center(75,'-')}<\n\n# #{description}\nsay_scroll '#{name}'\n\n#{template}\n"
+      "# >#{"[ #{name} ]".center(75,'-')}<\n\n# #{description}\nsay_scroll '#{name.gsub("'", "\\'")}'\n\n#{template}\n"
     end
     def compile; self.class.compile end
 
@@ -95,8 +94,8 @@ module AppScrollsScrolls
     end
 
     def self.from_mongo(key)
-      return key if key.respond_to?(:superclass) && key.superclass == AppScrollsScrolls::Scroll
-      AppScrollsScrolls::Scrolls[key]
+      return key if key.respond_to?(:superclass) && key.superclass == AppScrolls::Scroll
+      AppScrolls::Scrolls[key]
     end
 
     def self.get_binding

@@ -6,3 +6,5 @@ dist/*
 .idea
 .rvmrc
 .DS_Store
+local_scrolls
+scroll_config.rb

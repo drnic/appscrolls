@@ -20,7 +20,7 @@ task :run => :clean do
   require 'tempfile'
   require 'appscrolls'
 
-  template = AppScrollsScrolls::Template.new(scrolls)
+  template = AppScrolls::Template.new(scrolls)
 
   begin
     dir = Dir.mktmpdir "rails_template"
@@ -42,17 +42,17 @@ task :print do
   require 'appscrolls'
 
   scrolls = ENV['SCROLLS'].split(',')
-  puts AppScrollsScrolls::Template.new(scrolls).compile
+  puts AppScrolls::Template.new(scrolls).compile
 end
 
 namespace :list do
   desc "Display scrolls by category"
   task :categories do
     require 'appscrolls'
-    categories = AppScrollsScrolls::Scrolls.categories.sort
+    categories = AppScrolls::Scrolls.categories.sort
     categories = (categories - ["other"]) + ["other"]
     categories.each do |category|
-      puts "#{category}: #{AppScrollsScrolls::Scrolls.for(category).join(", ")}"
+      puts "#{category}: #{AppScrolls::Scrolls.for(category).join(", ")}"
     end
   end
 

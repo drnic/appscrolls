@@ -66,6 +66,28 @@ Or print out a list of scrolls for a specific category:
 
     scrolls list persistence
 
+### User Scrolls
+
+You can define an environment variable APPSCROLLS_DIR with a path to your local app scrolls:
+
+    export APPSCROLLS_DIR=~/.scrolls
+
+### Scroll Configuration
+
+If you wish to skip any configuration questions, you can provide the path to a configuration file with the `-c` or `--config` option:
+
+    scrolls new APP_NAME -c ~/.scrolls_config.rb
+    
+This config file is a script that can provide defaults for scrolls by setting config.SCROLL_NAME.OPTION_NAME.  For example:
+```
+config.postgresql.pg_username = 'root'
+config.postgresql.pg_password = ''
+config.guard.guard_notifications = false
+```
+
+Or instead of passing a flag each time, just set the APPSCROLLS_CONFIG environment variable to include it every time:
+    export APPSCROLLS_CONFIG=~/.scrolls_config.rb
+
 ## Deployment Support
 
 Web applications are boring if they aren't running proudly on the internet. The App Scrolls make this automatic for your favourite providers!

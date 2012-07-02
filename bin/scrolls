@@ -4,4 +4,4 @@ $:.push File.dirname(__FILE__) + '/../lib'
 require 'rubygems'
 require 'appscrolls/command'
 
-AppScrollsScrolls::Command.start
+AppScrolls::Command.start

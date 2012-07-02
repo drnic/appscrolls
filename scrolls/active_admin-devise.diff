@@ -1,0 +1,62 @@
+diff --git a/app/admin/admin_users.rb b/app/admin/admin_users.rb
+new file mode 100644
+index 0000000..c575e78
+--- /dev/null
++++ b/app/admin/admin_users.rb
+@@ -0,0 +1,18 @@
++ActiveAdmin.register AdminUser do
++  index do
++    column :email
++    column :current_sign_in_ip
++    column :current_sign_in_at
++    column :last_sign_in_at
++    column :sign_in_count
++    default_actions
++  end
++
++  form do |f|
++    f.inputs "Admin Details" do
++      f.input :email
++      f.input :password
++    end
++    f.buttons
++  end
++end
+diff --git a/app/admin/users.rb b/app/admin/users.rb
+new file mode 100644
+index 0000000..931975d
+--- /dev/null
++++ b/app/admin/users.rb
+@@ -0,0 +1,32 @@
++ActiveAdmin.register User do
++  index do
++    column :created_at
++    column :email
++    column :sign_in_count
++    default_actions
++  end
++
++  show do |user|
++    attributes_table do
++      row :email
++      row :sign_in_count
++      row :current_sign_in_at
++      row :last_sign_in_at
++      row :current_sign_in_ip
++      row :last_sign_in_ip
++      row :remember_created_at
++      row :reset_password_sent_at
++      row :updated_at
++      row :created_at
++    end
++    active_admin_comments
++  end
++
++  form do |f|
++    f.inputs "User Details" do
++      f.input :email
++      f.input :password
++    end
++    f.buttons
++  end
++end

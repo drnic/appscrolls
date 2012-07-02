@@ -1,0 +1,22 @@
+after_everything do
+  apply_patch # applies a diff file with the same filename and .diff extension
+end
+
+__END__
+
+name: <%= name.humanize.capitalize %>
+description: A freshly memorized scroll that applies a diff patch.
+website:
+author: <%= `whoami`.strip %>
+
+requires: []
+run_after: []
+run_before: []
+
+category: other # authentication, testing, persistence, javascript, css, services, deployment, and templating
+# exclusive:
+
+# config:
+#   - foo:
+#       type: boolean
+#       prompt: "Is foo true?"

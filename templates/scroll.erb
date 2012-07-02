@@ -1,10 +1,6 @@
 # ><%= "[ #{name} ]".center(75,'-') %><
-
-@current_scroll = "<%= key %>"
-@before_configs["<%= key %>"].call if @before_configs["<%= key %>"]
-say_scroll '<%= name %>'
-
-<%= config.compile if config %>
-@configs[@current_scroll] = config
-
+scroll '<%= key %>' do |config|
+say_scroll '<%= name.gsub("'", "\\'") %>'
+<%= "\n" + config.compile + "\n" if config %>
 <%= template %>
+end # <%= key %>

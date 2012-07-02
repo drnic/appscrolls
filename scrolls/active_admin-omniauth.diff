@@ -1,0 +1,36 @@
+diff --git a/app/admin/users.rb b/app/admin/users.rb
+index 931975d..4e3135b 100644
+--- a/app/admin/users.rb
++++ b/app/admin/users.rb
+@@ -1,14 +1,22 @@
+ ActiveAdmin.register User do
+   index do
+     column :created_at
++    column :name
+     column :email
+     column :sign_in_count
++    column :auth do |user|
++      user.authentications.map(&:provider).join(' ')
++    end
+     default_actions
+   end
+ 
+-  show do |user|
++  show :title => :name do |user|
+     attributes_table do
++      row :name
+       row :email
++      row :authentications do
++        user.authentications.map(&:provider).join(' ')
++      end
+       row :sign_in_count
+       row :current_sign_in_at
+       row :last_sign_in_at
+@@ -24,6 +32,7 @@ ActiveAdmin.register User do
+ 
+   form do |f|
+     f.inputs "User Details" do
++      f.input :name
+       f.input :email
+       f.input :password
+     end
