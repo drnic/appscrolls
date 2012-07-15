@@ -5,7 +5,7 @@ gsub_file "config/database.yml", /password: .*/, "password: #{config['pg_passwor
 
 after_bundler do
   rake "db:create:all"
-  
+
   rakefile("sample.rake") do
 <<-RUBY
 namespace :db do
@@ -28,7 +28,7 @@ author: drnic
 exclusive: orm
 category: persistence
 
-run_before: [eycloud]
+run_before: [eycloud, heroku]
 
 args: -d postgresql
 
