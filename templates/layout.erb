@@ -31,7 +31,6 @@ RUBY
 say_wizard "Running before_everything callbacks."
 @before_everything_blocks.each do |b|
   execute_block(b)
-  git_commit("before_everything for scroll '#{b.first}'") if use_git?
 end
 @current_scroll = nil
 
@@ -39,21 +38,24 @@ end
 <% if custom_code? %>
 # >-----------------------------[ Custom Code ]-------------------------------<
 <%= custom_code %>
+scm_commit "after custom code"
 @current_scroll = nil
 <% end %>
 
 
 # >-----------------------------[ Run Bundler ]-------------------------------<
+# Vendor everything: http://ryan.mcgeary.org/2011/02/09/vendor-everything-still-applies/
 say_wizard "Running Bundler install. This will take a while."
-run 'bundle install'
-git_commit("bundle install") if use_git?
+run 'bundle install --path vendor/bundle'
+run 'echo "vendor/bundle/ruby\n" >> .gitignore'
+scm_commit "after bundle install"
 
 
 # >---------------------[ Run after Bundler callbacks ]-----------------------<
 say_wizard "Running after_bundler callbacks."
 @after_blocks.each do |b|
   execute_block(b)
-  git_commit("after_bundler for scroll '#{b.first}'") if use_git?
+  scm_commit "after_bundler for scroll '#{b.first}'"
 end
 @current_scroll = nil
 
@@ -62,7 +64,7 @@ end
 say_wizard "Running after_everything callbacks."
 @after_everything_blocks.each do |b|
   execute_block(b)
-  git_commit("after_everything for scroll '#{b.first}'") if use_git?
+  scm_commit "after_everything for scroll '#{b.first}'"
 end
 @current_scroll = nil
 

@@ -1,6 +1,5 @@
 def scrolls; @scrolls end
 def scroll?(name); @scrolls.include?(name) end
-def use_git?; scroll?('git') end
 
 def say_custom(tag, text); say "\033[1m\033[36m" + tag.to_s.rjust(10) + "\033[0m" + "  #{text}" end
 def say_scroll(name); say "\033[1m\033[36m" + "scroll".rjust(10) + "\033[0m" + "  Running #{name} scroll..." end
@@ -47,9 +46,11 @@ def after_everything(&block); @after_everything_blocks << [@current_scroll, bloc
 @before_configs = {}
 def before_config(&block); @before_configs[@current_scroll] = block; end
 
-def git_commit(message)
-  `git add .`
-  `git commit -m "#{message}"`
+def scm_commit(message)
+  if scroll? 'git'
+    git :add => '.'
+    git :commit => "-m '#{message}'"
+  end
 end
 
 def execute_block(block)

@@ -74,7 +74,7 @@ module AppScrollsScrolls
         puts "#{bold}Generating and Running Template...#{clear}"
         puts
         file = Tempfile.new('template')
-        template = AppScrollsScrolls::Template.new(scrolls)
+        template = AppScrollsScrolls::Template.new(name, scrolls)
 
         puts "Using the following scrolls:"
         template.resolve_scrolls.map do |scroll|
@@ -89,7 +89,7 @@ module AppScrollsScrolls
           puts "Template stored to #{file.path}"
           puts File.read(file.path)
         else
-          system "rails new #{name} -m #{file.path} #{template.args.join(' ')}"
+          system "rails new #{name} --skip-bundle -m #{file.path} #{template.args.join(' ')}"
         end
       ensure
         file.unlink

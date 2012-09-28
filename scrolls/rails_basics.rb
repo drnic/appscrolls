@@ -2,28 +2,27 @@
 # create_file ".rvmrc", "rvm gemset create '#{app_name}' \nrvm gemset use '#{app_name}'"
 
 after_bundler do
-  # clean up rails defaults
-  remove_file "public/index.html"
-  remove_file "public/images/rails.png"
+  # Setup home controller and default route
   generate "controller home index"
-  gsub_file "app/controllers/home_controller.rb", /def index/, <<-RUBY
-def index
-    flash.now[:notice] = "Welcome! - love App Scrolls"
-RUBY
   route "root :to => 'home#index'"
   
-  run "mv README.rdoc RAILS_README.rdoc"
-  remove_file "README.rdoc"
-  create_file "README.md", <<-README
-# ReadMe
+  # Remove default static home page and move rails readme out of the way
+  if scroll? 'git'
+    git :rm => 'public/index.html'
+    git :rm => 'public/images/rails.png'
+    git :mv => 'README.rdoc doc/RAILS_README.rdoc'
+  else
+    remove_file "public/index.html"
+    remove_file "public/images/rails.png"
+    run 'mv README.rdoc doc/RAILS_README.rdoc'
+  end
 
+  # Setup app README with some diagnostic info
+  create_file "README.md", <<-README
+# #{@app_name.humanize}
 
 ## Deployment
 
-```
-ey deploy
-```
-Remove
 ## Thanks
 
 The original scaffold for this application was created by [App Scrolls](http://appscrolls.org).
@@ -31,14 +30,13 @@ The original scaffold for this application was created by [App Scrolls](http://a
 The project was created with the following scrolls:
 
 #{ scrolls.map {|r| "* #{r}"}.join("\n")}
-
 README
 
-  if scrolls.include? 'git'
+  # Ignore some files
+  if scroll? 'git'
     append_file ".gitignore", "\nconfig/database.yml"
     append_file ".gitignore", "\npublic/system"
   end
-  
 end
 
 after_everything do
@@ -51,4 +49,4 @@ name: Rails Basics
 description: Best practices for new Rails apps
 author: drnic
 
-run_before: [git]
+run_before: []

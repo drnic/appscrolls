@@ -1,8 +1,9 @@
 module AppScrollsScrolls
   class Template
-    attr_reader :scrolls, :unknown_scroll_names
+    attr_reader :name, :scrolls, :unknown_scroll_names
 
-    def initialize(scrolls)
+    def initialize(name, scrolls)
+      @app_name = name
       @unknown_scroll_names = []
       @scrolls = scrolls.inject([]) do |list, name|
         scroll = AppScrollsScrolls::Scroll.from_mongo(name)

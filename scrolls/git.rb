@@ -1,17 +1,17 @@
 before_everything do
   git :init
   git :add => '.'
-  git :commit => '-m "Initial import."'
+  git :commit => '-m "Fresh rails app before customizations."'
 end
 
 __END__
 
 name: Git
-description: "Provides basic Git setup for the Rails app and commits the initial repository."
+description: "Initialize repo and instruct main layout template to commit after each scroll."
 author: mbleigh
 
 exclusive: scm
 category: deployment
 
-run_before: [git, eycloud, heroku]
+run_before: [eycloud, heroku]
 
