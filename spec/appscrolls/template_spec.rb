@@ -6,7 +6,7 @@ describe AppScrollsScrolls::Template do
 
   describe '#initialize' do
     it 'should work with classes' do
-      subject.new([scroll]).scrolls.should == [scroll]
+      subject.new('name', [scroll]).scrolls.should == [scroll]
     end
   end
 
@@ -20,7 +20,7 @@ describe AppScrollsScrolls::Template do
     end
     
     subject do
-      @template = AppScrollsScrolls::Template.new([]) 
+      @template = AppScrollsScrolls::Template.new('name', []) 
       @template.stub!(:scrolls).and_return(@scrolls)
       @template.stub!(:scroll_classes).and_return(@scrolls)
       @template
@@ -50,7 +50,7 @@ describe AppScrollsScrolls::Template do
     end
     
     it 'should resolve and sort' do
-      template = AppScrollsScrolls::Template.new([scroll('eycloud')])
+      template = AppScrollsScrolls::Template.new('name', [scroll('eycloud')])
       template.resolve_scrolls.should == [scroll('eycloud_recipes_on_deploy'), scroll('git'), scroll('github'), scroll('eycloud')]
     end
   end
