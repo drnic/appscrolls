@@ -44,10 +44,8 @@ scm_commit "after custom code"
 
 
 # >-----------------------------[ Run Bundler ]-------------------------------<
-# Vendor everything: http://ryan.mcgeary.org/2011/02/09/vendor-everything-still-applies/
 say_wizard "Running Bundler install. This will take a while."
-run 'bundle install --path vendor/bundle'
-run 'echo "vendor/bundle/ruby\n" >> .gitignore'
+run @bundle_install_command
 scm_commit "after bundle install"
 
 

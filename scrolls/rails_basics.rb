@@ -1,6 +1,3 @@
-# create rvmrc file
-# create_file ".rvmrc", "rvm gemset create '#{app_name}' \nrvm gemset use '#{app_name}'"
-
 after_bundler do
   # Setup home controller and default route
   generate "controller home index"

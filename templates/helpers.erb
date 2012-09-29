@@ -39,10 +39,18 @@ end
 
 @before_everything_blocks = []
 def before_everything(&block); @before_everything_blocks << [@current_scroll, block]; end
+
+# Vendor everything: http://ryan.mcgeary.org/2011/02/09/vendor-everything-still-applies/
+# Most everyone should use Bundler to isolate gems in vendor/bundle. We allow this to be overridden,
+# for example by the rvm scroll to use an rvm gemset instead.
+@bundle_install_command = 'bundle install --path vendor/bundle; echo "vendor/bundle/ruby\n" >> .gitignore'
+
 @after_blocks = []
 def after_bundler(&block); @after_blocks << [@current_scroll, block]; end
+
 @after_everything_blocks = []
 def after_everything(&block); @after_everything_blocks << [@current_scroll, block]; end
+
 @before_configs = {}
 def before_config(&block); @before_configs[@current_scroll] = block; end
 
