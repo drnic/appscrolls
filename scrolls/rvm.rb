@@ -9,7 +9,7 @@ before_everything do
   run "bash -c 'source $HOME/.rvm/scripts/rvm; rvm use #{rvm_env} --create; rvm --rvmrc --create use #{rvm_env}'"
 
   # Add directive for ruby version to Gemfile
-  insert_into_file "Gemfile", "ruby '#{ruby_version.gsub /-.*/, ''}'\n", :after => "source 'https://rubygems.org'\n\n"
+  insert_into_file "Gemfile", "ruby '#{ruby_version.gsub /-.*/, ''}'\n", :after => "source 'https://rubygems.org'\n"
 
   # Load RVM environment so future shell commands, such as generators, work
   File.open("#{ENV['HOME']}/.rvm/environments/ruby-#{rvm_env}", 'r').each_line do |line|

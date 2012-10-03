@@ -1,6 +1,16 @@
+before_everything do
+  # remove commented lines and multiple blank lines from Gemfile
+  gsub_file 'Gemfile', /#.*\n/, "\n"
+  gsub_file 'Gemfile', /\n^\s*\n/, "\n"
+
+  # remove commented lines and multiple blank lines from config/routes.rb
+  gsub_file 'config/routes.rb', /  #.*\n/, "\n"
+  gsub_file 'config/routes.rb', /\n^\s*\n/, "\n"
+end
+
 after_bundler do
   # Setup home controller and default route
-  generate "controller home index"
+  generate "controller home index about contact"
   route "root :to => 'home#index'"
   
   # Remove default static home page and move rails readme out of the way
