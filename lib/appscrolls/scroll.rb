@@ -17,7 +17,7 @@ module AppScrollsScrolls
     ATTRIBUTES = %w(key args category name description template config exclusive tags run_before run_after requires website)
     DEFAULT_ATTRIBUTES = {
       :category => 'other',
-      :args => [],
+      :args => '',
       :tags => [],
       :run_after => [],
       :run_before => [],
@@ -37,7 +37,7 @@ module AppScrollsScrolls
       else
         template = template_or_file
       end
- 
+
       scroll_class = Class.new(AppScrollsScrolls::Scroll) 
       scroll_class.attributes = attributes
       scroll_class.template = template

@@ -14,5 +14,5 @@ author: mbleigh
 exclusive: unit_testing
 category: testing
 
-args: ["-T"]
+args: -T
 

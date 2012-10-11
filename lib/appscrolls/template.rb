@@ -59,7 +59,7 @@ module AppScrollsScrolls
     end
 
     def args
-      scrolls.map(&:args).uniq
+      @resolve_scrolls.map(&:args).uniq
     end
 
     def custom_code?; false end
