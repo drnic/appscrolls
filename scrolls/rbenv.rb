@@ -10,7 +10,7 @@ description: set project-specific ruby version using rbenv
 website: https://github.com/sstephenson/rbenv
 author: mattolson
 
-category: deployment
+category: development
 
 config:
   - ruby_version:

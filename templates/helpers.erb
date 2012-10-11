@@ -61,6 +61,14 @@ def scm_commit(message)
   end
 end
 
+def insert_into_environment_config(env, config_directives)
+  insert_into_file "config/environments/#{env}.rb", "\n"+config_directives, :before => "end\n"
+end
+
+def insert_into_application_config(config_directives)
+  insert_into_file 'config/application.rb', "\n"+config_directives, :before => "  end\nend"
+end
+
 def execute_block(block)
   config = @configs[block[0]] || {}
   @current_scroll = block[0];

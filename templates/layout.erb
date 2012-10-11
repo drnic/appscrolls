@@ -12,9 +12,14 @@
 # >---------------------------------------------------------------------------<
 
 # >----------------------------[ Initial Setup ]------------------------------<
-
+# Supply defaults for generators (can be overridden by individual scrolls)
 initializer 'generators.rb', <<-RUBY
 Rails.application.config.generators do |g|
+  g.orm :active_record
+  g.template_engine :erb
+  g.test_framework :test_unit, :fixture => true
+  g.stylesheets true
+  g.javascripts true
 end
 RUBY
 

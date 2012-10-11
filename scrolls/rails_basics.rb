@@ -1,35 +1,27 @@
-before_everything do
-  # remove commented lines and multiple blank lines from Gemfile
-  gsub_file 'Gemfile', /#.*\n/, "\n"
-  gsub_file 'Gemfile', /\n^\s*\n/, "\n"
-
-  # remove commented lines and multiple blank lines from config/routes.rb
-  gsub_file 'config/routes.rb', /  #.*\n/, "\n"
-  gsub_file 'config/routes.rb', /\n^\s*\n/, "\n"
-end
-
 after_bundler do
   # Setup home controller and default route
-  generate "controller home index about contact"
-  route "root :to => 'home#index'"
+  generate "controller home index"
+
+  # Make sure there is a default route
+  unless File.open('config/routes.rb', 'r') { |f| f.read } =~ /\nroot/
+    route "root :to => 'home#index'"
+  end
   
   # Remove default static home page and move rails readme out of the way
   if scroll? 'git'
     git :rm => 'public/index.html'
     git :rm => 'app/assets/images/rails.png'
     create_file 'app/assets/images/.gitkeep'
-    git :mv => 'README.rdoc doc/RAILS_README.rdoc'
+    git :rm => 'README.rdoc'
   else
-    remove_file "public/index.html"
-    remove_file "app/assets/images/rails.png"
-    run 'mv README.rdoc doc/RAILS_README.rdoc'
+    remove_file 'public/index.html'
+    remove_file 'app/assets/images/rails.png'
+    remove_file 'README.rdoc'
   end
 
   # Setup app README with some diagnostic info
   create_file "README.md", <<-README
 # #{@app_name.humanize}
-
-## Deployment
 
 ## Thanks
 
@@ -56,5 +48,4 @@ __END__
 name: Rails Basics
 description: Best practices for new Rails apps
 author: drnic
-
-run_before: []
+run_after: [less]

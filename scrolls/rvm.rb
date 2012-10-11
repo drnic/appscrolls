@@ -27,7 +27,7 @@ description: setup project-specific gemset and version of ruby using RVM
 website: https://rvm.io/
 author: mattolson
 
-category: deployment
+category: development
 
 config:
   - ruby_version:

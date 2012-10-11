@@ -19,7 +19,7 @@ requires: []
 run_after: []
 run_before: []
 
-category: other # authentication, testing, persistence, javascript, css, services, deployment, and templating
+category: other # authentication, testing, persistence, javascript, css, services, development, deployment, and templating
 # exclusive:
 
 # config:
