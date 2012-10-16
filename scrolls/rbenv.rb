@@ -1,7 +1,5 @@
-after_bundler do
-  run "rbenv local #{config['ruby_version']}"
-  insert_into_file "Gemfile", "ruby '#{config['ruby_version'].gsub /-.*/, ''}'\n", :after => "source 'https://rubygems.org'\n"
-end
+run "rbenv local #{config['ruby_version']}"
+insert_into_file "Gemfile", "ruby '#{config['ruby_version'].gsub /-.*/, ''}'\n", :after => "source 'https://rubygems.org'\n"
 
 __END__
 

@@ -31,7 +31,6 @@ exclusive: stylesheet
 tags: [css, stylesheet]
 
 requires: [simple_form, rails_basics]
-run_before: [simple_form]
 
 config:
   - twitter_bootstrap_layout:

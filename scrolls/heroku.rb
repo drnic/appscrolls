@@ -36,10 +36,6 @@ description: Use heroku for deployment
 website: http://www.heroku.com
 author: mattolson
 
-requires: []
-run_after: []
-run_before: []
-
 category: deployment
 # exclusive:
 

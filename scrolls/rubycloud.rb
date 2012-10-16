@@ -27,8 +27,6 @@ website: http://rubycloud.com
 author: mattolson
 
 requires: [git, heroku, rbenv, rails_basics, less, postgresql, services]
-run_after: []
-run_before: []
 
 category: other
 

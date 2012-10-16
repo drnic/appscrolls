@@ -6,21 +6,13 @@ require 'erb'
 
 module AppScrollsScrolls
   class Scroll
-    extend Comparable
-    
-    def self.<=>(another)
-      return -1 if another.run_after.include?(self.key) || self.run_before.include?(another.key) || self.run_before.include?('*')
-      return 1 if another.run_before.include?(self.key) || self.run_after.include?(another.key)
-      0
-    end
 
-    ATTRIBUTES = %w(key args category name description template config exclusive tags run_before run_after requires website)
+    ATTRIBUTES = %w(key args category name description template config exclusive tags run_after requires website)
     DEFAULT_ATTRIBUTES = {
       :category => 'other',
       :args => '',
       :tags => [],
       :run_after => [],
-      :run_before => [],
       :requires => []
     }
 

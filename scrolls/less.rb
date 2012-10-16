@@ -1,7 +1,7 @@
 # We'd rather manipulate the default Gemfile than add new entries
 # or duplicate groups
 before_everything do
-  uncomment_lines 'Gemfile', "gem 'therubyracer'"
+  uncomment_lines 'Gemfile', /gem 'therubyracer'.*\n/
   insert_into_file 'Gemfile', "  gem 'less-rails'\n", :after => /gem 'therubyracer'.*\n/
 end
 

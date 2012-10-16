@@ -24,7 +24,6 @@ screencast: http://railscasts.com/episodes/331-a-b-testing-with-split
 
 requires: [redis]
 run_after: [redis]
-run_before: []
 
 category: other
 exclusive: ab-testing

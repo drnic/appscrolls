@@ -62,10 +62,6 @@ description: Command line tool to file system modification events; Powers Up wit
 author: drnic
 website: https://github.com/guard/guard
 
-requires: []
-run_after: []
-run_before: []
-
 category: other
 # exclusive: 
 

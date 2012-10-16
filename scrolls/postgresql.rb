@@ -35,7 +35,6 @@ author: drnic
 exclusive: orm
 category: persistence
 
-run_before: [eycloud]
 run_after: [services]
 
 args: -d postgresql

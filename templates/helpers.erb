@@ -89,6 +89,6 @@ def add_service(service_name, pidfile, startcmd, stopcmd)
     :stop => stopcmd
   }
 
-  gsub_file 'lib/tasks/services.rake', "SERVICE_SPECS = {\n", "SERVICE_SPECS = {\n  #{service_name.to_sym} => #{service_spec.inspect},\n" 
+  gsub_file 'lib/tasks/services.rake', "SERVICE_SPECS = {\n", "SERVICE_SPECS = {\n  :#{service_name.to_sym} => #{service_spec.inspect},\n" 
 end
 
