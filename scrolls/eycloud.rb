@@ -87,4 +87,4 @@ category: deployment
 exclusive: deployment
 
 requires: [github, eycloud_recipes_on_deploy]
-run_after: [github, eycloud_recipes_on_deploy]
+run_after: [github, eycloud_recipes_on_deploy, mysql, postgresql]

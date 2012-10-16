@@ -12,14 +12,18 @@
 # >---------------------------------------------------------------------------<
 
 # >----------------------------[ Initial Setup ]------------------------------<
-
+# Supply defaults for generators (can be overridden by individual scrolls)
 initializer 'generators.rb', <<-RUBY
 Rails.application.config.generators do |g|
+  g.orm :active_record
+  g.template_engine :erb
+  g.test_framework :test_unit, :fixture => true
+  g.stylesheets true
+  g.javascripts true
 end
 RUBY
 
 @scrolls = <%= resolve_scrolls.map(&:key).inspect %> 
-use_git = @scrolls.include?('git')
 
 <%= render "helpers" %>
 
@@ -28,35 +32,42 @@ use_git = @scrolls.include?('git')
 <% end %>
 
 
+# >-------------------[ Run before everything callbacks ]---------------------<
 say_wizard "Running before_everything callbacks."
 @before_everything_blocks.each do |b|
   execute_block(b)
-  git_commit("recipe : '#{b.first}'") if use_git
 end
-
-<% if custom_code? %># >-----------------------------[ Custom Code ]-------------------------------<
-
-<%= custom_code %><% end %>
-
 @current_scroll = nil
+
+
+<% if custom_code? %>
+# >-----------------------------[ Custom Code ]-------------------------------<
+<%= custom_code %>
+scm_commit "after custom code"
+@current_scroll = nil
+<% end %>
+
 
 # >-----------------------------[ Run Bundler ]-------------------------------<
-
 say_wizard "Running Bundler install. This will take a while."
-run 'bundle install'
-git_commit("bundle install") if use_git
+run @bundle_install_command
+scm_commit "after bundle install"
 
 
-say_wizard "Running after Bundler callbacks."
+# >---------------------[ Run after Bundler callbacks ]-----------------------<
+say_wizard "Running after_bundler callbacks."
 @after_blocks.each do |b|
   execute_block(b)
-  git_commit("recipe : '#{b.first}'") if use_git
+  scm_commit "after_bundler for scroll '#{b.first}'"
 end
-
 @current_scroll = nil
+
+
+# >--------------------[ Run after everything callbacks ]----------------------<
 say_wizard "Running after_everything callbacks."
 @after_everything_blocks.each do |b|
   execute_block(b)
-  git_commit("recipe : '#{b.first}'") if use_git
+  scm_commit "after_everything for scroll '#{b.first}'"
 end
+@current_scroll = nil
 

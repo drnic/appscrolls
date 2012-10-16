@@ -1,10 +1,7 @@
 gem 'rspec-rails', :group => [:development, :test]
 
-inject_into_file "config/initializers/generators.rb", :after => "Rails.application.config.generators do |g|\n" do
-  "    g.test_framework = :rspec\n"
-end
-
 after_bundler do
+  gsub_file "config/initializers/generators.rb", /test_framework :test_unit.*\n/, "test_framework = :rspec\n"
   generate 'rspec:install'
 end
 
@@ -17,5 +14,5 @@ author: mbleigh
 exclusive: unit_testing
 category: testing
 
-args: ["-T"]
+args: -T
 

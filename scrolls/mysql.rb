@@ -25,6 +25,4 @@ author: drnic
 exclusive: orm
 category: persistence
 
-run_before: [eycloud]
-
 args: -d mysql

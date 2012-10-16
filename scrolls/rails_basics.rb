@@ -1,29 +1,28 @@
-# create rvmrc file
-# create_file ".rvmrc", "rvm gemset create '#{app_name}' \nrvm gemset use '#{app_name}'"
-
 after_bundler do
-  # clean up rails defaults
-  remove_file "public/index.html"
-  remove_file "public/images/rails.png"
+  # Setup home controller and default route
   generate "controller home index"
-  gsub_file "app/controllers/home_controller.rb", /def index/, <<-RUBY
-def index
-    flash.now[:notice] = "Welcome! - love App Scrolls"
-RUBY
-  route "root :to => 'home#index'"
+
+  # Make sure there is a default route
+  unless File.open('config/routes.rb', 'r') { |f| f.read } =~ /\nroot/
+    route "root :to => 'home#index'"
+  end
   
-  run "mv README.rdoc RAILS_README.rdoc"
-  remove_file "README.rdoc"
+  # Remove default static home page and move rails readme out of the way
+  if scroll? 'git'
+    git :rm => 'public/index.html'
+    git :rm => 'app/assets/images/rails.png'
+    create_file 'app/assets/images/.gitkeep'
+    git :rm => 'README.rdoc'
+  else
+    remove_file 'public/index.html'
+    remove_file 'app/assets/images/rails.png'
+    remove_file 'README.rdoc'
+  end
+
+  # Setup app README with some diagnostic info
   create_file "README.md", <<-README
-# ReadMe
+# #{@app_name.humanize}
 
-
-## Deployment
-
-```
-ey deploy
-```
-Remove
 ## Thanks
 
 The original scaffold for this application was created by [App Scrolls](http://appscrolls.org).
@@ -31,14 +30,13 @@ The original scaffold for this application was created by [App Scrolls](http://a
 The project was created with the following scrolls:
 
 #{ scrolls.map {|r| "* #{r}"}.join("\n")}
-
 README
 
-  if scrolls.include? 'git'
+  # Ignore some files
+  if scroll? 'git'
     append_file ".gitignore", "\nconfig/database.yml"
     append_file ".gitignore", "\npublic/system"
   end
-  
 end
 
 after_everything do
@@ -50,5 +48,4 @@ __END__
 name: Rails Basics
 description: Best practices for new Rails apps
 author: drnic
-
-run_before: [git]
+run_after: [less]

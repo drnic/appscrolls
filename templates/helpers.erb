@@ -39,16 +39,39 @@ end
 
 @before_everything_blocks = []
 def before_everything(&block); @before_everything_blocks << [@current_scroll, block]; end
+
+# Vendor everything: http://ryan.mcgeary.org/2011/02/09/vendor-everything-still-applies/
+# Most everyone should use Bundler to isolate gems in vendor/bundle. We allow this to be overridden,
+# for example by the rvm scroll to use an rvm gemset instead.
+@bundle_install_command = 'bundle install --path vendor/bundle; echo "vendor/bundle/ruby\n" >> .gitignore'
+
 @after_blocks = []
 def after_bundler(&block); @after_blocks << [@current_scroll, block]; end
+
 @after_everything_blocks = []
 def after_everything(&block); @after_everything_blocks << [@current_scroll, block]; end
+
 @before_configs = {}
 def before_config(&block); @before_configs[@current_scroll] = block; end
 
-def git_commit(message)
-  `git add .`
-  `git commit -m "#{message}"`
+def scm_commit(message)
+  if scroll? 'git'
+    git :add => '.'
+    git :commit => "-m '#{message}'"
+  end
+end
+
+def insert_into_environment_config(env, config_directives)
+  insert_into_file "config/environments/#{env}.rb", "\n"+config_directives, :before => "end\n"
+end
+
+def insert_into_application_config(config_directives)
+  insert_into_file 'config/application.rb', "\n"+config_directives, :before => "  end\nend"
+end
+
+def remove_comments_and_blank_lines(filename)
+  gsub_file filename, /#.*\n/, "\n"
+  gsub_file filename, /\n\s*\n/, "\n"
 end
 
 def execute_block(block)
@@ -56,3 +79,16 @@ def execute_block(block)
   @current_scroll = block[0];
   block[1].call
 end
+
+def add_service(service_name, pidfile, startcmd, stopcmd)
+  return unless File.exists? 'lib/tasks/services.rake'
+
+  service_spec = {
+    :pidfile => pidfile,
+    :start => startcmd,
+    :stop => stopcmd
+  }
+
+  gsub_file 'lib/tasks/services.rake', "SERVICE_SPECS = {\n", "SERVICE_SPECS = {\n  :#{service_name.to_sym} => #{service_spec.inspect},\n" 
+end
+

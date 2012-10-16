@@ -1,8 +1,11 @@
+require 'tsort'
+
 module AppScrollsScrolls
   class Template
-    attr_reader :scrolls, :unknown_scroll_names
+    attr_reader :name, :scrolls, :unknown_scroll_names
 
-    def initialize(scrolls)
+    def initialize(name, scrolls)
+      @app_name = name
       @unknown_scroll_names = []
       @scrolls = scrolls.inject([]) do |list, name|
         scroll = AppScrollsScrolls::Scroll.from_mongo(name)
@@ -16,6 +19,15 @@ module AppScrollsScrolls
       end
     end
 
+    include TSort
+    def tsort_each_node(&block)
+      scrolls_with_dependencies.each(&block)
+    end
+
+    def tsort_each_child(node, &block)
+      node.run_after.map {|x| AppScrollsScrolls::Scroll.from_mongo(x)}.each(&block)
+    end
+ 
     def self.template_root
       File.dirname(__FILE__) + '/../../templates'
     end
@@ -26,9 +38,8 @@ module AppScrollsScrolls
     end
     def render(template_name, binding = nil); self.class.render(template_name, binding) end
 
-
     def resolve_scrolls
-      @resolve_scrolls ||= scrolls_with_dependencies.sort.sort
+      @resolve_scrolls ||= self.tsort
     end
 
     def scroll_classes
@@ -58,7 +69,7 @@ module AppScrollsScrolls
     end
 
     def args
-      scrolls.map(&:args).uniq
+      resolve_scrolls.map(&:args).uniq
     end
 
     def custom_code?; false end

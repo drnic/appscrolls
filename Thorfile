@@ -9,8 +9,8 @@ class Default < Thor
   desc "new NAME", "Create a new scroll"
   def new(name)
     @name = name
-    template "new_scroll.tt", "scroll/#{name}.rb"
-    `open scroll/#{name}.rb`
+    template "new_scroll.tt", "scrolls/#{name}.rb"
+    `open scrolls/#{name}.rb`
   end
 
 end

@@ -17,3 +17,4 @@ website: https://github.com/plataformatec/simple_form
 
 exclusive: forms 
 category: templating
+run_after: [twitter_bootstrap]
