@@ -28,7 +28,7 @@ description: Favorite bundle of customizations for RubyCloud client apps
 website: http://rubycloud.com
 author: mattolson
 
-requires: [git, heroku, rbenv, rails_basics, less]
+requires: [git, heroku, rbenv, rails_basics, less, postgresql]
 run_after: []
 run_before: []
 

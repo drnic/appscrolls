@@ -29,7 +29,7 @@ module AppScrollsScrolls
 
 
     def resolve_scrolls
-      @resolve_scrolls ||= scrolls_with_dependencies.sort.sort
+      @resolve_scrolls ||= scrolls_with_dependencies.sort
     end
 
     def scroll_classes

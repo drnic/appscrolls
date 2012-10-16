@@ -6,6 +6,7 @@ after_bundler do
     # Add optional components to asset precompilation. Anything not included in
     # application.js and application.css needs to be added here to ensure compilation
     # on deploy.
+    # config.less.paths << ""
     config.assets.precompile += []
   CONFIG
 

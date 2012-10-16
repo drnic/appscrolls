@@ -9,9 +9,9 @@ module AppScrollsScrolls
     extend Comparable
     
     def self.<=>(another)
-      return -1 if another.run_after.include?(self.key) || self.run_before.include?(another.key)
+      return -1 if another.run_after.include?(self.key) || self.run_before.include?(another.key) || self.run_before.include?('*')
       return 1 if another.run_before.include?(self.key) || self.run_after.include?(another.key)
-      self.key <=> another.key
+      0
     end
 
     ATTRIBUTES = %w(key args category name description template config exclusive tags run_before run_after requires website)
