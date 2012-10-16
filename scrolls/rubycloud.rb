@@ -1,11 +1,9 @@
 before_everything do
-  # remove commented lines and multiple blank lines from Gemfile
-  gsub_file 'Gemfile', /#.*\n/, "\n"
-  gsub_file 'Gemfile', /\n^\s*\n/, "\n"
-
-  # remove commented lines and multiple blank lines from config/routes.rb
-  gsub_file 'config/routes.rb', /  #.*\n/, "\n"
-  gsub_file 'config/routes.rb', /\n^\s*\n/, "\n"
+  # Remove comments from rails generated files
+  remove_comments_and_blank_lines 'Gemfile'
+  remove_comments_and_blank_lines 'config/routes.rb'
+  remove_comments_and_blank_lines 'config/database.yml'
+  remove_comments_and_blank_lines '.gitignore'
 
   # turn off coffeescript
   comment_lines 'Gemfile', "gem 'coffee-rails'"
@@ -28,7 +26,7 @@ description: Favorite bundle of customizations for RubyCloud client apps
 website: http://rubycloud.com
 author: mattolson
 
-requires: [git, heroku, rbenv, rails_basics, less, postgresql]
+requires: [git, heroku, rbenv, rails_basics, less, postgresql, services]
 run_after: []
 run_before: []
 

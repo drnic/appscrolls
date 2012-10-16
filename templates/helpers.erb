@@ -69,8 +69,26 @@ def insert_into_application_config(config_directives)
   insert_into_file 'config/application.rb', "\n"+config_directives, :before => "  end\nend"
 end
 
+def remove_comments_and_blank_lines(filename)
+  gsub_file filename, /#.*\n/, "\n"
+  gsub_file filename, /\n\s*\n/, "\n"
+end
+
 def execute_block(block)
   config = @configs[block[0]] || {}
   @current_scroll = block[0];
   block[1].call
 end
+
+def add_service(service_name, pidfile, startcmd, stopcmd)
+  return unless File.exists? 'lib/tasks/services.rake'
+
+  service_spec = {
+    :pidfile => pidfile,
+    :start => startcmd,
+    :stop => stopcmd
+  }
+
+  gsub_file 'lib/tasks/services.rake', "SERVICE_SPECS = {\n", "SERVICE_SPECS = {\n  #{service_name.to_sym} => #{service_spec.inspect},\n" 
+end
+

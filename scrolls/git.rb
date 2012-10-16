@@ -13,5 +13,5 @@ author: mbleigh
 exclusive: scm
 category: deployment
 
-run_before: [eycloud, heroku]
+run_before: ['*']
 
