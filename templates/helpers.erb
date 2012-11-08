@@ -34,6 +34,11 @@ def multiple_choice(question, choices)
   values[answer]
 end
 
+# Is the current ruby jruby?
+def jruby?
+  @jruby ||= `ruby -v` =~ /^jruby/
+end
+
 @current_scroll = nil
 @configs = {}
 
