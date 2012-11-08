@@ -39,6 +39,10 @@ def jruby?
   @jruby ||= `ruby -v` =~ /^jruby/
 end
 
+def project_name
+  @project_name ||= File.basename(File.expand_path("."))
+end
+
 @current_scroll = nil
 @configs = {}
 
