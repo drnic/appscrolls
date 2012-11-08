@@ -1,6 +1,8 @@
 # create rvmrc file
 # create_file ".rvmrc", "rvm gemset create '#{app_name}' \nrvm gemset use '#{app_name}'"
 
+gem "warbler" if jruby?
+
 after_bundler do
   # clean up rails defaults
   remove_file "public/index.html"
