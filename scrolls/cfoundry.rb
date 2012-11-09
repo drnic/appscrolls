@@ -26,8 +26,8 @@ after_bundler do
     database: <%= db_svc[:database] rescue '#{project_name}_production' %>
     username: <%= db_svc[:username] rescue '#{db_username}' %>
     password: <%= db_svc[:password] rescue '#{db_password}' %>
-    <%= db_svc[:host] ? "host: \#{db_svc[:host]}" : "" %>
-    <%= db_svc[:port] ? "post: \#{db_svc[:port]}" : "" %>
+    <%= db_svc && db_svc[:host] ? "host: #{db_svc[:host]}" : "" %>
+    <%= db_svc && db_svc[:port] ? "post: #{db_svc[:port]}" : "" %>
   YAML
   end
 end
@@ -39,7 +39,9 @@ after_everything do
     run "mkdir -p deploy"
     run "cp #{project_name}.war deploy/"
   end
-  run "vmc push #{project_name} --runtime ruby19 --path ."
+  run "vmc push #{project_name} --runtime ruby19 --path . --no-start"
+  run "vmc env-add #{project_name} BUNDLE_WITHOUT=assets:test:development"
+  run "vmc start #{project_name}"
 end
 
 __END__
