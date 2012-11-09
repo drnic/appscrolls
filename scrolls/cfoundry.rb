@@ -1,3 +1,7 @@
+# Scroll is based on the following documentation
+# * http://blog.cloudfoundry.com/2012/03/15/using-cloud-foundry-services-with-ruby-part-2-run-time-support-for-ruby-applications/
+# * http://blog.cloudfoundry.com/2012/04/19/deploying-jruby-on-rails-applications-on-cloud-foundry/
+
 gem 'vmc'
 gem  'cf-runtime'
 
