@@ -1,6 +1,11 @@
 gem_group :assets do
   gem 'twitter-bootstrap-rails'
-  gem 'therubyracer'
+  gem 'less-rails'
+  if jruby?
+    gem 'therubyrhino'
+  else
+    gem 'therubyracer'
+  end
 end
 
 after_bundler do
