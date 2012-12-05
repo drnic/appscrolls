@@ -11,14 +11,14 @@ after_everything do
   tried_create_already = false
   while (@git_uri = `git config remote.origin.url`.strip) && @git_uri.size == 0
     if tried_create_already
-      @repo_name = ask_wizard "Repository already exists. What project name?"
+      @repo_name = ask_wizard "Repository #{@repo_name} already exists. What project name?"
     else
       @repo_name = File.basename(File.expand_path("."))
     end
     if github_private
       run "hub create #{@repo_name} -p"
     else
-      run "hub create #{@repo_name}w"
+      run "hub create #{@repo_name}"
     end
     tried_create_already = true
   end
