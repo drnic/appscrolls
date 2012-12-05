@@ -1,5 +1,11 @@
 # ChangeLog
 
+## v0.9
+
+* `cloudfoundry` - added support for uploading to cloudfoundry
+* `github` - now uses `hub` project instead of `github` gem
+* `postgresql` - database.yml includes "host: localhost" for each env
+
 ## v0.8
 
 * `postgresql` - supported on `eycloud` (Currently PostgreSQL 9.1)
