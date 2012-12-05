@@ -2,6 +2,9 @@ gem "pg"
 
 gsub_file "config/database.yml", /username: .*/, "username: #{config['pg_username']}"
 gsub_file "config/database.yml", /password: .*/, "password: #{config['pg_password']}"
+%w[development test production].each do |env|
+  gsub_file "config/database.yml", /^#{env}:/, "#{env}:\n  host: localhost"
+end
 
 after_bundler do
   rake "db:create:all"
