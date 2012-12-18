@@ -49,9 +49,8 @@ gem_group :development do
 end
 
 after_bundler do
-  run "bundle exec guard init"
-  
-  # TODO move livereload to the top of the Guardfile so it is zippy quick
+  KNOWN_GUARD = %w[livereload spork bundler cucumber rspec test haml less passenger puma redis resque unicorn]
+  run "bundle exec guard init #{KNOWN_GUARD.join(" ")}"
 end
 
 
@@ -67,7 +66,7 @@ run_after: []
 run_before: []
 
 category: other
-# exclusive: 
+# exclusive:
 
 config:
   - guard_notifications:
