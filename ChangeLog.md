@@ -1,8 +1,12 @@
 # ChangeLog
 
+## v0.10
+
+* `puma` - added basic support for Puma; also Cloud Foundry will use Puma automatically
+
 ## v0.9
 
-* `cloudfoundry` - added support for uploading to cloudfoundry
+* `Cloud Foundry` - added support for uploading to Cloud Foundry
 * `github` - now uses `hub` project instead of `github` gem
 * `postgresql` - database.yml includes "host: localhost" for each env
 
