@@ -2,14 +2,15 @@
 # * http://blog.cloudfoundry.com/2012/03/15/using-cloud-foundry-services-with-ruby-part-2-run-time-support-for-ruby-applications/
 # * http://blog.cloudfoundry.com/2012/04/19/deploying-jruby-on-rails-applications-on-cloud-foundry/
 
-gem 'vmc'
+vmc_version = '0.3.23'
+gem 'vmc', "~> #{vmc_version}"
 gem  'cf-runtime'
 
 required_dbs = %w[mysql postgresql]
 
 selected_db = required_dbs.find { |db| scroll? db }
 unless selected_db
-  say_custom "cfoundry", "Please include a DB choice from: #{required_dbs.join ", "}"
+  say_custom "cf", "Please include a DB choice from: #{required_dbs.join ", "}"
   exit_now = true
 end
 
@@ -18,22 +19,21 @@ db_username = config['pg_username'] || 'root'
 db_password = config['pg_password'] || ''
 
 after_bundler do
-  # Must vendor everything
+  # Desirable to vendor everything
   run "bundle package"
 
-  append_file "config/database.yml" do
-  <<-YAML.gsub(/^\s{2}/, '')
+  production = <<-YAML.gsub(/^\s{2}/, '')
   production:
     adapter: #{selected_db}
-    <% require 'cfruntime/properties' %>
     <% db_svc = CFRuntime::CloudApp.service_props('#{selected_db}') %>
     database: <%= db_svc[:database] rescue '#{project_name}_production' %>
     username: <%= db_svc[:username] rescue '#{db_username}' %>
     password: <%= db_svc[:password] rescue '#{db_password}' %>
-    <%= db_svc && db_svc[:host] ? "host: #{db_svc[:host]}" : "" %>
-    <%= db_svc && db_svc[:port] ? "post: #{db_svc[:port]}" : "" %>
+    <%= db_svc && db_svc[:host] ? "host: \#{db_svc[:host]}" : "" %>
+    <%= db_svc && db_svc[:port] ? "port: \#{db_svc[:port]}" : "" %>
   YAML
-  end
+  puts production
+  append_file "config/database.yml", production
 end
 
 after_everything do
@@ -43,15 +43,15 @@ after_everything do
     run "mkdir -p deploy"
     run "cp #{project_name}.war deploy/"
   end
-  run "vmc push #{project_name} --runtime ruby19 --path . --no-start"
-  run "vmc env-add #{project_name} BUNDLE_WITHOUT=assets:test:development"
-  run "vmc start #{project_name}"
+  run "vmc _#{vmc_version}_ push #{project_name} --runtime ruby19 --path . --no-start"
+  run "vmc _#{vmc_version}_ env-add #{project_name} BUNDLE_WITHOUT=assets:test:development"
+  run "vmc _#{vmc_version}_ start #{project_name}"
 end
 
 __END__
 
-name: CloudFoundry
-description: Prepare codebase and perform initial deploy to a CloudFoundry target
+name: Cloud Foundry
+description: Prepare codebase and perform initial deploy to a Cloud Foundry target
 website: http://cloudfoundry.org
 author: drnic
 
@@ -60,9 +60,3 @@ run_after: [postgresql, mysql]
 run_before: []
 
 category: deployment
-# exclusive:
-
-# config:
-#   - foo:
-#       type: boolean
-#       prompt: "Is foo true?"
