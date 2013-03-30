@@ -3,6 +3,9 @@
 # * http://blog.cloudfoundry.com/2012/04/19/deploying-jruby-on-rails-applications-on-cloud-foundry/
 
 vmc_version = '0.3.23'
+
+@name = File.basename(File.expand_path("."))
+
 gem 'vmc', "~> #{vmc_version}"
 gem  'cf-runtime'
 
@@ -14,9 +17,29 @@ unless selected_db
   exit_now = true
 end
 
-# TODO similar config for mysql
-db_username = config['pg_username'] || 'root'
-db_password = config['pg_password'] || ''
+manifest = {"applications"=>
+  {"."=>
+    {"name"=>@name,
+     "framework"=>
+      {"name"=>"rails3",
+       "info"=>
+        {"mem"=>"256M", "description"=>"Rails Application", "exec"=>nil}},
+     "url"=>"${name}.${target-base}",
+     "mem"=>"256M",
+     "instances"=>1,
+     "services"=>{}}}}
+
+case selected_db.to_sym
+when :postgresql
+  manifest["applications"]["."]["services"]["#{@name}-postgresql"] = {"type"=>"postgresql"}
+  db_username = config['pg_username'] || 'root'
+  db_password = config['pg_password'] || ''
+when :mysql
+  manifest["applications"]["."]["services"]["#{@name}-mysql"] = {"type"=>"mysql"}
+end
+
+require "yaml"
+create_file "manifest.yml", manifest.to_yaml
 
 exit 1 if exit_now
 
