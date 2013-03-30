@@ -29,7 +29,7 @@ author: drnic
 exclusive: orm
 category: persistence
 
-run_before: [eycloud]
+run_before: [eycloud, cf]
 
 args: -d postgresql
 
