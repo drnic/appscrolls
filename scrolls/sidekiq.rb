@@ -1,9 +1,16 @@
 gem "sidekiq"
+# slim/sinatra are used for the sidekiq monitoring UI at /sidekiq/SECRET
+gem "slim"
+gem "sinatra", ">= 1.3.0", require: false
 
 initializer "sidekiq.rb", <<-RUBY
-Sidekiq.configure_server do |config|
-  config.redis = { url: $redis_url }
+if $redis_config[:password]
+  redis_url = "redis://:\#{$redis_config[:password]}@\#{$redis_config[:host]}:\#{$redis_config[:port]}/sidekiq"
+else
+  redis_url = "redis://\#{$redis_config[:host]}:\#{$redis_config[:port]}/sidekiq"
 end
+Rails.logger.info "Setting sidekiq redis: \#{{ url: redis_url, namespace: 'sidekiq' }.inspect}"
+Sidekiq.redis = { url: redis_url, namespace: 'sidekiq' }
 RUBY
 
 if scroll? "eycloud_recipes_on_deploy"
@@ -13,6 +20,16 @@ if scroll? "eycloud_recipes_on_deploy"
 
   require_recipe "sidekiq"
   RUBY
+end
+
+after_bundler do
+  route <<-RUBY
+require "sidekiq/web"
+  mount Sidekiq::Web, at: "/sidekiq/#{config['sidekiq_admin_secret']}"
+  require "sidekiq/api"
+  match "queue-status" => proc { [200, {"Content-Type" => "text/plain"}, [Sidekiq::Queue.new.size < 100 ? "OK" : "UHOH" ]] }
+RUBY
+
 end
 
 __END__
@@ -26,4 +43,9 @@ category: worker
 tags: [worker,background-tasks]
 
 requires: [redis]
-run_after: [redis, eycloud_recipes_on_deploy]
+run_after: [redis, eycloud_recipes_on_deploy, cf]
+
+config:
+  - sidekiq_admin_secret:
+      type: string
+      prompt: "Enter a secret string for the route /sidekiq/SECRET:"
