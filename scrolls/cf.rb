@@ -19,7 +19,7 @@ unless selected_db
   exit_now = true
 end
 
-manifest = {"applications"=>
+$cf_manifest = {"applications"=>
   {"."=>
     {"name"=>@name,
      "framework"=>
@@ -33,11 +33,9 @@ manifest = {"applications"=>
 
 known_services.each do |service|
   if scroll? service
-    manifest["applications"]["."]["services"]["#{@name}-#{service}"] = {"type"=>service}
+    $cf_manifest["applications"]["."]["services"]["#{@name}-#{service}"] = {"type"=>service}
   end
 end
-
-create_file "manifest.yml", manifest.to_yaml
 
 db_username = config['pg_username'] || 'root'
 db_password = config['pg_password'] || ''
@@ -64,6 +62,8 @@ after_bundler do
 end
 
 after_everything do
+  create_file "manifest.yml", $cf_manifest.to_yaml
+
   run "rake assets:precompile"
   if jruby?
    run "warble"
