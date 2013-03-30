@@ -44,6 +44,8 @@ create_file "manifest.yml", manifest.to_yaml
 exit 1 if exit_now
 
 after_bundler do
+  run %Q{vmc _#{vmc_version}_ apps | grep "\\b#{@name}\\b" && vmc _#{vmc_version}_ delete #{@name}}
+
   # Desirable to vendor everything
   run "bundle package"
 
