@@ -3,12 +3,14 @@
 # * http://blog.cloudfoundry.com/2012/04/19/deploying-jruby-on-rails-applications-on-cloud-foundry/
 
 vmc_version = '0.3.23'
+require "yaml"
 
 @name = File.basename(File.expand_path("."))
 
 gem 'vmc', "~> #{vmc_version}"
 gem  'cf-runtime'
 
+known_services = %w[postgresql mysql redis mongodb]
 required_dbs = %w[mysql postgresql]
 
 selected_db = required_dbs.find { |db| scroll? db }
@@ -29,17 +31,16 @@ manifest = {"applications"=>
      "instances"=>1,
      "services"=>{}}}}
 
-case selected_db.to_sym
-when :postgresql
-  manifest["applications"]["."]["services"]["#{@name}-postgresql"] = {"type"=>"postgresql"}
-  db_username = config['pg_username'] || 'root'
-  db_password = config['pg_password'] || ''
-when :mysql
-  manifest["applications"]["."]["services"]["#{@name}-mysql"] = {"type"=>"mysql"}
+known_services.each do |service|
+  if scroll? service
+    manifest["applications"]["."]["services"]["#{@name}-#{service}"] = {"type"=>service}
+  end
 end
 
-require "yaml"
 create_file "manifest.yml", manifest.to_yaml
+
+db_username = config['pg_username'] || 'root'
+db_password = config['pg_password'] || ''
 
 exit 1 if exit_now
 
