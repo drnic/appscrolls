@@ -18,6 +18,8 @@ end
 db_username = config['pg_username'] || 'root'
 db_password = config['pg_password'] || ''
 
+exit 1 if exit_now
+
 after_bundler do
   # Desirable to vendor everything
   run "bundle package"
@@ -32,7 +34,6 @@ after_bundler do
     <%= db_svc && db_svc[:host] ? "host: \#{db_svc[:host]}" : "" %>
     <%= db_svc && db_svc[:port] ? "port: \#{db_svc[:port]}" : "" %>
   YAML
-  puts production
   append_file "config/database.yml", production
 end
 
