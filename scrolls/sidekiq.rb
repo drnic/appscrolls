@@ -1,5 +1,11 @@
 gem "sidekiq"
 
+initializer "sidekiq.rb", <<-RUBY
+Sidekiq.configure_server do |config|
+  config.redis = { url: $redis_url }
+end
+RUBY
+
 if scroll? "eycloud_recipes_on_deploy"
   gem "eycloud-recipe-sidekiq", :group => :eycloud
 
