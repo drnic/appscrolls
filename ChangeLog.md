@@ -4,6 +4,12 @@
 
 * `puma` - added basic support for Puma; also Cloud Foundry will use Puma automatically
 
+### v0.10.1
+
+* `cfoundry` renamed to `cf`
+* `cf` - automatically creates & binds postgresql/mysql if selected; deletes existing app of same name
+* installation forces installation of latest bundler 1.3.4+ & rails 3.2.13+
+
 ## v0.9
 
 * `Cloud Foundry` - added support for uploading to Cloud Foundry
