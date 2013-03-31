@@ -29,7 +29,16 @@ require "sidekiq/web"
   require "sidekiq/api"
   match "queue-status" => proc { [200, {"Content-Type" => "text/plain"}, [Sidekiq::Queue.new.size < 100 ? "OK" : "UHOH" ]] }
 RUBY
+end
 
+after_everything do
+  if scroll? "cf"
+    worker_name = "#{@name}-worker"
+    services = $cf_manifest["applications"]["."]["services"]
+    manifest_file = cf_standalone_command("worker", worker_name, "bundle exec sidekiq -e production", services)
+    cf_delete_app worker_name
+    run "vmc _#{@vmc_version}_ push #{worker_name} --runtime #{@cf_ruby_runtime} --path . --manifest #{manifest_file}"
+  end
 end
 
 __END__

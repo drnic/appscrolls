@@ -2,12 +2,13 @@
 # * http://blog.cloudfoundry.com/2012/03/15/using-cloud-foundry-services-with-ruby-part-2-run-time-support-for-ruby-applications/
 # * http://blog.cloudfoundry.com/2012/04/19/deploying-jruby-on-rails-applications-on-cloud-foundry/
 
-vmc_version = '0.3.23'
 require "yaml"
 
+@vmc_version = '0.3.23'
 @name = File.basename(File.expand_path("."))
+@cf_ruby_runtime = "ruby19" # might change later in scrolls
 
-gem 'vmc', "~> #{vmc_version}"
+gem 'vmc', "~> #{@vmc_version}"
 gem  'cf-runtime'
 
 known_services = %w[postgresql mysql redis mongodb]
@@ -27,6 +28,7 @@ $cf_manifest = {"applications"=>
        "info"=>
         {"mem"=>"256M", "description"=>"Rails Application", "exec"=>nil}},
      "url"=>"${name}.${target-base}",
+     "runtime"=>@cf_ruby_runtime,
      "mem"=>"256M",
      "instances"=>1,
      "services"=>{}}}}
@@ -43,7 +45,7 @@ db_password = config['pg_password'] || ''
 exit 1 if exit_now
 
 after_bundler do
-  run %Q{vmc _#{vmc_version}_ apps | grep "\\b#{@name}\\b" && vmc _#{vmc_version}_ delete #{@name}}
+  cf_delete_app @name
 
   # Desirable to vendor everything
   run "bundle package"
@@ -70,9 +72,31 @@ after_everything do
     run "mkdir -p deploy"
     run "cp #{project_name}.war deploy/"
   end
-  run "vmc _#{vmc_version}_ push #{project_name} --runtime ruby19 --path . --no-start"
-  run "vmc _#{vmc_version}_ env-add #{project_name} BUNDLE_WITHOUT=assets:test:development"
-  run "vmc _#{vmc_version}_ start #{project_name}"
+  run "vmc _#{@vmc_version}_ push #{project_name} --runtime #{@cf_ruby_runtime} --path . --no-start"
+  run "vmc _#{@vmc_version}_ env-add #{project_name} BUNDLE_WITHOUT=assets:test:development"
+  run "vmc _#{@vmc_version}_ start #{project_name}"
+end
+
+def cf_delete_app(name)
+  run %Q{vmc _#{@vmc_version}_ apps | grep "\\b#{name}\\b" && vmc _#{@vmc_version}_ delete #{name}}
+end
+
+def cf_standalone_command(key, name, command, services={})
+  cf_manifest = {"applications"=>
+    {"."=>
+      {"name"=>name,
+       "framework"=>
+        {"name"=>"standalone",
+         "info"=>
+          {"mem"=>"64M", "description"=>"Standalone Application", "exec"=>nil}},
+       "url"=>nil,
+       "runtime"=>@cf_ruby_runtime,
+       "command"=>command,
+       "mem"=>"256M",
+       "instances"=>1,
+       "services"=>services}}}
+  create_file "manifest.#{key}.yml", cf_manifest.to_yaml
+  "manifest.#{key}.yml"
 end
 
 __END__
