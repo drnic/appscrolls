@@ -1,5 +1,9 @@
 # ChangeLog
 
+## v0.11
+
+* `sidekiq` - adds sidekiq gem & web dashboard (hidden via secret string); can deploy worker to Cloud Foundry
+
 ## v0.10
 
 * `puma` - added basic support for Puma; also Cloud Foundry will use Puma automatically
