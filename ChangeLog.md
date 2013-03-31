@@ -4,6 +4,10 @@
 
 * `sidekiq` - adds sidekiq gem & web dashboard (hidden via secret string); can deploy worker to Cloud Foundry
 
+### v0.11.1
+
+* `sidekiq` - correctly create the app/workers directory
+
 ## v0.10
 
 * `puma` - added basic support for Puma; also Cloud Foundry will use Puma automatically
