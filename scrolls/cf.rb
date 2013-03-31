@@ -72,13 +72,21 @@ after_everything do
     run "mkdir -p deploy"
     run "cp #{project_name}.war deploy/"
   end
-  run "vmc _#{@vmc_version}_ push #{project_name} --runtime #{@cf_ruby_runtime} --path . --no-start"
-  run "vmc _#{@vmc_version}_ env-add #{project_name} BUNDLE_WITHOUT=assets:test:development"
-  run "vmc _#{@vmc_version}_ start #{project_name}"
+  run_vmc "push #{project_name} --runtime #{@cf_ruby_runtime} --path . --no-start"
+  run_vmc "env-add #{project_name} BUNDLE_WITHOUT=assets:test:development"
+  run_vmc "start #{project_name}"
+end
+
+def vmc
+  "vmc _#{@vmc_version}_"
+end
+
+def run_vmc(command)
+  run "#{vmc} #{command}"
 end
 
 def cf_delete_app(name)
-  run %Q{vmc _#{@vmc_version}_ apps | grep "\\b#{name}\\b" && vmc _#{@vmc_version}_ delete #{name}}
+  run %Q{#{vmc} apps | grep " #{name} " && #{vmc} delete #{name}}
 end
 
 def cf_standalone_command(key, name, command, services={})

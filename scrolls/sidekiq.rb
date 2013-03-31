@@ -40,7 +40,7 @@ after_everything do
     services = $cf_manifest["applications"]["."]["services"]
     manifest_file = cf_standalone_command("worker", worker_name, "bundle exec sidekiq -e production", services)
     cf_delete_app worker_name
-    run "vmc _#{@vmc_version}_ push #{worker_name} --runtime #{@cf_ruby_runtime} --path . --manifest #{manifest_file}"
+    run_vmc "push #{worker_name} --path . --manifest #{manifest_file}"
   end
 end
 
