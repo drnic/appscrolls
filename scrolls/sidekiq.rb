@@ -22,7 +22,7 @@ if scroll? "eycloud_recipes_on_deploy"
   RUBY
 end
 
-directory "app/workers"
+empty_directory "app/workers"
 create_file "app/workers/.gitkeep", ""
 
 after_bundler do
