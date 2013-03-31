@@ -8,6 +8,10 @@
 
 * `sidekiq` - correctly create the app/workers directory
 
+### v0.11.2
+
+* `redis` - use integer for redis database number [thx @mperham]
+
 ## v0.10
 
 * `puma` - added basic support for Puma; also Cloud Foundry will use Puma automatically
