@@ -4,45 +4,73 @@
 
 require "yaml"
 
-@vmc_version = '0.3.23'
 @name = File.basename(File.expand_path("."))
-@cf_ruby_runtime = "ruby19" # might change later in scrolls
 
-gem 'vmc', "~> #{@vmc_version}"
-gem  'cf-runtime'
+# TODO set ruby for buildpack in Gemfile
+@cf_ruby_runtime = "2.0.0" # might change later in scroll
+gsub_file "Gemfile", %r{source 'http://rubygems.org'}, <<-EOS
+source 'http://rubygems.org'
+
+ruby '#{@cf_ruby_runtime}'
+EOS
+
+gem 'cf'
+gem 'cf-runtime'
 
 known_services = %w[postgresql mysql redis mongodb]
-required_dbs = %w[mysql postgresql]
-
-selected_db = required_dbs.find { |db| scroll? db }
-unless selected_db
-  say_custom "cf", "Please include a DB choice from: #{required_dbs.join ", "}"
-  exit_now = true
+@service_labels = known_services.select { |service| scroll? service }
+if scroll? 'postgresql'
+  selected_sql = 'postgresql'
+elsif scroll? 'mysql'
+  selected_sql = 'mysql'
 end
 
-$cf_manifest = {"applications"=>
-  {"."=>
-    {"name"=>@name,
-     "framework"=>
-      {"name"=>"rails3",
-       "info"=>
-        {"mem"=>"256M", "description"=>"Rails Application", "exec"=>nil}},
-     "url"=>"${name}.${target-base}",
-     "runtime"=>@cf_ruby_runtime,
-     "mem"=>"256M",
-     "instances"=>1,
-     "services"=>{}}}}
+def run_cf(*command)
+  run "cf #{command.join(' ')}"
+end
 
-known_services.each do |service|
-  if scroll? service
-    $cf_manifest["applications"]["."]["services"]["#{@name}-#{service}"] = {"type"=>service}
+def cf_delete_app(name)
+  run %Q{cf apps | grep "^#{name} " && cf delete #{name}}
+end
+
+# Adds the following
+# applications:
+# - name: NAME
+#   memory: 256M
+#   instances: 1
+#   url: NAME.${target-base}
+#   path: .
+#   services:
+#     postgresql-NAME:
+#       label: postgresql
+#       provider: core
+#       version: '9.2'
+#       plan: default
+def cf_web_app(name, service_labels=[])
+  services = {}
+  if service_labels.include?("postgresql")
+    services["postgresql-#{name}"] = {
+      "label" => "postgresql",
+      "provider" => "core",
+      "version" => "9.2",
+      "plan" => "default"
+    }
   end
+  { 
+    "name" => name,
+    "memory" => "256M",
+    "instances" => 1,
+    "url" => "#{name}.${target-base}",
+    "path" => ".",
+    "services" => services
+  }
 end
+
+$cf_manifest = {"applications"=>[]}
+$cf_manifest["applications"] << cf_web_app(@name, @service_labels)
 
 db_username = config['pg_username'] || 'root'
 db_password = config['pg_password'] || ''
-
-exit 1 if exit_now
 
 after_bundler do
   cf_delete_app @name
@@ -52,8 +80,8 @@ after_bundler do
 
   production = <<-YAML.gsub(/^\s{2}/, '')
   production:
-    adapter: #{selected_db}
-    <% db_svc = CFRuntime::CloudApp.service_props('#{selected_db}') %>
+    adapter: #{selected_sql}
+    <% db_svc = CFRuntime::CloudApp.service_props('#{selected_sql}') %>
     database: <%= db_svc[:database] rescue '#{project_name}_production' %>
     username: <%= db_svc[:username] rescue '#{db_username}' %>
     password: <%= db_svc[:password] rescue '#{db_password}' %>
@@ -67,49 +95,13 @@ after_everything do
   create_file "manifest.yml", $cf_manifest.to_yaml
 
   run "rake assets:precompile"
-  if jruby?
-   run "warble"
-    run "mkdir -p deploy"
-    run "cp #{project_name}.war deploy/"
-  end
-  run_vmc "push #{project_name} --runtime #{@cf_ruby_runtime} --path . --no-start"
-  run_vmc "env-add #{project_name} BUNDLE_WITHOUT=assets:test:development"
-  run_vmc "start #{project_name}"
+  run_cf "push"
 end
 
-def vmc
-  "vmc _#{@vmc_version}_"
-end
-
-def run_vmc(command)
-  run "#{vmc} #{command}"
-end
-
-def cf_delete_app(name)
-  run %Q{#{vmc} apps | grep " #{name} " && #{vmc} delete #{name}}
-end
-
-def cf_standalone_command(key, name, command, services={})
-  cf_manifest = {"applications"=>
-    {"."=>
-      {"name"=>name,
-       "framework"=>
-        {"name"=>"standalone",
-         "info"=>
-          {"mem"=>"64M", "description"=>"Standalone Application", "exec"=>nil}},
-       "url"=>nil,
-       "runtime"=>@cf_ruby_runtime,
-       "command"=>command,
-       "mem"=>"256M",
-       "instances"=>1,
-       "services"=>services}}}
-  create_file "manifest.#{key}.yml", cf_manifest.to_yaml
-  "manifest.#{key}.yml"
-end
 
 __END__
 
-name: Cloud Foundry
+name: Cloud Foundry v2
 description: Prepare codebase and perform initial deploy to a Cloud Foundry target
 website: http://cloudfoundry.org
 author: drnic
