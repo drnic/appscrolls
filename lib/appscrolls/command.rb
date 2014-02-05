@@ -33,6 +33,25 @@ module AppScrollsScrolls
       end
     end
 
+    desc "history", "view history of past scroll choices"
+    method_option :save, :desc => "Save a past choice of scrolls to a new scroll."
+    method_option :use, :desc => "Directly use a past choice of scrolls to generate a new app."
+    def history
+      lines = File.readlines history_file
+      lines.each_with_index do |line, i|
+        puts "#{i}: #{line}"
+      end
+      if options[:save]
+        print "Enter line number and name to save to a new scroll (e.g. 1 my_defaults): "
+        index, name = STDIN.gets.strip.split(' ')
+        create_new_scroll(:scrolls => lines[index.to_i].chomp.split(' '), :name => name)
+      elsif options[:use]
+        print "Enter line number and name to create a new scroll from past selection (e.g. 1 new_app_name): "
+        index, name = STDIN.gets.strip.split(' ')
+        run_template(name, lines[index.to_i].chomp.split(' '))
+      end
+    end
+
     desc "list [CATEGORY]", "list available scrolls (optionally by category)"
     def list(category = nil)
       if category
@@ -91,8 +110,39 @@ module AppScrollsScrolls
         else
           system "rails new #{name} -m #{file.path} #{template.args.join(' ')}"
         end
+        write_history scrolls
       ensure
         file.unlink
+      end
+
+      def scrolls_dir
+        File.join ENV['HOME'], '.scrolls'
+      end
+
+      def ensure_scrolls_dir
+        Dir.mkdir scrolls_dir unless Dir.exists? scrolls_dir
+      end
+
+      def history_file
+        ensure_scrolls_dir
+        File.join scrolls_dir, 'history'
+      end
+
+      def write_history(scrolls)
+        File.open(history_file, "a") do |file|
+          file.puts scrolls.join(' ')
+        end
+      end
+
+      def create_new_scroll(hash)
+        require 'active_support/inflector'
+        require 'erb'
+        require 'appscrolls/template'
+        name = hash[:name]
+        requires = hash[:scrolls]
+        scroll = AppScrollsScrolls::Template.render("saved_scrolls", binding)
+        scroll_path = "scrolls/#{name}.rb"
+        File.open(scroll_path, "w") { |file| file << scroll }
       end
     end
   end

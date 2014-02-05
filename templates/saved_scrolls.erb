@@ -1,0 +1,19 @@
+
+__END__
+
+name: <%= name.humanize.capitalize %>
+description: 
+website:
+author: <%= `whoami`.strip %>
+
+requires: [<%= requires.join(', ') %>]
+run_after: []
+run_before: []
+
+category: other # authentication, testing, persistence, javascript, css, services, deployment, and templating
+# exclusive: 
+
+# config:
+#   - foo:
+#       type: boolean
+#       prompt: "Is foo true?"
